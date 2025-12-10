@@ -62,3 +62,16 @@ deny[reason] if {
     
     reason := "Password must not contain your username or email address"
 }
+
+# 7. Common Password Check (New)
+deny[reason] if {
+    config := inheritance.get_effective_config("security")
+    object.get(config, "password_reject_common", false) == true
+    
+    # Check if password is in common list
+    # Direct lookup prevents recursion on data root
+    common_list := data.common_passwords
+    input.password in common_list
+    
+    reason := "Password is too common/vulnerable"
+}
