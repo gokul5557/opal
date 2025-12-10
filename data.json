@@ -1,0 +1,109 @@
+{
+  "organizations": {
+    "acme_corp": {
+      "policy": {
+        "security": {
+          "mfa_required": false,
+          "password_min_length": 8,
+          "password_require_number": true,
+          "password_require_special_char": false,
+          "session_timeout_minutes": 1440
+        },
+        "access": {
+          "allowed_prefixes": [
+            "/public",
+            "/auth"
+          ]
+        },
+        "ip_whitelist": {
+          "allowed_cidrs": [
+            "10.0.0.0/8"
+          ]
+        }
+      },
+      "departments": {
+        "engineering": {
+          "policy": {
+            "security": {
+              "mfa_required": true,
+              "password_min_length": 12,
+              "password_require_special_char": true
+            },
+            "access": {
+              "allowed_prefixes": [
+                "/git",
+                "/jenkins",
+                "/jira"
+              ]
+            }
+          }
+        },
+        "sales": {
+          "policy": {
+            "security": {
+              "session_timeout_minutes": 240
+            },
+            "access": {
+              "allowed_prefixes": [
+                "/crm",
+                "/leads"
+              ]
+            }
+          }
+        }
+      },
+      "groups": {
+        "remote_workers": {
+          "policy": {
+            "ip_whitelist": {
+              "allowed_cidrs": [
+                "0.0.0.0/0"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "start_up_inc": {
+      "policy": {
+        "security": {
+          "mfa_required": true,
+          "password_min_length": 10,
+          "password_require_number": false,
+          "password_require_special_char": false
+        }
+      }
+    }
+  },
+  "users": {
+    "alice@acme.com": {
+      "org_id": "acme_corp",
+      "dept_id": "engineering",
+      "groups": [],
+      "policy_override": {
+        "access": {
+          "allowed_prefixes": [
+            "/special-project"
+          ]
+        }
+      }
+    },
+    "bob@acme.com": {
+      "org_id": "acme_corp",
+      "dept_id": "engineering",
+      "groups": [
+        "remote_workers"
+      ]
+    },
+    "charlie@acme.com": {
+      "org_id": "acme_corp",
+      "dept_id": "sales",
+      "groups": []
+    },
+    "dave@startup.com": {
+      "org_id": "start_up_inc",
+      "dept_id": null,
+      "groups": []
+    }
+  }
+}
