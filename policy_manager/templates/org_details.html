@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Manage {{ org_id }}</h2>
+    <div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">
+                + New Policy
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/org/{{ org_id }}/policies/new?type=password">Password Policy</a>
+                </li>
+                <li><a class="dropdown-item" href="/org/{{ org_id }}/policies/new?type=mfa">MFA Policy</a></li>
+                <li><a class="dropdown-item" href="/org/{{ org_id }}/policies/new?type=ip_whitelist">IP Whitelist</a>
+                </li>
+                <li><a class="dropdown-item" href="/org/{{ org_id }}/policies/new?type=session">Session Policy</a></li>
+            </ul>
+        </div>
+        <a href="/" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Defined Policies (TABS) -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="policyTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pwd-tab" data-bs-toggle="tab" href="#pwd" role="tab">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="mfa-tab" data-bs-toggle="tab" href="#mfa" role="tab">MFA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ip-tab" data-bs-toggle="tab" href="#ip" role="tab">IP Whitelist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="sess-tab" data-bs-toggle="tab" href="#sess" role="tab">Session</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="policyTabsContent">
+                    {% for ptype, tabby in [('password', 'pwd'), ('mfa', 'mfa'), ('ip_whitelist', 'ip'), ('session',
+                    'sess')] %}
+                    <div class="tab-pane fade {{ 'show active' if ptype == 'password' else '' }}" id="{{ tabby }}"
+                        role="tabpanel">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Policy ID</th>
+                                    <th>Config</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if org.defined_policies.get(ptype) %}
+                                {% for pid, pcontent in org.defined_policies.get(ptype).items() %}
+                                <tr>
+                                    <td><strong>{{ pid }}</strong></td>
+                                    <td><small>{{ pcontent|tojson }}</small></td>
+                                    <td>
+                                        <a href="/org/{{ org_id }}/policies/edit/{{ ptype }}/{{ pid }}"
+                                            class="btn btn-sm btn-outline-primary">Edit</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-muted">No policies defined.</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organization Structure (Departments) -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-warning">Departments</div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    {% for dept_name, dept_data in org.departments.items() %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>{{ dept_name }}</strong>
+                            <a href="/org/{{ org_id }}/assign/department/{{ dept_name }}"
+                                class="btn btn-sm btn-outline-dark">Manage Assignments</a>
+                        </div>
+                        <div>
+                            {% for ap_type, ap_id in dept_data.get('assigned_policies', {}).items() %}
+                            <span class="badge bg-secondary">{{ ap_type }}: {{ ap_id }}</span>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Groups -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                <span>Groups</span>
+                <div class="d-flex gap-2 align-items-center">
+                    <span class="badge bg-light text-dark">Page {{ pagination.groups.current }} / {{
+                        pagination.groups.total_pages }}</span>
+                    <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#addGroupModal">+
+                        New</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    {% for grp_name, grp_data in groups.items() %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <strong>{{ grp_name }}</strong><br>
+                                <span class="badge bg-warning text-dark">{{ grp_data.get('dept_id', 'Unassigned')
+                                    }}</span>
+                            </div>
+                            <a href="/org/{{ org_id }}/assign/group/{{ grp_name }}"
+                                class="btn btn-sm btn-outline-dark">Assignments</a>
+                        </div>
+                        <div>
+                            {% for ap_type, ap_id in grp_data.get('assigned_policies', {}).items() %}
+                            <span class="badge bg-secondary">{{ ap_type }}: {{ ap_id }}</span>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Groups Pagination -->
+                <nav aria-label="Groups pagination">
+                    <ul class="pagination pagination-sm justify-content-center mb-0">
+                        <li class="page-item {{ 'disabled' if not pagination.groups.has_prev }}">
+                            <a class="page-link"
+                                href="{{ url_for('org_details', org_id=org_id, page_groups=pagination.groups.prev_num, page_users=pagination.users.current) }}">Previous</a>
+                        </li>
+                        <li class="page-item {{ 'disabled' if not pagination.groups.has_next }}">
+                            <a class="page-link"
+                                href="{{ url_for('org_details', org_id=org_id, page_groups=pagination.groups.next_num, page_users=pagination.users.current) }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users List -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <span>Users</span>
+                <div class="d-flex gap-2 align-items-center">
+                    <span class="badge bg-light text-dark">Page {{ pagination.users.current }} / {{
+                        pagination.users.total_pages }}</span>
+                    <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#userModal"
+                        onclick="prepareAddUser()">+ New User</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>User Email</th>
+                            <th>Department</th>
+                            <th>Groups</th>
+                            <th>Overrides</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for uid, udata in users.items() %}
+                        <tr>
+                            <td>{{ uid }}</td>
+                            <td><span class="badge bg-warning text-dark">{{ udata.get('dept_id', 'None') }}</span></td>
+                            <td>
+                                {% for g in udata.get('groups', []) %}
+                                <span class="badge bg-success">{{ g }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% if udata.get('policy_overrides') %}
+                                {{ udata.get('policy_overrides') }}
+                                {% else %}
+                                <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-dark"
+                                        onclick='editUser({{ uid|tojson }}, {{ udata.get("dept_id")|tojson }}, {{ udata.get("groups")|tojson }})'
+                                        data-bs-toggle="modal" data-bs-target="#userModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary test-policy-btn" data-bs-toggle="modal"
+                                        data-bs-target="#testPolicyModal" data-user="{{ uid }}">
+                                        Test
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Users Pagination -->
+                <nav aria-label="Users pagination">
+                    <ul class="pagination pagination-sm justify-content-center mb-0">
+                        <li class="page-item {{ 'disabled' if not pagination.users.has_prev }}">
+                            <a class="page-link"
+                                href="{{ url_for('org_details', org_id=org_id, page_users=pagination.users.prev_num, page_groups=pagination.groups.current) }}">Previous</a>
+                        </li>
+                        <li class="page-item {{ 'disabled' if not pagination.users.has_next }}">
+                            <a class="page-link"
+                                href="{{ url_for('org_details', org_id=org_id, page_users=pagination.users.next_num, page_groups=pagination.groups.current) }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Group Modal -->
+<div class="modal fade" id="addGroupModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/org/{{ org_id }}/groups/add" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Group</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Group Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Department</label>
+                        <select class="form-select" name="dept_id">
+                            <option value="">None</option>
+                            {% for d in org.departments.keys() %}
+                            <option value="{{ d }}">{{ d }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create Group</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- User Modal (Add/Edit) -->
+<div class="modal fade" id="userModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="userForm" action="/org/{{ org_id }}/users/add" method="POST">
+                <!-- Hidden Org ID for updates -->
+                <input type="hidden" name="org_id" value="{{ org_id }}">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalTitle">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="userEmailInput" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Department</label>
+                        <select class="form-select" name="dept_id" id="userDeptInput">
+                            <option value="">None</option>
+                            {% for d in org.departments.keys() %}
+                            <option value="{{ d }}">{{ d }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Groups</label>
+                        <div style="max-height: 150px; overflow-y: auto;" class="border p-2 rounded">
+                            {% for g in org.groups.keys() %}
+                            <div class="form-check">
+                                <input class="form-check-input group-check" type="checkbox" name="groups"
+                                    value="{{ g }}" id="g_{{ g }}">
+                                <label class="form-check-label" for="g_{{ g }}">
+                                    {{ g }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function prepareAddUser() {
+        document.getElementById('userModalTitle').textContent = "Add New User";
+        document.getElementById('userForm').action = "/org/{{ org_id }}/users/add";
+        document.getElementById('userEmailInput').readOnly = false;
+        document.getElementById('userEmailInput').value = "";
+        document.getElementById('userDeptInput').value = "";
+
+        // Clear checkboxes
+        document.querySelectorAll('.group-check').forEach(cb => cb.checked = false);
+    }
+
+    function editUser(email, deptId, groups) {
+        document.getElementById('userModalTitle').textContent = "Edit User: " + email;
+        document.getElementById('userForm').action = "/api/users/update";
+
+        var emailInput = document.getElementById('userEmailInput');
+        emailInput.value = email;
+        emailInput.readOnly = true; // Cannot change ID during edit
+
+        document.getElementById('userDeptInput').value = deptId || "";
+
+        // Set checkboxes
+        document.querySelectorAll('.group-check').forEach(cb => {
+            cb.checked = (groups && groups.includes(cb.value));
+        });
+    }
+</script>
+
+<!-- Test Policy Modal -->
+<div class="modal fade" id="testPolicyModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Test Password Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Testing for user: <strong id="modalUserEmail"></strong></p>
+                <div class="mb-3">
+                    <label class="form-label">Password to Test</label>
+                    <input type="password" class="form-control" id="testPasswordInput">
+                </div>
+                <div id="testResult" class="d-none">
+                    <div class="alert" id="testResultAlert"></div>
+                    <ul id="testResultReasons" class="mb-0 text-danger fw-bold"></ul>
+
+                    <hr>
+                    <h6 class="mb-2">Policy Trace (Why?)</h6>
+                    <div class="accordion" id="traceAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTrace">
+                                    View Hierarchy Resolution
+                                </button>
+                            </h2>
+                            <div id="collapseTrace" class="accordion-collapse collapse"
+                                data-bs-parent="#traceAccordion">
+                                <div class="accordion-body p-2" style="font-size: 0.9em;">
+                                    <ul class="list-group list-group-flush" id="traceList">
+                                        <!-- Filled by JS -->
+                                    </ul>
+                                    <div class="mt-2 p-2 bg-light border rounded">
+                                        <strong>Effective Config:</strong>
+                                        <pre id="effectiveConfig" class="mb-0"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="runTestBtn">Run Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var testModal = document.getElementById('testPolicyModal');
+        var modalUserEmail = document.getElementById('modalUserEmail');
+        var testPasswordInput = document.getElementById('testPasswordInput');
+        var runTestBtn = document.getElementById('runTestBtn');
+        var testResult = document.getElementById('testResult');
+        var testResultAlert = document.getElementById('testResultAlert');
+        var testResultReasons = document.getElementById('testResultReasons');
+
+        var currentUser = '';
+
+        testModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            currentUser = button.getAttribute('data-user');
+            modalUserEmail.textContent = currentUser;
+            testPasswordInput.value = '';
+            testResult.classList.add('d-none');
+        });
+
+        runTestBtn.addEventListener('click', function () {
+            var password = testPasswordInput.value;
+            if (!password) return;
+
+            // Simple AJAX form post
+            var formData = new FormData();
+            formData.append('user', currentUser);
+            formData.append('password', password);
+
+            fetch('/api/test/password', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    testResult.classList.remove('d-none');
+                    testResultReasons.innerHTML = '';
+                    var traceList = document.getElementById('traceList');
+                    var effectiveConfig = document.getElementById('effectiveConfig');
+                    traceList.innerHTML = '';
+                    effectiveConfig.textContent = '';
+
+                    if (data.allowed) {
+                        testResultAlert.className = 'alert alert-success';
+                        testResultAlert.textContent = 'ALLOWED: Password meets all policy requirements.';
+                    } else {
+                        testResultAlert.className = 'alert alert-danger';
+                        testResultAlert.textContent = 'DENIED: Policy violations found:';
+
+                        if (data.reasons && data.reasons.length > 0) {
+                            data.reasons.forEach(function (r) {
+                                var li = document.createElement('li');
+                                li.textContent = r;
+                                testResultReasons.appendChild(li);
+                            });
+                        }
+                    }
+
+                    // Render Trace
+                    if (data.trace) {
+                        // Org
+                        addTraceItem(traceList, "Organization", data.trace.org_policy.id, data.trace.org_policy.config);
+                        // Dept
+                        addTraceItem(traceList, "Department", data.trace.dept_policy.id, data.trace.dept_policy.config);
+                        // Groups
+                        if (data.trace.group_policies) {
+                            data.trace.group_policies.forEach(function (gp) {
+                                addTraceItem(traceList, "Group: " + gp.group, gp.policy_id, gp.config);
+                            });
+                        }
+
+                        // Effective
+                        effectiveConfig.textContent = JSON.stringify(data.trace.effective, null, 2);
+                    }
+                })
+                .catch(error => {
+                    testResult.classList.remove('d-none');
+                    testResultAlert.className = 'alert alert-warning';
+                    testResultAlert.textContent = 'Error: ' + error;
+                });
+        });
+
+        function addTraceItem(list, label, id, config) {
+            var li = document.createElement('li');
+            li.className = "list-group-item";
+            var idHtml = id ? `<span class="badge bg-secondary ms-2">${id}</span>` : `<span class="badge bg-light text-dark border ms-2">None</span>`;
+
+            var configStr = (Object.keys(config).length > 0) ? JSON.stringify(config) : "No overrides";
+
+            li.innerHTML = `<div><strong>${label}</strong>${idHtml}</div><div class="text-muted small">${configStr}</div>`;
+            list.appendChild(li);
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8182
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 578-597-671
+127.0.0.1 - - [10/Dec/2025 11:36:16] "GET /org/acme_corp HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:52:08] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:00] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:12] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:12] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:16] "GET /org/Org_1/assign/department/HR HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:19] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:19] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:21] "GET /org/Org_1/assign/group/Org_1_Group_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:25] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:25] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:30] "GET /org/Org_1/assign/group/Org_1_Group_2 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:33] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:33] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:36] "GET /org/Org_1/assign/group/Org_1_Group_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:39] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:39] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:42] "GET /org/Org_1/assign/department/HR HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:53:47] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:53:47] "GET /org/Org_1 HTTP/1.1" 200 -

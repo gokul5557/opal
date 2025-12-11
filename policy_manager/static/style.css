@@ -1,0 +1,118 @@
+:root {
+  --sidebar-width: 280px;
+  --topbar-height: 60px;
+  --primary-color: #0d6efd;
+  --bg-light: #f8f9fa;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  padding: 20px 0;
+  background-color: #212529; /* Dark Sidebar */
+  color: #fff;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-header {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.7);
+  padding: 10px 20px;
+  transition: all 0.3s;
+  border-left: 4px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #fff;
+  background-color: rgba(255,255,255,0.05);
+  border-left-color: var(--primary-color);
+}
+
+.nav-link i {
+  width: 25px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+/* Main Content Wrapper */
+.main-wrapper {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Styling */
+.top-navbar {
+  height: var(--topbar-height);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  justify-content: space-between;
+}
+
+.content-area {
+  padding: 30px;
+  flex: 1;
+}
+
+/* Card Tiles */
+.stat-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: #fff;
+  height: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.bg-soft-primary { background-color: rgba(13, 110, 253, 0.1); color: var(--primary-color); }
+.bg-soft-success { background-color: rgba(25, 135, 84, 0.1); color: #198754; }
+.bg-soft-warning { background-color: rgba(255, 193, 7, 0.1); color: #ffc107; }
+
+/* Utilities */
+.text-muted-small { font-size: 0.85rem; color: #6c757d; }

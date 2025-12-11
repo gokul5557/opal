@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Manage Assignments for {{ target_name }} ({{ target_type|title }})</h2>
+<div class="card">
+    <div class="card-body">
+        <form action="/org/{{ org_id }}/assign/save" method="post">
+            <input type="hidden" name="target_type" value="{{ target_type }}">
+            <input type="hidden" name="target_name" value="{{ target_name }}">
+
+            {% for ptype in ['password', 'mfa', 'ip_whitelist', 'session', 'access'] %}
+            <div class="mb-3">
+                <label class="form-label">{{ ptype|replace('_', ' ')|title }} Policy</label>
+                <select class="form-select" name="policy_{{ ptype }}">
+                    <option value="">-- Inherit / None --</option>
+                    {% for pid in defined_policies.get(ptype, {}).keys() %}
+                    <option value="{{ pid }}" {{ 'selected' if pid==current_assignments.get(ptype) else '' }}>
+                        {{ pid }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Save Assignments</button>
+            <a href="/org/{{ org_id }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

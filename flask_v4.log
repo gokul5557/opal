@@ -1,0 +1,141 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8182
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 578-597-671
+127.0.0.1 - - [10/Dec/2025 11:22:57] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:23:02] "POST /org/acme_corp/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:23:27] "POST /org/acme_corp/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:25:30] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:25:34] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2548, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/app.py", line 9, in dashboard
+    return render_template("dashboard.html", orgs=orgs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/base.html", line 16, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/dashboard.html", line 12, in block 'content'
+    Policies: {{ (org_data.get('defined_policies', {}).values() | sum(attribute='__len__')) if
+  File "/usr/lib/python3/dist-packages/jinja2/async_utils.py", line 45, in wrapper
+    return normal_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/jinja2/filters.py", line 1315, in sync_do_sum
+    return sum(iterable, start)  # type: ignore[no-any-return, call-overload]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'method-wrapper'
+127.0.0.1 - - [10/Dec/2025 11:25:34] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:25:34] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:25:34] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:25:34] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [10/Dec/2025 11:25:41] "GET /org/ HTTP/1.1" 404 -
+127.0.0.1 - - [10/Dec/2025 11:25:45] "GET /org HTTP/1.1" 404 -
+127.0.0.1 - - [10/Dec/2025 11:25:53] "GET /org HTTP/1.1" 404 -
+127.0.0.1 - - [10/Dec/2025 11:25:56] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2548, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/app.py", line 9, in dashboard
+    return render_template("dashboard.html", orgs=orgs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 147, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/flask/templating.py", line 130, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/usr/lib/python3/dist-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/base.html", line 16, in top-level template code
+    {% block content %}{% endblock %}
+  File "/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/templates/dashboard.html", line 12, in block 'content'
+    Policies: {{ (org_data.get('defined_policies', {}).values() | sum(attribute='__len__')) if
+  File "/usr/lib/python3/dist-packages/jinja2/async_utils.py", line 45, in wrapper
+    return normal_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/jinja2/filters.py", line 1315, in sync_do_sum
+    return sum(iterable, start)  # type: ignore[no-any-return, call-overload]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'method-wrapper'
+127.0.0.1 - - [10/Dec/2025 11:25:56] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [10/Dec/2025 11:25:56] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [10/Dec/2025 11:25:56] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [10/Dec/2025 11:27:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:28:36] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:28:40] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:28:48] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:28:48] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:28:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:28:51] "GET /org/Org_1/assign/department/Sales HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:29:12] "POST /org/Org_1/assign/save HTTP/1.1" 302 -
+127.0.0.1 - - [10/Dec/2025 11:29:12] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:29:17] "GET /org/Org_1/assign/group/Org_1_Group_1 HTTP/1.1" 200 -
+127.0.0.1 - - [10/Dec/2025 11:29:20] "GET /org/Org_1 HTTP/1.1" 200 -
+ * Detected change in '/home/gokul/oidc+apisix/python/opal_testing/policy_poc/policy_manager/app.py', reloading
+DEBUG: save_policy hit for acme_corp
+DEBUG: pid=ui_strict_pwd, type=password
+DEBUG: password_min_length raw=55
+DEBUG: Constructed policy: {'password_min_length': 55, 'password_require_number': False, 'password_require_special_char': False, 'password_reject_common': False}
+DEBUG: Org found
+DEBUG: Saved data
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=gokul, type=password
+DEBUG: password_min_length raw=24
+DEBUG: Constructed policy: {'password_min_length': 24, 'password_require_number': True, 'password_require_special_char': True, 'password_reject_common': True}
+DEBUG: Org found
+DEBUG: Saved data
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 578-597-671

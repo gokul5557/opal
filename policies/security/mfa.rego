@@ -8,7 +8,7 @@ import data.policies.common.inheritance
 # Input expected: {"user": "email"}
 required if {
     # 1. Get Effective Config
-    config := inheritance.get_effective_config("security")
+    config := inheritance.get_effective_config("mfa")
     
     # 2. Check Requirement
     # Default to false if not specified
