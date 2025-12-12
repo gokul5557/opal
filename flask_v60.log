@@ -293,3 +293,578 @@ DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json'
 127.0.0.1 - - [12/Dec/2025 10:24:28] "GET /static/style.css HTTP/1.1" 304 -
 127.0.0.1 - - [12/Dec/2025 10:27:14] "GET /org/Org_1/policies/edit/access/access_role_general_api HTTP/1.1" 200 -
 127.0.0.1 - - [12/Dec/2025 10:27:14] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpbdazmip9.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp2nx07gj_.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpny7rsnyt.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzu9hr47m.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdq3jc5r_.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpiuqzcjm7.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:57] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp2wavj45j.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:58] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpz6n9zm33.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:36:58] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp3z662aoo.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:58] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpjshhtepe.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:36:58] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4uuc2yfw.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:38:24] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4zssoxso.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:38:24] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp0spx9v22.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:38:24] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpw3kz0ci9.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpv5gjg94u.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzzjdimer.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmps787ci97.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpakhv69_d.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmperzmi9uu.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpob2rx0kz.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:38:25] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmps7mlpv43.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:02] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpx7nxrd_o.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpcgc9sj96.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpng66cchv.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpkaaeqx62.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpt4k10rzc.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpkw7gnzi4.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpod07qw8w.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:03] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpy_wlg63l.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:04] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvdi8ogr_.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:04] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp2zkw1gk_.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpf2girq5k.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpolft5_u3.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp6bhqf7mf.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpgbh3huni.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpg63kx0g3.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvuzelcpf.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp1uaj38sz.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:40:48] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmprotl3fm_.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:49] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpm4h6ghk7.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:40:49] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp8v_klq2y.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpt86nnz5r.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4b0_lmb9.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpt4uacmd_.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpudzd7u6v.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp6xmuh0jj.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpo55huue1.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpv7iud51n.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp405nf0og.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpy80nfqax.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:42:16] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp1qqtx9zj.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:43:04] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpifmunk5m.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:43:04] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzp6bg2yx.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:43:04] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpy_lwblv6.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpq4uqy3sa.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4n7ffsml.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpaqj95dzn.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpu6f12pwq.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/password HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpb6ryklis.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpgay6vakg.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [12/Dec/2025 10:43:05] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpc416k1st.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp85f1kodj.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp217v6l8n.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpupgd0dp1.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpbw3ce44o.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmprqjq4xr_.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:39] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp6kxogibp.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:40] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzcjiz93f.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:40] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp1bu668ru.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:40] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpjk1_v1w7.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:44:40] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpbtkiugzn.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvbr0qxf2.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpztwougqy.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpgsp8_drd.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpxxdfmcs8.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp7rm6_c4q.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:14] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmppfqyegi0.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:15] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp1579337c.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:15] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4zns54mi.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:15] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpit8uf5r4.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:47:15] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp7tustepb.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:17] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpmteo9_12.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:17] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpj71z_lf7.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:17] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpngui11y8.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:17] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpqd6ichtb.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:17] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpekya3x2w.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:18] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpniy65hgm.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:18] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp5t009rpi.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:18] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzvc4sc8i.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:18] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpf_ntleli.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:54:18] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpm_l2oh5_.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:11] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpekmx1lfk.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:11] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4iqztys8.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:12] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpubgi03vz.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:12] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdngwimmn.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:12] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpc432_2hq.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:12] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp7hwixvwv.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpieok9ums.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:13] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpfl3zex_8.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp0r4mgtw9.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:56:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpnv9m6w_k.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:01] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpcwtx78ya.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:01] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp0enrjz1s.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpp965_sin.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp9r5mypf2.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp_rmgf1nl.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpac7iqcsk.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpf6qkbc8g.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp4bn_xv49.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpbc98a706.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:02] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp3033idir.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:35] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp2j55hn6w.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:35] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp8058fd28.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:35] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpyldqhx76.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpncykiciq.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp8cw_0m8w.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpm7tjrv9a.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmppl4zfgk1.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpn023rrdm.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmptg0q_uyj.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:36] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpzoc0abw_.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:37] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for org3_user@default.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvv1zkq53.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:57:37] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp_rjjt2km.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:05] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpk59dzzau.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:05] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpt52448i7.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:05] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpustc8f9r.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:05] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpf3p49rkz.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpyyh2ccjy.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpa54r5vl8.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmphfs7jbfu.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmph3b1fm51.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmplbdaoo3u.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpym6pyytq.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:06] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for org3_user@default.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpxzwm35yw.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:07] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpq_ym10t1.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:46] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp6my0i20x.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:46] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmphru67_30.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:46] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvbf1bsdi.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:47] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpemymhpuf.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:47] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp3imjobuv.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:47] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp5bogszk3.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:47] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpr1x_xzkc.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:47] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp3c8wyy77.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:48] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpqfmuba5z.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:48] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmprqbwi09u.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:48] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for org3_user@default.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdhsauemr.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 10:58:48] "POST /api/test/access HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:00:36] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:00:36] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:00:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:00:42] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:00:49] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:00:49] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpuytt0ojr.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpqhk0_kq0.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpblsiua36.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp7kqzcggj.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmprofmul92.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdq9cj_wx.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_64587@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpepj3u9r6.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp_ex80dzl.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:13] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp449hhay9.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:14] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_59185@org_2.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmptuidyg4i.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [12/Dec/2025 11:05:14] "POST /api/test/access HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:17:38] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:17:38] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:17:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:17:40] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:17:41] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:17:41] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:19:08] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:19:08] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:20:40] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:20:40] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:20:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:20:43] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:20:46] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:20:47] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:20:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:20:49] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:20:54] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:20:54] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:23:49] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:23:49] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:23:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:23:53] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:24:03] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:24:03] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:24:22] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:24:22] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:24:27] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:24:27] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:25:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:25:13] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:25:15] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:25:15] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:25:17] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:25:17] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:28:28] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:28] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:28:32] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:32] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:28:34] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:34] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:28:38] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:38] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=first_strict, type=password
+DEBUG: password_min_length raw=12
+DEBUG: Constructed policy: {'password_min_length': 12, 'password_require_number': True, 'password_require_special_char': True, 'password_reject_common': True}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:28:52] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:28:52] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:52] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:28:57] "GET /org/Org_1/policies/new?type=password HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:28:57] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=medium_interns, type=password
+DEBUG: password_min_length raw=10
+DEBUG: Constructed policy: {'password_min_length': 10, 'password_require_number': True, 'password_require_special_char': False, 'password_reject_common': False}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:29:13] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:29:13] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:14] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:29:20] "GET /org/Org_1/policies/new?type=mfa HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:20] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=admins, type=mfa
+DEBUG: Constructed policy: {'mfa_required': True}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:29:31] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:29:31] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:31] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:29:37] "GET /org/Org_1/policies/new?type=mfa HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:37] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=interns, type=mfa
+DEBUG: Constructed policy: {'mfa_required': False}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:29:44] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:29:44] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:44] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:29:50] "GET /org/Org_1/policies/new?type=ip_whitelist HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:29:50] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=billing_team, type=ip_whitelist
+DEBUG: Constructed policy: {'allow_cidrs': ['10.0.0.0/8']}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:30:04] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:30:04] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:30:04] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:30:23] "GET /org/Org_1/policies/edit/mfa/interns HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:30:23] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:30:27] "GET /org/Org_1/policies/edit/ip_whitelist/billing_team HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:30:27] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=billing_team, type=ip_whitelist
+DEBUG: Constructed policy: {'allow_cidrs': ['10.0.0.0/8', '10.1.0.1/8']}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [12/Dec/2025 11:30:37] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [12/Dec/2025 11:30:37] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:30:37] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:31:17] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:31:17] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:31:40] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:31:41] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:01] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:01] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:02] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:02] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:02] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:02] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:03] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:03] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:03] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:03] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:54] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:54] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:33:55] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:35:34] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:35:34] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:35:35] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:35:35] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [12/Dec/2025 11:35:35] "GET /org/Org_1 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Dec/2025 11:35:35] "GET /static/style.css HTTP/1.1" 304 -

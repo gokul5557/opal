@@ -1,4116 +1,470 @@
 {
+  "global_policies": {
+    "password": {
+      "Global_Default_Password_Policy": {
+        "password_min_length": 12,
+        "password_require_number": true,
+        "password_require_special_char": true,
+        "password_require_uppercase": true,
+        "password_require_lowercase": true,
+        "password_reject_common": true,
+        "password_reject_user_info": true
+      }
+    },
+    "access": {
+      "Global_Access_Admin": {
+        "allowed_prefixes": [
+          "/admin",
+          "/api"
+        ]
+      },
+      "Global_Access_User": {
+        "allowed_prefixes": [
+          "/mail",
+          "/drive",
+          "/api/resource/Organization",
+          "/api"
+        ]
+      },
+      "access_plan_basic": {
+        "prefixes": [
+          "/drive",
+          "/mail"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_plan_pro": {
+        "prefixes": [
+          "/drive",
+          "/mail",
+          "/calendar"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_plan_premium": {
+        "prefixes": [
+          "/meet",
+          "/drive",
+          "/mail",
+          "/calendar",
+          "/rooms"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_plan_enterprise": {
+        "prefixes": [
+          "/meet",
+          "/drive",
+          "/mail",
+          "/chat",
+          "/calendar",
+          "/rooms"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_workspace_admin": {
+        "prefixes": [
+          "/"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_billing_admin": {
+        "prefixes": [
+          "/api/method/saga_billings.invoice.invoice_list.view",
+          "/api/resource/Wallet%20History",
+          "/api/method/saga_billings.billings.before_payment.list_items",
+          "/api/resource/Subscription Plan",
+          "/api/method/saga_billings.billings.current_plan.plan",
+          "/api/method/saga_billings.billings.order_id.get",
+          "/api/method/saga_billings.billings.change_plan.move",
+          "/api/method/saga_billings.invoice.invoice_list.get_list",
+          "/api/method/saga_billings.billings.transaction_history.get",
+          "/api/resource/Wallet"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_org_admin": {
+        "prefixes": [
+          "/api/method/saga_directory.dns.cloudflar.add_record",
+          "/api/method/saga_workspace.mail_setup.txt_record_verify.verify_dns",
+          "/api/resource/Domains",
+          "/api/method/saga_directory.deletion.org_admin.delete",
+          "/api/method/saga_directory.deletion.organization.delete",
+          "/api/method/saga_workspace.mail_setup.domain_validate.validate",
+          "/api/method/saga_workspace.mail_setup.dns_record.dns_datas",
+          "/api/method/saga_workspace.mail_setup.domain_provision.add_domain",
+          "/api/resource/Organization"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_user_admin": {
+        "prefixes": [
+          "/api/method/saga_directory.account.update_info.profile",
+          "/api/method/saga_directory.login.stage.find",
+          "/api/method/saga_directory.account.user_info.profile",
+          "/api/method/saga_directory.account.change_email.mailid",
+          "/api/method/saga_directory.account.change_password.password",
+          "/api/method/saga_directory.signup.signup_update.phone_number",
+          "/api/method/saga_directory.account.update_otp_type.otp_type",
+          "/api/method/saga_directory.login.forgot_password.otp_send",
+          "/api/method/saga_directory.account.change_phone_number.phone",
+          "/api/method/saga_directory.signup.register.company_details",
+          "/api/method/saga_directory.login.stage.update",
+          "/api/method/saga_directory.signup.signup_update.otp_type",
+          "/api/method/saga_directory.signup.initial.step",
+          "/api/method/saga_directory.login.auth.user_login",
+          "/api/method/saga_directory.login.forgot_password.password"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_email_admin": {
+        "prefixes": [
+          "/mail"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_drive_admin": {
+        "prefixes": [
+          "/drive"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_calendar_admin": {
+        "prefixes": [
+          "/calendar"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_meet_admin": {
+        "prefixes": [
+          "/meet",
+          "/rooms"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_employee": {
+        "prefixes": [],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_guest": {
+        "prefixes": [],
+        "permissions": [
+          "read"
+        ]
+      },
+      "access_role_super_admin": {
+        "prefixes": [
+          "/api/method/frappe.client.get_list",
+          "/api/method/saga_msp.deletion.msp_admin.delete",
+          "/api/method/saga_msp.deletion.msp_org.delete",
+          "/api/method/frappe.auth.get_logged_user"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_department_admin": {
+        "prefixes": [
+          "/api/resource/Designation",
+          "/api/resource/Department"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_group_admin": {
+        "prefixes": [
+          "/api/method/remove_group_member",
+          "/api/resource/Group*"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_employee_apps": {
+        "prefixes": [
+          "/mail/mail.api.account.get_user_info",
+          "/mail/mail.api.mail.create_mail",
+          "/mail/mail.api.outbound.send",
+          "/mail/mail.api.mail.get_mime_message",
+          "/mail/upload_file",
+          "/mail/mail.api.mail.fetch_attachment",
+          "/mail/mail.api.mail.search_mails",
+          "/mail/mail.api.mail.set_flagged",
+          "/mail/mail.api.mail.get_mailboxes",
+          "/mail/mail.api.mail.get_mail_thread",
+          "/mail/mail.api.mail.get_mails_from_mailbox",
+          "/drive/*",
+          "/mail/mail.api.outbound.send_raw",
+          "/mail/mail.api.auth.validate",
+          "/calendar/*",
+          "/mail/mail.api.mail.update_draft_mail",
+          "/mail/mail.api.mail.set_mails_mailbox",
+          "/mail/mail.api.mail.delete_threads",
+          "/mail/mail.api.mail.set_seen",
+          "/mail/mail.api.mail.get_mailbox_thread_count"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_general_api": {
+        "prefixes": [
+          "/api/resource/Work%20Location*",
+          "/api/method/saga_directory.employee.self_account.create",
+          "/api/resource/Org%20Admin",
+          "/api/method/saga_directory.verification.phone_otp_validate.check",
+          "/api/method/saga_directory.employee.account.create",
+          "/api/method/saga_directory.verification.app_otp_validate.validate",
+          "/api/resource/Item*",
+          "/api/method/saga_directory.verification.mail_otp_validate.check",
+          "/api/method/saga_directory.verification.mail_otp_resend.resend",
+          "/auth/login",
+          "/api/method/saga_auth.auth_gateway.session_auth.session",
+          "/api/method/saga_directory.verification.phone_otp_send.phone_otp_send",
+          "/api/*",
+          "/rooms/*",
+          "/api/method/saga_auth.auth_gateway.password_set.set",
+          "/api/method/saga_directory.verification.totp_service.generate",
+          "/api/method/upload_file",
+          "/api/method/saga_directory.db.validators.clientadmin",
+          "/api/method/saga_directory.verification.mail_otp_send.otp_send",
+          "/api/method/saga_directory.deletion.account_cleanup.delete",
+          "/api/method/logout",
+          "/api/method/saga_directory.verification.phone_otp_send.resend",
+          "/api/method/saga_directory.deletion.employee.delete",
+          "/callback",
+          "/api/method/saga_directory.verification.find_otp_type.type",
+          "/api/method/saga_auth.user_activity.recent_activity.datas",
+          "/api/method/saga_auth.auth_gateway.user_account.create",
+          "/api/method/login",
+          "/api/status",
+          "/*",
+          "/api/method/saga_workspace.mail_setup.txt_record.record",
+          "/api/method/saga_directory.deletion.org_signup.delete",
+          "/api/method/saga_workspace.mail_setup.txt_record.generate",
+          "/logout",
+          "/api/method/saga_directory.verification.phone_otp_send.send",
+          "/api/health",
+          "/api/method/saga_auth.deletion.user_account.delete",
+          "/api/resource/Employee*"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      }
+    }
+  },
+  "global_roles": {
+    "workspace_admin": {
+      "assigned_policies": {
+        "access": "access_role_workspace_admin"
+      }
+    },
+    "billing_admin": {
+      "assigned_policies": {
+        "access": "access_role_billing_admin"
+      }
+    },
+    "org_admin": {
+      "assigned_policies": {
+        "access": "access_role_org_admin"
+      }
+    },
+    "user_admin": {
+      "assigned_policies": {
+        "access": "access_role_user_admin"
+      }
+    },
+    "email_admin": {
+      "assigned_policies": {
+        "access": "access_role_email_admin"
+      }
+    },
+    "drive_admin": {
+      "assigned_policies": {
+        "access": "access_role_drive_admin"
+      }
+    },
+    "calendar_admin": {
+      "assigned_policies": {
+        "access": "access_role_calendar_admin"
+      }
+    },
+    "meet_admin": {
+      "assigned_policies": {
+        "access": "access_role_meet_admin"
+      }
+    },
+    "employee": {
+      "assigned_policies": {
+        "access": "access_role_employee"
+      },
+      "inherited_roles": [
+        "employee_apps"
+      ]
+    },
+    "guest": {
+      "assigned_policies": {
+        "access": "access_role_guest"
+      }
+    },
+    "super_admin": {
+      "assigned_policies": {
+        "access": "access_role_super_admin"
+      }
+    },
+    "department_admin": {
+      "assigned_policies": {
+        "access": "access_role_department_admin"
+      }
+    },
+    "group_admin": {
+      "assigned_policies": {
+        "access": "access_role_group_admin"
+      }
+    },
+    "employee_apps": {
+      "assigned_policies": {
+        "access": "access_role_employee_apps"
+      }
+    },
+    "general_api": {
+      "assigned_policies": {
+        "access": "access_role_general_api"
+      }
+    }
+  },
   "organizations": {
-    "Org_1": {
+    "gokul": {
       "defined_policies": {
         "password": {
-          "Org_1_Pwd_High": {
+          "first_strict": {
             "password_min_length": 12,
             "password_require_number": true,
             "password_require_special_char": true,
-            "password_require_uppercase": true,
-            "password_require_lowercase": true,
-            "password_reject_common": true,
-            "password_reject_user_info": true
+            "password_reject_common": true
           },
-          "Org_1_Pwd_Med": {
+          "medium_interns": {
             "password_min_length": 10,
             "password_require_number": true,
             "password_require_special_char": false,
-            "password_reject_common": true
-          },
-          "Org_1_Pwd_Low": {
-            "password_min_length": 8,
-            "password_require_number": false,
-            "password_require_special_char": false,
             "password_reject_common": false
-          },
-          "gokul": {
-            "password_min_length": 11,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_reject_common": true
-          },
-          "test_friday": {
-            "password_min_length": 5,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_reject_common": true
           }
         },
         "mfa": {
-          "Org_1_MFA_Enforced": {
+          "admins": {
             "mfa_required": true
           },
-          "Org_1_MFA_Optional": {
+          "interns": {
             "mfa_required": false
           }
         },
-        "session": {
-          "Org_1_Sess_Strict": {
-            "session_timeout_minutes": 15,
-            "max_sessions": 1
-          },
-          "Org_1_Sess_Std": {
-            "session_timeout_minutes": 1440,
-            "max_sessions": 10
-          }
-        },
         "ip_whitelist": {
-          "Org_1_IP_Office": {
-            "allowed_cidrs": [
-              "10.248.0.0/16"
-            ]
-          },
-          "Org_1_IP_Any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          },
-          "Org_1_IP_White": {
+          "billing_team": {
             "allow_cidrs": [
-              "10.0.0.0/8"
-            ]
-          }
-        },
-        "access": {
-          "Org_1_Access_Admin": {
-            "allowed_prefixes": [
-              "/admin",
-              "/api"
-            ]
-          },
-          "Org_1_Access_User": {
-            "allowed_prefixes": [
-              "/mail",
-              "/drive",
-              "/api/resource/Organization",
-              "/api"
-            ]
-          },
-          "access_plan_basic": {
-            "prefixes": [
-              "/drive",
-              "/mail"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_plan_pro": {
-            "prefixes": [
-              "/drive",
-              "/mail",
-              "/calendar"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_plan_premium": {
-            "prefixes": [
-              "/meet",
-              "/drive",
-              "/mail",
-              "/calendar",
-              "/rooms"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_plan_enterprise": {
-            "prefixes": [
-              "/meet",
-              "/drive",
-              "/mail",
-              "/chat",
-              "/calendar",
-              "/rooms"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_workspace_admin": {
-            "prefixes": [
-              "/"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_billing_admin": {
-            "prefixes": [
-              "/api/method/saga_billings.invoice.invoice_list.view",
-              "/api/resource/Wallet%20History",
-              "/api/method/saga_billings.billings.before_payment.list_items",
-              "/api/resource/Subscription Plan",
-              "/api/method/saga_billings.billings.current_plan.plan",
-              "/api/method/saga_billings.billings.order_id.get",
-              "/api/method/saga_billings.billings.change_plan.move",
-              "/api/method/saga_billings.invoice.invoice_list.get_list",
-              "/api/method/saga_billings.billings.transaction_history.get",
-              "/api/resource/Wallet"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_org_admin": {
-            "prefixes": [
-              "/api/method/saga_directory.dns.cloudflar.add_record",
-              "/api/method/saga_workspace.mail_setup.txt_record_verify.verify_dns",
-              "/api/resource/Domains",
-              "/api/method/saga_directory.deletion.org_admin.delete",
-              "/api/method/saga_directory.deletion.organization.delete",
-              "/api/method/saga_workspace.mail_setup.domain_validate.validate",
-              "/api/method/saga_workspace.mail_setup.dns_record.dns_datas",
-              "/api/method/saga_workspace.mail_setup.domain_provision.add_domain",
-              "/api/resource/Organization"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_user_admin": {
-            "prefixes": [
-              "/api/method/saga_directory.account.update_info.profile",
-              "/api/method/saga_directory.login.stage.find",
-              "/api/method/saga_directory.account.user_info.profile",
-              "/api/method/saga_directory.account.change_email.mailid",
-              "/api/method/saga_directory.account.change_password.password",
-              "/api/method/saga_directory.signup.signup_update.phone_number",
-              "/api/method/saga_directory.account.update_otp_type.otp_type",
-              "/api/method/saga_directory.login.forgot_password.otp_send",
-              "/api/method/saga_directory.account.change_phone_number.phone",
-              "/api/method/saga_directory.signup.register.company_details",
-              "/api/method/saga_directory.login.stage.update",
-              "/api/method/saga_directory.signup.signup_update.otp_type",
-              "/api/method/saga_directory.signup.initial.step",
-              "/api/method/saga_directory.login.auth.user_login",
-              "/api/method/saga_directory.login.forgot_password.password"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_email_admin": {
-            "prefixes": [
-              "/mail"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_drive_admin": {
-            "prefixes": [
-              "/drive"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_calendar_admin": {
-            "prefixes": [
-              "/calendar"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_meet_admin": {
-            "prefixes": [
-              "/meet",
-              "/rooms"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_employee": {
-            "prefixes": [],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_guest": {
-            "prefixes": [],
-            "permissions": [
-              "read"
-            ]
-          },
-          "access_role_super_admin": {
-            "prefixes": [
-              "/api/method/frappe.client.get_list",
-              "/api/method/saga_msp.deletion.msp_admin.delete",
-              "/api/method/saga_msp.deletion.msp_org.delete",
-              "/api/method/frappe.auth.get_logged_user"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_department_admin": {
-            "prefixes": [
-              "/api/resource/Designation",
-              "/api/resource/Department"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_group_admin": {
-            "prefixes": [
-              "/api/method/remove_group_member",
-              "/api/resource/Group*"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_employee_apps": {
-            "prefixes": [
-              "/mail/mail.api.account.get_user_info",
-              "/mail/mail.api.mail.create_mail",
-              "/mail/mail.api.outbound.send",
-              "/mail/mail.api.mail.get_mime_message",
-              "/mail/upload_file",
-              "/mail/mail.api.mail.fetch_attachment",
-              "/mail/mail.api.mail.search_mails",
-              "/mail/mail.api.mail.set_flagged",
-              "/mail/mail.api.mail.get_mailboxes",
-              "/mail/mail.api.mail.get_mail_thread",
-              "/mail/mail.api.mail.get_mails_from_mailbox",
-              "/drive/*",
-              "/mail/mail.api.outbound.send_raw",
-              "/mail/mail.api.auth.validate",
-              "/calendar/*",
-              "/mail/mail.api.mail.update_draft_mail",
-              "/mail/mail.api.mail.set_mails_mailbox",
-              "/mail/mail.api.mail.delete_threads",
-              "/mail/mail.api.mail.set_seen",
-              "/mail/mail.api.mail.get_mailbox_thread_count"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_general_api": {
-            "prefixes": [
-              "/api/resource/Work%20Location*",
-              "/api/method/saga_directory.employee.self_account.create",
-              "/api/resource/Org%20Admin",
-              "/api/method/saga_directory.verification.phone_otp_validate.check",
-              "/api/method/saga_directory.employee.account.create",
-              "/api/method/saga_directory.verification.app_otp_validate.validate",
-              "/api/resource/Item*",
-              "/api/method/saga_directory.verification.mail_otp_validate.check",
-              "/api/method/saga_directory.verification.mail_otp_resend.resend",
-              "/auth/login",
-              "/api/method/saga_auth.auth_gateway.session_auth.session",
-              "/api/method/saga_directory.verification.phone_otp_send.phone_otp_send",
-              "/api/*",
-              "/rooms/*",
-              "/api/method/saga_auth.auth_gateway.password_set.set",
-              "/api/method/saga_directory.verification.totp_service.generate",
-              "/api/method/upload_file",
-              "/api/method/saga_directory.db.validators.clientadmin",
-              "/api/method/saga_directory.verification.mail_otp_send.otp_send",
-              "/api/method/saga_directory.deletion.account_cleanup.delete",
-              "/api/method/logout",
-              "/api/method/saga_directory.verification.phone_otp_send.resend",
-              "/api/method/saga_directory.deletion.employee.delete",
-              "/callback",
-              "/api/method/saga_directory.verification.find_otp_type.type",
-              "/api/method/saga_auth.user_activity.recent_activity.datas",
-              "/api/method/saga_auth.auth_gateway.user_account.create",
-              "/api/method/login",
-              "/api/status",
-              "/*",
-              "/api/method/saga_workspace.mail_setup.txt_record.record",
-              "/api/method/saga_directory.deletion.org_signup.delete",
-              "/api/method/saga_workspace.mail_setup.txt_record.generate",
-              "/logout",
-              "/api/method/saga_directory.verification.phone_otp_send.send",
-              "/api/health",
-              "/api/method/saga_auth.deletion.user_account.delete",
-              "/api/resource/Employee*"
-            ],
-            "permissions": [
-              "read",
-              "write"
-            ]
-          },
-          "access_role_gokul": {
-            "api_permissions": {
-              "/api/resource/Domains": [
-                "read",
-                "write"
-              ]
-            },
-            "prefixes": [
-              "/api/resource/Domains"
-            ],
-            "permissions": [
-              "read",
-              "write"
+              "10.0.0.0/8",
+              "10.1.0.1/8"
             ]
           }
         }
       },
       "assigned_policies": {
-        "access": "Org_1_Access_User",
-        "ip_whitelist": "Org_1_IP_White"
+        "password": "Global_Default_Password_Policy"
       },
       "departments": {
         "HR": {
           "assigned_policies": {
-            "password": "gokul",
-            "mfa": "Org_1_MFA_Enforced"
-          }
-        },
-        "Finance": {
-          "assigned_policies": {
-            "mfa": "Org_1_MFA_Enforced"
-          }
-        },
-        "Sales": {
-          "assigned_policies": {
-            "password": "test_friday"
-          }
-        },
-        "Engineering": {
-          "assigned_policies": {
-            "password": "Org_1_Pwd_High"
-          }
-        }
-      },
-      "groups": {
-        "Org_1_Group_1": {
-          "assigned_policies": {
-            "password": "Org_1_Pwd_Low",
-            "mfa": "Org_1_MFA_Optional"
-          },
-          "dept_id": "HR"
-        },
-        "Org_1_Group_2": {
-          "assigned_policies": {
-            "password": "gokul"
-          },
-          "dept_id": "Finance"
-        },
-        "Org_1_Group_3": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_1_Group_4": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_1_Group_5": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_1_Group_6": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_1_Group_7": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_1_Group_8": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_1_Group_9": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_1_Group_10": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_1_Group_11": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_1_Group_12": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_1_Group_13": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_1_Group_14": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_1_Group_15": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_1_Group_16": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_1_Group_17": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_1_Group_18": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_1_Group_19": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_1_Group_20": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "devops": {
-          "dept_id": "Engineering",
-          "assigned_policies": {}
-        },
-        "Plan_Basic": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_plan_basic"
-          }
-        },
-        "Plan_Pro": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_plan_pro"
-          }
-        },
-        "Plan_Premium": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_plan_premium"
-          }
-        },
-        "Plan_Enterprise": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_plan_enterprise"
-          }
-        },
-        "Role_WorkspaceAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_workspace_admin"
-          }
-        },
-        "Role_BillingAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_billing_admin"
-          }
-        },
-        "Role_OrgAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_org_admin"
-          }
-        },
-        "Role_UserAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_user_admin"
-          }
-        },
-        "Role_EmailAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_email_admin"
-          }
-        },
-        "Role_DriveAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_drive_admin"
-          }
-        },
-        "Role_CalendarAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_calendar_admin"
-          }
-        },
-        "Role_MeetAdmin": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_meet_admin"
-          }
-        },
-        "Role_Employee": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_employee"
-          }
-        },
-        "Role_Guest": {
-          "dept_id": "Engineering",
-          "assigned_policies": {
-            "access": "access_role_guest"
-          }
-        }
-      },
-      "roles": {
-        "workspace_admin": {
-          "assigned_policies": {
-            "access": "access_role_workspace_admin"
-          }
-        },
-        "billing_admin": {
-          "assigned_policies": {
-            "access": "access_role_billing_admin"
-          }
-        },
-        "org_admin": {
-          "assigned_policies": {
-            "access": "access_role_org_admin"
-          }
-        },
-        "user_admin": {
-          "assigned_policies": {
-            "access": "access_role_user_admin"
-          }
-        },
-        "email_admin": {
-          "assigned_policies": {
-            "access": "access_role_email_admin"
-          }
-        },
-        "drive_admin": {
-          "assigned_policies": {
-            "access": "access_role_drive_admin"
-          }
-        },
-        "calendar_admin": {
-          "assigned_policies": {
-            "access": "access_role_calendar_admin"
-          }
-        },
-        "meet_admin": {
-          "assigned_policies": {
-            "access": "access_role_meet_admin"
-          }
-        },
-        "employee": {
-          "assigned_policies": {
-            "access": "access_role_employee"
-          }
-        },
-        "guest": {
-          "assigned_policies": {
-            "access": "access_role_guest"
-          }
-        },
-        "super_admin": {
-          "assigned_policies": {
-            "access": "access_role_super_admin"
-          }
-        },
-        "department_admin": {
-          "assigned_policies": {
-            "access": "access_role_department_admin"
-          }
-        },
-        "group_admin": {
-          "assigned_policies": {
-            "access": "access_role_group_admin"
-          }
-        },
-        "employee_apps": {
-          "assigned_policies": {
-            "access": "access_role_employee_apps"
-          }
-        },
-        "general_api": {
-          "assigned_policies": {
-            "access": "access_role_general_api"
-          }
-        },
-        "gokul": {
-          "assigned_policies": {
-            "access": "access_role_gokul"
-          },
-          "inherited_roles": [
-            "billing_admin"
-          ]
-        }
-      }
-    },
-    "Org_2": {
-      "defined_policies": {
-        "password": {
-          "Org_2_Pwd_High": {
-            "password_min_length": 12,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_require_uppercase": true,
-            "password_require_lowercase": true,
-            "password_reject_common": true,
-            "password_reject_user_info": true
-          },
-          "Org_2_Pwd_Med": {
-            "password_min_length": 10,
-            "password_require_number": true,
-            "password_require_special_char": false,
-            "password_reject_common": true
-          },
-          "Org_2_Pwd_Low": {
-            "password_min_length": 8,
-            "password_require_number": false,
-            "password_require_special_char": false,
-            "password_reject_common": false
-          }
-        },
-        "mfa": {
-          "Org_2_MFA_Enforced": {
-            "mfa_required": true
-          },
-          "Org_2_MFA_Optional": {
-            "mfa_required": false
-          }
-        },
-        "session": {
-          "Org_2_Sess_Strict": {
-            "session_timeout_minutes": 15,
-            "max_sessions": 1
-          },
-          "Org_2_Sess_Std": {
-            "session_timeout_minutes": 1440,
-            "max_sessions": 10
-          }
-        },
-        "ip_whitelist": {
-          "Org_2_IP_Office": {
-            "allowed_cidrs": [
-              "10.28.0.0/16"
-            ]
-          },
-          "Org_2_IP_Any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          }
-        },
-        "access": {
-          "Org_2_Access_Admin": {
-            "allowed_prefixes": [
-              "/admin",
-              "/api"
-            ]
-          },
-          "Org_2_Access_User": {
-            "allowed_prefixes": [
-              "/app",
-              "/home"
-            ]
-          }
-        }
-      },
-      "assigned_policies": {
-        "password": "Org_2_Pwd_Med",
-        "mfa": "Org_2_MFA_Optional",
-        "session": "Org_2_Sess_Std",
-        "ip_whitelist": "Org_2_IP_Any",
-        "access": "Org_2_Access_User"
-      },
-      "departments": {
-        "Engineering": {
-          "assigned_policies": {
-            "password": "Org_2_Pwd_High"
-          }
-        },
-        "HR": {
-          "assigned_policies": {}
-        },
-        "Finance": {
-          "assigned_policies": {
-            "mfa": "Org_2_MFA_Enforced"
-          }
-        },
-        "Sales": {
-          "assigned_policies": {}
-        }
-      },
-      "groups": {
-        "Org_2_Group_1": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_2_Group_2": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_2_Group_3": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_2_Group_4": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_2_Group_5": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_2_Group_6": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_2_Group_7": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_2_Group_8": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_2_Group_9": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_2_Group_10": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_2_Group_11": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_2_Group_12": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_2_Group_13": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_2_Group_14": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_2_Group_15": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_2_Group_16": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_2_Group_17": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_2_Group_18": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_2_Group_19": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_2_Group_20": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        }
-      }
-    },
-    "Org_3": {
-      "defined_policies": {
-        "password": {
-          "Org_3_Pwd_High": {
-            "password_min_length": 12,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_require_uppercase": true,
-            "password_require_lowercase": true,
-            "password_reject_common": true,
-            "password_reject_user_info": true
-          },
-          "Org_3_Pwd_Med": {
-            "password_min_length": 10,
-            "password_require_number": true,
-            "password_require_special_char": false,
-            "password_reject_common": true
-          },
-          "Org_3_Pwd_Low": {
-            "password_min_length": 8,
-            "password_require_number": false,
-            "password_require_special_char": false,
-            "password_reject_common": false
-          }
-        },
-        "mfa": {
-          "Org_3_MFA_Enforced": {
-            "mfa_required": true
-          },
-          "Org_3_MFA_Optional": {
-            "mfa_required": false
-          }
-        },
-        "session": {
-          "Org_3_Sess_Strict": {
-            "session_timeout_minutes": 15,
-            "max_sessions": 1
-          },
-          "Org_3_Sess_Std": {
-            "session_timeout_minutes": 1440,
-            "max_sessions": 10
-          }
-        },
-        "ip_whitelist": {
-          "Org_3_IP_Office": {
-            "allowed_cidrs": [
-              "10.44.0.0/16"
-            ]
-          },
-          "Org_3_IP_Any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          }
-        },
-        "access": {
-          "Org_3_Access_Admin": {
-            "allowed_prefixes": [
-              "/admin",
-              "/api"
-            ]
-          },
-          "Org_3_Access_User": {
-            "allowed_prefixes": [
-              "/app",
-              "/home"
-            ]
-          }
-        }
-      },
-      "assigned_policies": {
-        "password": "Org_3_Pwd_Med",
-        "mfa": "Org_3_MFA_Optional",
-        "session": "Org_3_Sess_Std",
-        "ip_whitelist": "Org_3_IP_Any",
-        "access": "Org_3_Access_User"
-      },
-      "departments": {
-        "Engineering": {
-          "assigned_policies": {
-            "password": "Org_3_Pwd_High"
-          }
-        },
-        "Finance": {
-          "assigned_policies": {
-            "mfa": "Org_3_MFA_Enforced"
+            "password": "medium_interns"
           }
         },
         "Sales": {
           "assigned_policies": {}
         },
-        "HR": {
+        "Marketing": {
+          "assigned_policies": {}
+        },
+        "R&D": {
           "assigned_policies": {}
         }
       },
       "groups": {
-        "Org_3_Group_1": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_3_Group_2": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_3_Group_3": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_3_Group_4": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_3_Group_5": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_3_Group_6": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_3_Group_7": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_3_Group_8": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_3_Group_9": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_3_Group_10": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_3_Group_11": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_3_Group_12": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_3_Group_13": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_3_Group_14": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_3_Group_15": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_3_Group_16": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_3_Group_17": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_3_Group_18": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_3_Group_19": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_3_Group_20": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        }
-      }
-    },
-    "Org_4": {
-      "defined_policies": {
-        "password": {
-          "Org_4_Pwd_High": {
-            "password_min_length": 12,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_require_uppercase": true,
-            "password_require_lowercase": true,
-            "password_reject_common": true,
-            "password_reject_user_info": true
-          },
-          "Org_4_Pwd_Med": {
-            "password_min_length": 10,
-            "password_require_number": true,
-            "password_require_special_char": false,
-            "password_reject_common": true
-          },
-          "Org_4_Pwd_Low": {
-            "password_min_length": 8,
-            "password_require_number": false,
-            "password_require_special_char": false,
-            "password_reject_common": false
-          }
-        },
-        "mfa": {
-          "Org_4_MFA_Enforced": {
-            "mfa_required": true
-          },
-          "Org_4_MFA_Optional": {
-            "mfa_required": false
-          }
-        },
-        "session": {
-          "Org_4_Sess_Strict": {
-            "session_timeout_minutes": 15,
-            "max_sessions": 1
-          },
-          "Org_4_Sess_Std": {
-            "session_timeout_minutes": 1440,
-            "max_sessions": 10
-          }
-        },
-        "ip_whitelist": {
-          "Org_4_IP_Office": {
-            "allowed_cidrs": [
-              "10.29.0.0/16"
-            ]
-          },
-          "Org_4_IP_Any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          }
-        },
-        "access": {
-          "Org_4_Access_Admin": {
-            "allowed_prefixes": [
-              "/admin",
-              "/api"
-            ]
-          },
-          "Org_4_Access_User": {
-            "allowed_prefixes": [
-              "/app",
-              "/home"
-            ]
-          }
-        }
-      },
-      "assigned_policies": {
-        "password": "Org_4_Pwd_Med",
-        "mfa": "Org_4_MFA_Optional",
-        "session": "Org_4_Sess_Std",
-        "ip_whitelist": "Org_4_IP_Any",
-        "access": "Org_4_Access_User"
-      },
-      "departments": {
-        "Sales": {
+        "one": {
+          "dept_id": "HR",
           "assigned_policies": {}
         },
-        "Finance": {
-          "assigned_policies": {
-            "mfa": "Org_4_MFA_Enforced"
-          }
-        },
-        "HR": {
+        "two": {
+          "dept_id": "Sales",
           "assigned_policies": {}
         },
-        "Engineering": {
-          "assigned_policies": {
-            "password": "Org_4_Pwd_High"
-          }
-        }
-      },
-      "groups": {
-        "Org_4_Group_1": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_4_Group_2": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_4_Group_3": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_4_Group_4": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_4_Group_5": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_4_Group_6": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_4_Group_7": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_4_Group_8": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_4_Group_9": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_4_Group_10": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_4_Group_11": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_4_Group_12": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_4_Group_13": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_4_Group_14": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_4_Group_15": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_4_Group_16": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_4_Group_17": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_4_Group_18": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_4_Group_19": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_4_Group_20": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        }
-      }
-    },
-    "Org_5": {
-      "defined_policies": {
-        "password": {
-          "Org_5_Pwd_High": {
-            "password_min_length": 12,
-            "password_require_number": true,
-            "password_require_special_char": true,
-            "password_require_uppercase": true,
-            "password_require_lowercase": true,
-            "password_reject_common": true,
-            "password_reject_user_info": true
-          },
-          "Org_5_Pwd_Med": {
-            "password_min_length": 10,
-            "password_require_number": true,
-            "password_require_special_char": false,
-            "password_reject_common": true
-          },
-          "Org_5_Pwd_Low": {
-            "password_min_length": 8,
-            "password_require_number": false,
-            "password_require_special_char": false,
-            "password_reject_common": false
-          }
-        },
-        "mfa": {
-          "Org_5_MFA_Enforced": {
-            "mfa_required": true
-          },
-          "Org_5_MFA_Optional": {
-            "mfa_required": false
-          }
-        },
-        "session": {
-          "Org_5_Sess_Strict": {
-            "session_timeout_minutes": 15,
-            "max_sessions": 1
-          },
-          "Org_5_Sess_Std": {
-            "session_timeout_minutes": 1440,
-            "max_sessions": 10
-          }
-        },
-        "ip_whitelist": {
-          "Org_5_IP_Office": {
-            "allowed_cidrs": [
-              "10.225.0.0/16"
-            ]
-          },
-          "Org_5_IP_Any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          }
-        },
-        "access": {
-          "Org_5_Access_Admin": {
-            "allowed_prefixes": [
-              "/admin",
-              "/api"
-            ]
-          },
-          "Org_5_Access_User": {
-            "allowed_prefixes": [
-              "/app",
-              "/home"
-            ]
-          }
-        }
-      },
-      "assigned_policies": {
-        "password": "Org_5_Pwd_Med",
-        "mfa": "Org_5_MFA_Optional",
-        "session": "Org_5_Sess_Std",
-        "ip_whitelist": "Org_5_IP_Any",
-        "access": "Org_5_Access_User"
-      },
-      "departments": {
-        "HR": {
+        "three": {
+          "dept_id": "R&D",
           "assigned_policies": {}
         },
-        "Sales": {
+        "four": {
+          "dept_id": "R&D",
           "assigned_policies": {}
-        },
-        "Engineering": {
-          "assigned_policies": {
-            "password": "Org_5_Pwd_High"
-          }
-        },
-        "Finance": {
-          "assigned_policies": {
-            "mfa": "Org_5_MFA_Enforced"
-          }
         }
       },
-      "groups": {
-        "Org_5_Group_1": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_5_Group_2": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_5_Group_3": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_5_Group_4": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_5_Group_5": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_5_Group_6": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_5_Group_7": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_5_Group_8": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_5_Group_9": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_5_Group_10": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_5_Group_11": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_5_Group_12": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_5_Group_13": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_5_Group_14": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_5_Group_15": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_5_Group_16": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        },
-        "Org_5_Group_17": {
-          "assigned_policies": {},
-          "dept_id": "HR"
-        },
-        "Org_5_Group_18": {
-          "assigned_policies": {},
-          "dept_id": "Sales"
-        },
-        "Org_5_Group_19": {
-          "assigned_policies": {},
-          "dept_id": "Engineering"
-        },
-        "Org_5_Group_20": {
-          "assigned_policies": {},
-          "dept_id": "Finance"
-        }
-      }
-    },
-    "acme_corp": {
-      "defined_policies": {
-        "password": {
-          "acme_pwd_default": {
-            "password_min_length": 8,
-            "password_require_number": true,
-            "password_reject_common": true
-          },
-          "acme_pwd_strict": {
-            "password_min_length": 12,
-            "password_require_special_char": true,
-            "password_reject_common": true
-          },
-          "acme_pwd_short": {
-            "password_min_length": 5
-          }
-        },
-        "mfa": {
-          "acme_mfa_none": {
-            "mfa_required": false
-          },
-          "acme_mfa_required": {
-            "mfa_required": true
-          }
-        },
-        "ip_whitelist": {
-          "acme_ip_int": {
-            "allowed_cidrs": [
-              "10.0.0.0/8"
-            ]
-          },
-          "acme_ip_any": {
-            "allowed_cidrs": [
-              "0.0.0.0/0"
-            ]
-          }
-        },
-        "access": {
-          "acme_public": {
-            "allowed_prefixes": [
-              "/public",
-              "/auth"
-            ]
-          },
-          "acme_secure": {
-            "allowed_prefixes": [
-              "/git",
-              "/jenkins"
-            ]
-          }
-        },
-        "session": {
-          "acme_sess_day": {
-            "session_timeout_minutes": 1440
-          },
-          "acme_sess_short": {
-            "session_timeout_minutes": 240
-          }
-        }
-      },
-      "assigned_policies": {
-        "password": "acme_pwd_default",
-        "mfa": "acme_mfa_none",
-        "ip_whitelist": "acme_ip_int",
-        "access": "acme_public",
-        "session": "acme_sess_day"
-      },
-      "departments": {
-        "engineering": {
-          "assigned_policies": {
-            "password": "acme_pwd_strict",
-            "mfa": "acme_mfa_required",
-            "access": "acme_secure"
-          }
-        },
-        "sales": {
-          "assigned_policies": {
-            "session": "acme_sess_short"
-          }
-        }
-      },
-      "groups": {
-        "remote_workers": {
-          "assigned_policies": {
-            "ip_whitelist": "acme_ip_any"
-          },
-          "dept_id": "engineering"
-        }
-      }
-    },
-    "start_up_inc": {
-      "defined_policies": {
-        "mfa": {
-          "startup_mfa": {
-            "mfa_required": true
-          }
-        },
-        "password": {
-          "startup_pwd": {
-            "password_min_length": 10
-          }
-        }
-      },
-      "assigned_policies": {
-        "mfa": "startup_mfa",
-        "password": "startup_pwd"
-      },
-      "departments": {},
-      "groups": {}
+      "roles": {}
     }
   },
   "users": {
-    "alice@sagasoft.io": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [],
+    "gokul@sagasoft.io": {
+      "org_id": "gokul",
+      "dept_id": "HR",
+      "groups": [
+        "one"
+      ],
+      "policy_overrides": {},
       "roles": [
         "user_admin",
-        "employee",
-        "gokul"
-      ]
-    },
-    "user_64587@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_11"
-      ],
-      "policy_overrides": {},
-      "roles": [
         "employee"
-      ]
-    },
-    "user_14713@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_11"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_29670@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_15"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_86181@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_21206@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_4"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_42000@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_5"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_32414@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_5"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_43378@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_1",
-        "Org_1_Group_2",
-        "Org_1_Group_4"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_17264@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_5"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "group_admin"
-      ]
-    },
-    "user_94348@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_9"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_80430@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_19"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "department_admin"
-      ]
-    },
-    "user_71646@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_11"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_89016@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_9"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_31546@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_13"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_84052@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_14"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_65854@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_20"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_14621@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_15"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_57889@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_5"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_20231@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_12"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_7265@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_12"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_42822@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_10"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_21258@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_14"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_43419@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_2"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_58942@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_3"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_70070@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_15"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_24538@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_1"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_38164@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_10"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_8987@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "workspace_admin"
-      ]
-    },
-    "user_77420@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_19"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_65069@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_17"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_94281@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_17"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_45670@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_20"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_99302@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_3"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "department_admin"
-      ]
-    },
-    "user_3973@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_17"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_38588@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_13"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_38021@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "org_admin"
-      ]
-    },
-    "user_31464@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_2"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_36352@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_5"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_72865@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_9"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "email_admin"
-      ]
-    },
-    "user_89685@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_8"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_8173@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_8"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_97980@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_15"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_74775@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_56659@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_1"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_14398@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_12"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "super_admin"
-      ]
-    },
-    "user_24397@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_1"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_18359@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_12"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_58867@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_7"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_19213@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_8"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "meet_admin"
-      ]
-    },
-    "user_13008@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_7"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_54252@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_1"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_48618@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_10"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_69223@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "HR",
-      "groups": [
-        "Org_1_Group_14"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_52866@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_2"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_90705@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_1"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "meet_admin"
-      ]
-    },
-    "user_27370@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_1_Group_3"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_93399@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_2"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "meet_admin"
-      ]
-    },
-    "user_95712@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_7"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_87360@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_71670@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "meet_admin"
-      ]
-    },
-    "user_65054@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_19"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_29473@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_6"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_90495@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_12"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "user_98725@org_1.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "general_api"
-      ]
-    },
-    "user_59185@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_1",
-        "Org_2_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_30815@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_62579@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_2649@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_2",
-        "Org_2_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_73312@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_2",
-        "Org_2_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_31333@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_3",
-        "Org_2_Group_9",
-        "Org_2_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_12768@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_3",
-        "Org_2_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_36759@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_4",
-        "Org_2_Group_6",
-        "Org_2_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_33341@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_2046@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_4",
-        "Org_2_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_77279@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_44896@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_6",
-        "Org_2_Group_11",
-        "Org_2_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_70072@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_6",
-        "Org_2_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_75641@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_6",
-        "Org_2_Group_12",
-        "Org_2_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_14646@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_6",
-        "Org_2_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_98522@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_55044@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_7",
-        "Org_2_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_49762@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_7",
-        "Org_2_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_88655@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_7",
-        "Org_2_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_72892@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_8",
-        "Org_2_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_46181@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38444@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_9",
-        "Org_2_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_45601@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_18354@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_9",
-        "Org_2_Group_10",
-        "Org_2_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_97110@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_15243@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_51057@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_86368@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_25579@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_57393@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38271@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_80242@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_76089@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_69870@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_70117@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_26776@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_72116@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_49529@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_93656@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_9432@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_95548@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_81139@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_2_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_59318@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_18",
-        "Org_2_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_28730@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_66308@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
-      "groups": [
-        "Org_2_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_79917@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_96845@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_22370@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_2303@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_2_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_4346@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_61006@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_63924@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_89939@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_2_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_74537@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_1"
-      ],
-      "policy_overrides": {}
-    },
-    "user_42895@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_1",
-        "Org_3_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_50039@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_1",
-        "Org_3_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_94915@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_1",
-        "Org_3_Group_4",
-        "Org_3_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_50820@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92179@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_2",
-        "Org_3_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_93935@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_2",
-        "Org_3_Group_10",
-        "Org_3_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_7942@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_77356@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_52044@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_54838@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_63749@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38224@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_96344@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_5",
-        "Org_3_Group_13",
-        "Org_3_Group_15",
-        "Org_3_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38309@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_29990@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_5",
-        "Org_3_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_83489@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_5",
-        "Org_3_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_22801@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_43164@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_90578@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_6",
-        "Org_3_Group_16",
-        "Org_3_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_83544@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_56024@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_83768@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_7",
-        "Org_3_Group_10",
-        "Org_3_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_57315@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_7",
-        "Org_3_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_97504@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_12154@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_8",
-        "Org_3_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_66178@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_8",
-        "Org_3_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_6956@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_88954@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_63548@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_9",
-        "Org_3_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_80529@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_99010@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92120@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_65651@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_19707@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_48150@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_15839@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_51457@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_91848@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_68062@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_13",
-        "Org_3_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_88160@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_70448@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_14",
-        "Org_3_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_54266@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_62286@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92368@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_82148@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_99187@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "HR",
-      "groups": [
-        "Org_3_Group_16",
-        "Org_3_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38880@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_85445@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_32315@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_3_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_43497@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_71425@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_3_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_95370@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_49949@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_31400@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_59567@org_3.com": {
-      "org_id": "Org_3",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_3_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_97665@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_1",
-        "Org_4_Group_2",
-        "Org_4_Group_5",
-        "Org_4_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_60091@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_1",
-        "Org_4_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_74616@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_42376@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_58057@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_2",
-        "Org_4_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_5424@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_97528@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_3",
-        "Org_4_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_66381@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_4",
-        "Org_4_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_18383@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_4",
-        "Org_4_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_56940@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_4",
-        "Org_4_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_67898@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_5",
-        "Org_4_Group_7",
-        "Org_4_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92924@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_5",
-        "Org_4_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_80571@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_80224@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_6",
-        "Org_4_Group_16",
-        "Org_4_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_34995@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_6",
-        "Org_4_Group_8",
-        "Org_4_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_70536@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_73640@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_11724@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_7",
-        "Org_4_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_49154@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_7",
-        "Org_4_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_63824@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_32926@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_37288@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_81130@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_39383@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_97765@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_56108@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_15589@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_25610@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_10",
-        "Org_4_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_77083@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_20439@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_8787@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_45241@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_16774@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_12",
-        "Org_4_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_56035@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_12",
-        "Org_4_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_54822@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_6832@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_59442@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_12",
-        "Org_4_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_15388@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_41759@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_23548@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_12897@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_95178@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_14",
-        "Org_4_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_47340@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_61345@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_10878@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_51586@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_3105@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_16",
-        "Org_4_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_29539@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_4_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_85928@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_4_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_18190@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_63707@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "HR",
-      "groups": [
-        "Org_4_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92860@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_32390@org_4.com": {
-      "org_id": "Org_4",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_4_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_74565@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_1"
-      ],
-      "policy_overrides": {}
-    },
-    "user_57512@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_1",
-        "Org_5_Group_2",
-        "Org_5_Group_5",
-        "Org_5_Group_6",
-        "Org_5_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_94843@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_1",
-        "Org_5_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_18253@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_1",
-        "Org_5_Group_2"
-      ],
-      "policy_overrides": {}
-    },
-    "user_73827@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_1"
-      ],
-      "policy_overrides": {}
-    },
-    "user_20389@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_2",
-        "Org_5_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_89554@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_3"
-      ],
-      "policy_overrides": {}
-    },
-    "user_72905@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_3",
-        "Org_5_Group_6",
-        "Org_5_Group_9",
-        "Org_5_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_83428@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_90878@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_39881@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_4",
-        "Org_5_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_37163@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_4"
-      ],
-      "policy_overrides": {}
-    },
-    "user_85292@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_24754@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_5"
-      ],
-      "policy_overrides": {}
-    },
-    "user_19481@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_5",
-        "Org_5_Group_6"
-      ],
-      "policy_overrides": {}
-    },
-    "user_11078@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_6",
-        "Org_5_Group_12",
-        "Org_5_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_98246@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_78531@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_7",
-        "Org_5_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_93677@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_49965@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_7"
-      ],
-      "policy_overrides": {}
-    },
-    "user_17164@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_8",
-        "Org_5_Group_11",
-        "Org_5_Group_15",
-        "Org_5_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_14311@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_8"
-      ],
-      "policy_overrides": {}
-    },
-    "user_91045@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_8",
-        "Org_5_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_93222@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_9",
-        "Org_5_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_84369@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_9",
-        "Org_5_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_14681@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_71369@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_9"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38012@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_10",
-        "Org_5_Group_14",
-        "Org_5_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_80904@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_10"
-      ],
-      "policy_overrides": {}
-    },
-    "user_87265@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_10",
-        "Org_5_Group_11"
-      ],
-      "policy_overrides": {}
-    },
-    "user_52900@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_11",
-        "Org_5_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_18260@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_12"
-      ],
-      "policy_overrides": {}
-    },
-    "user_95612@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_92015@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_13080@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_13"
-      ],
-      "policy_overrides": {}
-    },
-    "user_68557@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_75460@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_14"
-      ],
-      "policy_overrides": {}
-    },
-    "user_1239@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_94299@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_15"
-      ],
-      "policy_overrides": {}
-    },
-    "user_98005@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_51719@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_16"
-      ],
-      "policy_overrides": {}
-    },
-    "user_40479@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_62397@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_13595@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_17014@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "HR",
-      "groups": [
-        "Org_5_Group_17"
-      ],
-      "policy_overrides": {}
-    },
-    "user_61526@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_18",
-        "Org_5_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_26572@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_79391@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38889@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_18",
-        "Org_5_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_62783@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Sales",
-      "groups": [
-        "Org_5_Group_18"
-      ],
-      "policy_overrides": {}
-    },
-    "user_38014@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_23092@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_5_Group_19"
-      ],
-      "policy_overrides": {}
-    },
-    "user_40370@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "user_59086@org_5.com": {
-      "org_id": "Org_5",
-      "dept_id": "Finance",
-      "groups": [
-        "Org_5_Group_20"
-      ],
-      "policy_overrides": {}
-    },
-    "alice@acme.com": {
-      "org_id": "acme_corp",
-      "dept_id": "engineering",
-      "groups": []
-    },
-    "bob@acme.com": {
-      "org_id": "acme_corp",
-      "dept_id": "engineering",
-      "groups": [
-        "remote_workers"
-      ]
-    },
-    "charlie@acme.com": {
-      "org_id": "acme_corp",
-      "dept_id": "sales",
-      "groups": []
-    },
-    "dave@startup.com": {
-      "org_id": "start_up_inc",
-      "dept_id": null,
-      "groups": []
-    },
-    "gokul@sagasoft.io": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "gokul@sagaid.com": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_14"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "billing@sagasoft.xyz": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_4"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee"
-      ]
-    },
-    "guest@sagasoft.xyz": {
-      "org_id": "Org_1",
-      "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_16"
-      ],
-      "policy_overrides": {},
-      "roles": [
-        "employee",
-        "drive_admin"
       ]
     }
-  },
-  "common_passwords": [
-    "password",
-    "123456",
-    "admin"
-  ]
+  }
 }

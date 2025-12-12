@@ -12,7 +12,13 @@
         <div class="stat-card p-4">
             <div class="d-flex justify-content-between align-items-start">
                 <div>
-                    <h5 class="mb-1 text-truncate" style="max-width: 150px;" title="{{ org_id }}">{{ org_id }}</h5>
+                    <h5 class="mb-1 text-truncate" style="max-width: 150px;" title="{{ org_id }}">
+                        {{ org_id }}
+                        <a href="#" class="text-primary ms-2" data-bs-toggle="modal" data-bs-target="#renameModal"
+                            data-org-id="{{ org_id }}" title="Rename Organization">
+                            <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i>
+                        </a>
+                    </h5>
                     <span class="badge bg-light text-dark border">Active</span>
                 </div>
                 <div class="dropdown">
@@ -21,6 +27,8 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/org/{{ org_id }}">Manage</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#renameModal"
+                                data-org-id="{{ org_id }}">Rename</a></li>
                         <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
                     </ul>
                 </div>
@@ -66,4 +74,41 @@
     </div>
     {% endfor %}
 </div>
+
+<!-- Rename Modal -->
+<div class="modal fade" id="renameModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/org/rename" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rename Organization</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="old_id" id="renameOldId">
+                    <div class="mb-3">
+                        <label class="form-label">New Organization Name</label>
+                        <input type="text" class="form-control" name="new_id" required pattern="[A-Za-z0-9_]+"
+                            title="Alphanumeric and underscore only">
+                        <div class="form-text">This will update the Org ID and all associated user references.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Rename</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var renameModal = document.getElementById('renameModal')
+    renameModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var orgId = button.getAttribute('data-org-id')
+        var input = renameModal.querySelector('#renameOldId')
+        input.value = orgId
+    })
+</script>
 {% endblock %}

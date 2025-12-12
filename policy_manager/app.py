@@ -58,28 +58,85 @@ def org_details(org_id):
         }
     }
     
-    # We pass the full org object but override groups with paged version for display if needed, 
-    # but since template iterates org.groups, we might need to pass paged_groups separately 
-    # and update template to use it.
-    
+    global_policies = data.get("global_policies", {})
+    global_roles = data.get("global_roles", {})
+
     return render_template("org_details.html", 
                            org_id=org_id, 
                            org=org, 
                            users=paged_users, 
                            groups=paged_groups,
-                           pagination=pagination)
+                           pagination=pagination,
+                           global_policies=global_policies,
+                           global_roles=global_roles)
 
-@app.route("/org/<org_id>/department/add")
+@app.route("/org/<org_id>/department/add", methods=["POST"])
 def add_department(org_id):
-    name = request.args.get("name")
+    name = request.form.get("name")
     if name:
         data = load_data()
-        org = data["organizations"][org_id]
-        if name not in org["departments"]:
-            # Default to Org's assigned policy initially or empty? 
-            # Or assume default assignment logic. Let's start with Org's default.
-            default_pid = org.get("assigned_policy_id", "")
-            org["departments"][name] = {"assigned_policy_id": default_pid}
+        org = data["organizations"].get(org_id)
+        if org:
+            if name not in org.get("departments", {}):
+                # Init departments if missing
+                if "departments" not in org:
+                    org["departments"] = {}
+                
+                # Default Assignments?
+                org["departments"][name] = {"assigned_policies": {}}
+                save_data(data)
+    return redirect(url_for("org_details", org_id=org_id))
+
+@app.route("/org/<org_id>/department/rename", methods=["POST"])
+def rename_department(org_id):
+    old_name = request.form.get("old_name")
+    new_name = request.form.get("new_name")
+    
+    if old_name and new_name:
+        data = load_data()
+        org = data["organizations"].get(org_id)
+        dirs = org.get("departments", {})
+        
+        if old_name in dirs and new_name not in dirs:
+            dirs[new_name] = dirs.pop(old_name)
+            
+            # Update Users and Groups referencing this department
+            users = data.get("users", {})
+            for u in users.values():
+                if u.get("org_id") == org_id and u.get("dept_id") == old_name:
+                    u["dept_id"] = new_name
+            
+            # For groups, maybe? Groups usually reference dept too?
+            # Looking at UI, groups have badge for dept.
+            groups = org.get("groups", {})
+            for g in groups.values():
+                if g.get("dept_id") == old_name:
+                    g["dept_id"] = new_name
+                    
+            save_data(data)
+            
+    return redirect(url_for("org_details", org_id=org_id))
+
+@app.route("/org/<org_id>/department/delete", methods=["POST"])
+def delete_department(org_id):
+    name = request.form.get("name")
+    if name:
+        data = load_data()
+        org = data["organizations"].get(org_id)
+        if org and name in org.get("departments", {}):
+            del org["departments"][name]
+            
+            # Unlink users/groups?
+            users = data.get("users", {})
+            for u in users.values():
+                if u.get("org_id") == org_id and u.get("dept_id") == name:
+                    u["dept_id"] = None
+                    
+            groups = org.get("groups", {})
+            for g in groups.values():
+                if g.get("dept_id") == name:
+                     g["dept_id"] = None
+
             save_data(data)
     return redirect(url_for("org_details", org_id=org_id))
 
@@ -94,6 +151,21 @@ def edit_policy(org_id, p_type, policy_id):
     # Look up in defined_policies[type]
     policy = org.get("defined_policies", {}).get(p_type, {}).get(policy_id, {})
     return render_template("policy_form.html", org_id=org_id, policy_id=policy_id, policy=policy, policy_type=p_type)
+
+@app.route("/org/rename", methods=["POST"])
+def rename_organization():
+    from data_access import rename_org
+    old_id = request.form.get("old_id")
+    new_id = request.form.get("new_id")
+    
+    if not old_id or not new_id:
+        return "Missing ID", 400
+        
+    success, msg = rename_org(old_id, new_id)
+    if success:
+        return redirect(url_for("dashboard"))
+    else:
+        return f"Error: {msg}", 400
 
 @app.route("/org/<org_id>/policies/save", methods=["POST"])
 def save_policy(org_id):

@@ -1,0 +1,259 @@
+package policies.common.global
+
+# Global Defaults
+# Derived from Org_1 configuration as the baseline for all organizations.
+# These definitions are available to all organizations via inheritance.
+
+policies := {
+    "password": {
+        "Global_Default_Password_Policy": {
+            "password_min_length": 12,
+            "password_require_number": true,
+            "password_require_special_char": true,
+            "password_require_uppercase": true,
+            "password_require_lowercase": true,
+            "password_reject_common": true,
+            "password_reject_user_info": true
+        }
+    },
+    "access": {
+        "Global_Access_Admin": {
+            "allowed_prefixes": ["/admin", "/api"]
+        },
+        "Global_Access_User": {
+            "allowed_prefixes": ["/mail", "/drive", "/api/resource/Organization", "/api"]
+        },
+        "access_plan_basic": {
+            "prefixes": ["/drive", "/mail"],
+            "permissions": ["read", "write"]
+        },
+        "access_plan_pro": {
+            "prefixes": ["/drive", "/mail", "/calendar"],
+            "permissions": ["read", "write"]
+        },
+        "access_plan_premium": {
+            "prefixes": ["/meet", "/drive", "/mail", "/calendar", "/rooms"],
+            "permissions": ["read", "write"]
+        },
+        "access_plan_enterprise": {
+            "prefixes": ["/meet", "/drive", "/mail", "/chat", "/calendar", "/rooms"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_workspace_admin": {
+            "prefixes": ["/"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_billing_admin": {
+            "prefixes": [
+                "/api/method/saga_billings.invoice.invoice_list.view",
+                "/api/resource/Wallet%20History",
+                "/api/method/saga_billings.billings.before_payment.list_items",
+                "/api/resource/Subscription Plan",
+                "/api/method/saga_billings.billings.current_plan.plan",
+                "/api/method/saga_billings.billings.order_id.get",
+                "/api/method/saga_billings.billings.change_plan.move",
+                "/api/method/saga_billings.invoice.invoice_list.get_list",
+                "/api/method/saga_billings.billings.transaction_history.get",
+                "/api/resource/Wallet"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_org_admin": {
+            "prefixes": [
+                "/api/method/saga_directory.dns.cloudflar.add_record",
+                "/api/method/saga_workspace.mail_setup.txt_record_verify.verify_dns",
+                "/api/resource/Domains",
+                "/api/method/saga_directory.deletion.org_admin.delete",
+                "/api/method/saga_directory.deletion.organization.delete",
+                "/api/method/saga_workspace.mail_setup.domain_validate.validate",
+                "/api/method/saga_workspace.mail_setup.dns_record.dns_datas",
+                "/api/method/saga_workspace.mail_setup.domain_provision.add_domain",
+                "/api/resource/Organization"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_user_admin": {
+            "prefixes": [
+                "/api/method/saga_directory.account.update_info.profile",
+                "/api/method/saga_directory.login.stage.find",
+                "/api/method/saga_directory.account.user_info.profile",
+                "/api/method/saga_directory.account.change_email.mailid",
+                "/api/method/saga_directory.account.change_password.password",
+                "/api/method/saga_directory.signup.signup_update.phone_number",
+                "/api/method/saga_directory.account.update_otp_type.otp_type",
+                "/api/method/saga_directory.login.forgot_password.otp_send",
+                "/api/method/saga_directory.account.change_phone_number.phone",
+                "/api/method/saga_directory.signup.register.company_details",
+                "/api/method/saga_directory.login.stage.update",
+                "/api/method/saga_directory.signup.signup_update.otp_type",
+                "/api/method/saga_directory.signup.initial.step",
+                "/api/method/saga_directory.login.auth.user_login",
+                "/api/method/saga_directory.login.forgot_password.password"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_email_admin": {
+            "prefixes": ["/mail"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_drive_admin": {
+            "prefixes": ["/drive"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_calendar_admin": {
+            "prefixes": ["/calendar"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_meet_admin": {
+            "prefixes": ["/meet", "/rooms"],
+            "permissions": ["read", "write"]
+        },
+        "access_role_employee": {
+            "prefixes": [],
+            "permissions": ["read", "write"]
+        },
+        "access_role_guest": {
+            "prefixes": [],
+            "permissions": ["read"]
+        },
+        "access_role_super_admin": {
+            "prefixes": [
+                "/api/method/frappe.client.get_list",
+                "/api/method/saga_msp.deletion.msp_admin.delete",
+                "/api/method/saga_msp.deletion.msp_org.delete",
+                "/api/method/frappe.auth.get_logged_user"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_department_admin": {
+            "prefixes": [
+                "/api/resource/Designation",
+                "/api/resource/Department"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_group_admin": {
+            "prefixes": [
+                "/api/method/remove_group_member",
+                "/api/resource/Group*"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_employee_apps": {
+            "prefixes": [
+                "/mail/mail.api.account.get_user_info",
+                "/mail/mail.api.mail.create_mail",
+                "/mail/mail.api.outbound.send",
+                "/mail/mail.api.mail.get_mime_message",
+                "/mail/upload_file",
+                "/mail/mail.api.mail.fetch_attachment",
+                "/mail/mail.api.mail.search_mails",
+                "/mail/mail.api.mail.set_flagged",
+                "/mail/mail.api.mail.get_mailboxes",
+                "/mail/mail.api.mail.get_mail_thread",
+                "/mail/mail.api.mail.get_mails_from_mailbox",
+                "/drive/*",
+                "/mail/mail.api.outbound.send_raw",
+                "/mail/mail.api.auth.validate",
+                "/calendar/*",
+                "/mail/mail.api.mail.update_draft_mail",
+                "/mail/mail.api.mail.set_mails_mailbox",
+                "/mail/mail.api.mail.delete_threads",
+                "/mail/mail.api.mail.set_seen",
+                "/mail/mail.api.mail.get_mailbox_thread_count"
+            ],
+            "permissions": ["read", "write"]
+        },
+        "access_role_general_api": {
+            "prefixes": [
+                "/api/resource/Work%20Location*",
+                "/api/method/saga_directory.employee.self_account.create",
+                "/api/resource/Org%20Admin",
+                "/api/method/saga_directory.verification.phone_otp_validate.check",
+                "/api/method/saga_directory.employee.account.create",
+                "/api/method/saga_directory.verification.app_otp_validate.validate",
+                "/api/resource/Item*",
+                "/api/method/saga_directory.verification.mail_otp_validate.check",
+                "/api/method/saga_directory.verification.mail_otp_resend.resend",
+                "/auth/login",
+                "/api/method/saga_auth.auth_gateway.session_auth.session",
+                "/api/method/saga_directory.verification.phone_otp_send.phone_otp_send",
+                "/api/*",
+                "/rooms/*",
+                "/api/method/saga_auth.auth_gateway.password_set.set",
+                "/api/method/saga_directory.verification.totp_service.generate",
+                "/api/method/upload_file",
+                "/api/method/saga_directory.db.validators.clientadmin",
+                "/api/method/saga_directory.verification.mail_otp_send.otp_send",
+                "/api/method/saga_directory.deletion.account_cleanup.delete",
+                "/api/method/logout",
+                "/api/method/saga_directory.verification.phone_otp_send.resend",
+                "/api/method/saga_directory.deletion.employee.delete",
+                "/callback",
+                "/api/method/saga_directory.verification.find_otp_type.type",
+                "/api/method/saga_auth.user_activity.recent_activity.datas",
+                "/api/method/saga_auth.auth_gateway.user_account.create",
+                "/api/method/login",
+                "/api/status",
+                "/*",
+                "/api/method/saga_workspace.mail_setup.txt_record.record",
+                "/api/method/saga_directory.deletion.org_signup.delete",
+                "/api/method/saga_workspace.mail_setup.txt_record.generate",
+                "/logout",
+                "/api/method/saga_directory.verification.phone_otp_send.send",
+                "/api/health",
+                "/api/method/saga_auth.deletion.user_account.delete",
+                "/api/resource/Employee*"
+            ],
+            "permissions": ["read", "write"]
+        }
+    }
+}
+
+roles := {
+    "workspace_admin": {
+        "assigned_policies": {"access": "access_role_workspace_admin"}
+    },
+    "billing_admin": {
+        "assigned_policies": {"access": "access_role_billing_admin"}
+    },
+    "org_admin": {
+        "assigned_policies": {"access": "access_role_org_admin"}
+    },
+    "user_admin": {
+        "assigned_policies": {"access": "access_role_user_admin"}
+    },
+    "email_admin": {
+        "assigned_policies": {"access": "access_role_email_admin"}
+    },
+    "drive_admin": {
+        "assigned_policies": {"access": "access_role_drive_admin"}
+    },
+    "calendar_admin": {
+        "assigned_policies": {"access": "access_role_calendar_admin"}
+    },
+    "meet_admin": {
+        "assigned_policies": {"access": "access_role_meet_admin"}
+    },
+    "employee": {
+        "assigned_policies": {"access": "access_role_employee"}
+    },
+    "guest": {
+        "assigned_policies": {"access": "access_role_guest"}
+    },
+    "super_admin": {
+        "assigned_policies": {"access": "access_role_super_admin"}
+    },
+    "department_admin": {
+        "assigned_policies": {"access": "access_role_department_admin"}
+    },
+    "group_admin": {
+        "assigned_policies": {"access": "access_role_group_admin"}
+    },
+    "employee_apps": {
+        "assigned_policies": {"access": "access_role_employee_apps"}
+    },
+    "general_api": {
+        "assigned_policies": {"access": "access_role_general_api"}
+    }
+}

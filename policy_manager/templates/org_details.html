@@ -60,6 +60,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- Global Policies -->
+                                {% if global_policies.get(ptype) %}
+                                <tr class="table-light">
+                                    <td colspan="3" class="fw-bold text-muted text-uppercase small">Global Defaults</td>
+                                </tr>
+                                {% for pid, pcontent in global_policies.get(ptype).items() %}
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-secondary mb-1">Global</span>
+                                        <strong>{{ pid }}</strong>
+                                    </td>
+                                    <td><small class="text-muted">{{ pcontent|tojson }}</small></td>
+                                    <td><span class="text-muted small">Read-only</span></td>
+                                </tr>
+                                {% endfor %}
+                                {% endif %}
+
+                                <!-- Org Policies -->
+                                <tr class="table-light">
+                                    <td colspan="3" class="fw-bold text-muted text-uppercase small">Organization Defined
+                                    </td>
+                                </tr>
                                 {% if org.defined_policies.get(ptype) %}
                                 {% for pid, pcontent in org.defined_policies.get(ptype).items() %}
                                 <tr>
@@ -93,15 +115,34 @@
 
     <div class="col-md-6 mb-4">
         <div class="card">
-            <div class="card-header bg-warning">Departments</div>
+            <div class="card-header bg-warning d-flex justify-content-between align-items-center">
+                <span>Departments</span>
+                <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#addDeptModal">+
+                    New</button>
+            </div>
             <div class="card-body">
                 <ul class="list-group mb-3">
                     {% for dept_name, dept_data in org.departments.items() %}
                     <li class="list-group-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <strong>{{ dept_name }}</strong>
-                            <a href="/org/{{ org_id }}/assign/department/{{ dept_name }}"
-                                class="btn btn-sm btn-outline-dark">Manage Assignments</a>
+                            <div class="btn-group">
+                                <a href="/org/{{ org_id }}/assign/department/{{ dept_name }}"
+                                    class="btn btn-sm btn-outline-dark" title="Assign Policies">
+                                    <i class="bi bi-shield-check"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-primary" onclick="editDept('{{ dept_name }}')"
+                                    data-bs-toggle="modal" data-bs-target="#editDeptModal">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <form action="/org/{{ org_id }}/department/delete" method="POST" class="d-inline"
+                                    onsubmit="return confirm('Delete Department {{ dept_name }}?');">
+                                    <input type="hidden" name="name" value="{{ dept_name }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                         <div>
                             {% for ap_type, ap_id in dept_data.get('assigned_policies', {}).items() %}
@@ -188,6 +229,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Global Roles -->
+                            <tr class="table-light">
+                                <td colspan="5" class="fw-bold text-muted text-uppercase small">Global Roles</td>
+                            </tr>
+                            {% for rname, rconf in global_roles.items() %}
+                            <tr>
+                                <td><span class="badge bg-secondary">{{ rname }}</span></td>
+                                <td>-</td>
+                                <td><small class="text-muted">{{ rconf.assigned_policies.access }}</small></td>
+                                <td>
+                                    {% set pol = global_policies.access.get(rconf.assigned_policies.access, {}) %}
+                                    <small class="text-muted">{{ pol.get('permissions', []) | length }} Perms / {{
+                                        pol.get('allowed_prefixes', []) | length }} Prefixes</small>
+                                </td>
+                                <td><span class="text-muted small">Read-only</span></td>
+                            </tr>
+                            {% endfor %}
+
+                            <!-- Org Roles -->
+                            <tr class="table-light">
+                                <td colspan="5" class="fw-bold text-muted text-uppercase small">Organization Roles</td>
+                            </tr>
+
                             {% for rname, rconf in org.roles.items() %}
                             <tr>
                                 <td><span class="badge bg-info text-dark">{{ rname }}</span></td>
@@ -305,6 +369,55 @@
     </div>
 </div>
 
+<!-- Add Dept Modal -->
+<div class="modal fade" id="addDeptModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/org/{{ org_id }}/department/add" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Dept Modal -->
+<div class="modal fade" id="editDeptModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="/org/{{ org_id }}/department/rename" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rename Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="old_name" id="editDeptOldName">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" name="new_name" id="editDeptNewName" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Rename</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Add Group Modal -->
 <div class="modal fade" id="addGroupModal" tabindex="-1">
     <div class="modal-dialog">
@@ -384,22 +497,38 @@
                     <div class="mb-3">
                         <label class="form-label">Roles</label>
                         <div class="border p-2" style="max-height: 150px; overflow-y: auto;">
-                            {% for rname in org.get('roles', {}).keys() %}
-                            <div class="form-check">
-                                <input class="form-check-input role-check" type="checkbox" name="roles"
-                                    value="{{ rname }}" id="edit_role_{{ loop.index }}_{{ rname }}">
-                                <label class="form-check-label" for="edit_role_{{ loop.index }}_{{ rname }}">
-                                    {{ rname }}
-                                </label>
+                            <!-- Global Roles -->
+                            <div class="mb-2">
+                                <small class="text-muted fw-bold">Global</small>
+                                {% for rname in global_roles.keys() %}
+                                <div class="form-check">
+                                    <input class="form-check-input role-check" type="checkbox" name="roles"
+                                        value="{{ rname }}" id="edit_role_g_{{ loop.index }}_{{ rname }}">
+                                    <label class="form-check-label" for="edit_role_g_{{ loop.index }}_{{ rname }}">
+                                        {{ rname }}
+                                    </label>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
+                            <!-- Org Roles -->
+                            <div>
+                                <small class="text-muted fw-bold">Custom</small>
+                                {% for rname in org.get('roles', {}).keys() %}
+                                <div class="form-check">
+                                    <input class="form-check-input role-check" type="checkbox" name="roles"
+                                        value="{{ rname }}" id="edit_role_{{ loop.index }}_{{ rname }}">
+                                    <label class="form-check-label" for="edit_role_{{ loop.index }}_{{ rname }}">
+                                        {{ rname }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save User</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save User</button>
+                    </div>
             </form>
         </div>
     </div>
@@ -462,9 +591,9 @@
                     </li>
                 </ul>
 
-                <div class="tab-content">
+                <div class="tab-content border p-3 rounded-bottom">
                     <!-- Password Test Tab -->
-                    <div class="tab-pane fade show active" id="test-pwd">
+                    <div class="tab-pane show active" id="test-pwd">
                         <div class="mb-3">
                             <label class="form-label">Password to Test</label>
                             <input type="password" class="form-control" id="testPasswordInput">
@@ -473,7 +602,7 @@
                     </div>
 
                     <!-- Access Test Tab -->
-                    <div class="tab-pane fade" id="test-access">
+                    <div class="tab-pane" id="test-access">
                         <div class="mb-3">
                             <label class="form-label">URI Path</label>
                             <input type="text" class="form-control" id="testPathInput" placeholder="/mail">
@@ -601,6 +730,12 @@
     document.addEventListener('DOMContentLoaded', function () {
         roleModal = new bootstrap.Modal(document.getElementById('roleModal'));
     });
+
+    // Department Scripts
+    function editDept(oldName) {
+        document.getElementById('editDeptOldName').value = oldName;
+        document.getElementById('editDeptNewName').value = oldName;
+    }
 
     function openRoleModal() {
         document.getElementById('roleModalTitle').innerText = "New Role";
@@ -799,6 +934,13 @@
             li.innerHTML = `<div><strong>${label}</strong>${idHtml}</div><div class="text-muted small">${configStr}</div>`;
             list.appendChild(li);
         }
+
+        // Fix for Modals appearing behind backdrop or being clipped
+        // Move all modals to body ensuring they are outside any restrictive container
+        var modals = document.querySelectorAll('.modal');
+        modals.forEach(function (modal) {
+            document.body.appendChild(modal);
+        });
     });
 </script>
 {% endblock %}

@@ -3,6 +3,12 @@ package policies.common.inheritance
 import future.keywords.if
 import future.keywords.in
 
+# Break recursion by importing specific data paths instead of using 'data' root
+import data.global_policies
+import data.global_roles
+import data.users
+import data.organizations
+
 # -----------------------------------------------------------------------------
 # Data Lookups & Merging Logic
 # -----------------------------------------------------------------------------
@@ -11,11 +17,13 @@ import future.keywords.in
 # Hierarchy: Org < Dept < Group < User
 get_effective_config(policy_type) := merged_config if {
     user_email := input.user
-    user := object.get(data.users, user_email, {})
-    org := object.get(data.organizations, object.get(user, "org_id", ""), {})
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
     
-    # 1. Get Defined Policies for this TYPE (e.g. org.defined_policies.password)
-    defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    # 1. Get Defined Policies (Union of Org + Global)
+    org_defined := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    global_defined := object.get(global_policies, policy_type, {})
+    defined_policies_type := object.union(global_defined, org_defined)
     
     # 2. Org Policy
     # Look for org.assigned_policies.password -> ID
@@ -50,8 +58,8 @@ get_effective_config(policy_type) := merged_config if {
 # Helper: Explain configuration resolution for debugging/UI
 explain_config(policy_type) := explanation if {
     user_email := input.user
-    user := object.get(data.users, user_email, {})
-    org := object.get(data.organizations, object.get(user, "org_id", ""), {})
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
     
     # 1. Get Defined Policies
     defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
@@ -99,11 +107,6 @@ explain_config(policy_type) := explanation if {
         "effective": effective
     }
 }
-
-# -----------------------------------------------------------------------------
-# Additive Merge Logic (For Access Control / APISIX)
-# Hierarchy: Union(Org + Dept + Groups + User) -> All permissions apply
-# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # Additive Merge Logic (For Access Control / APISIX)
@@ -163,11 +166,13 @@ get_effective_config_merged(policy_type) := get_effective_config_merged_with_use
 
 get_effective_config_merged_with_user(policy_type, user_email) := merged_config if {
     # user_email passed as arg
-    user := object.get(data.users, user_email, {})
-    org := object.get(data.organizations, object.get(user, "org_id", ""), {})
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
     
-    # 1. Defined Policies Lookup
-    defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    # 1. Defined Policies Lookup (Union with Global)
+    org_defined := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    global_defined := object.get(global_policies, policy_type, {})
+    defined_policies_type := object.union(global_defined, org_defined)
     
     # 2. Collect all raw policy configs
     # Org
@@ -190,11 +195,15 @@ get_effective_config_merged_with_user(policy_type, user_email) := merged_config 
 
     # Roles (Resolved Recursively)
     direct_roles := object.get(user, "roles", [])
-    all_role_names := resolve_all_roles(object.get(org, "roles", {}), direct_roles)
+    # Merge Global + Org Roles
+    org_roles := object.get(org, "roles", {})
+    all_available_roles := object.union(global_roles, org_roles)
+    
+    all_role_names := resolve_all_roles(all_available_roles, direct_roles)
     
     role_policies := [rp |
         some role_name in all_role_names
-        role := object.get(object.get(org, "roles", {}), role_name, {})
+        role := object.get(all_available_roles, role_name, {})
         rp_id := object.get(object.get(role, "assigned_policies", {}), policy_type, "")
         rp := object.get(defined_policies_type, rp_id, {})
     ]
@@ -235,9 +244,12 @@ explain_config_merged(policy_type) := explain_config_merged_with_user(policy_typ
 
 explain_config_merged_with_user(policy_type, user_email) := trace if {
     # user_email arg
-    user := object.get(data.users, user_email, {})
-    org := object.get(data.organizations, object.get(user, "org_id", ""), {})
-    defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
+    
+    global_defined := object.get(global_policies, policy_type, {})
+    org_defined := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    defined_policies_type := object.union(global_defined, org_defined)
     
     # ... (Re-fetch logic similar to above for explanation structure)
     org_policy_id := object.get(object.get(org, "assigned_policies", {}), policy_type, "")
@@ -257,11 +269,15 @@ explain_config_merged_with_user(policy_type, user_email) := trace if {
     ]
 
     direct_roles := object.get(user, "roles", [])
-    all_role_names := resolve_all_roles(object.get(org, "roles", {}), direct_roles)
+    
+    org_roles := object.get(org, "roles", {})
+    all_available_roles := object.union(global_roles, org_roles)
+    
+    all_role_names := resolve_all_roles(all_available_roles, direct_roles)
     
     role_policies := [rp |
         some role_name in all_role_names
-        role := object.get(object.get(org, "roles", {}), role_name, {})
+        role := object.get(all_available_roles, role_name, {})
         rp_id := object.get(object.get(role, "assigned_policies", {}), policy_type, "")
         rp_data := object.get(defined_policies_type, rp_id, {})
         
@@ -296,8 +312,8 @@ get_effective_ip_whitelist_merged(policy_type) := get_effective_ip_whitelist_mer
 
 get_effective_ip_whitelist_merged_with_user(policy_type, user_email) := merged_config if {
     # user_email arg
-    user := object.get(data.users, user_email, {})
-    org := object.get(data.organizations, object.get(user, "org_id", ""), {})
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
     
     # 1. Defined Policies Lookup
     defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
