@@ -1,0 +1,22 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8182
+ * Running on http://10.69.127.29:8182
+Press CTRL+C to quit
+DEBUG: save_policy hit for Org_1
+DEBUG: pid=Org_1_IP_White, type=ip_whitelist
+DEBUG: Constructed policy: {'allow_cidrs': ['10.0.0.0/8']}
+DEBUG: Org found
+DEBUG: Saved data
+127.0.0.1 - - [11/Dec/2025 17:45:03] "POST /org/Org_1/policies/save HTTP/1.1" 302 -
+127.0.0.1 - - [11/Dec/2025 17:45:11] "POST /org/Org_1/assign/ip_whitelist HTTP/1.1" 404 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpwj20p1pi.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [11/Dec/2025 17:45:21] "POST /api/test/access HTTP/1.1" 500 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpc30tcc6w.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+DEBUG: OPA Failed: 
+127.0.0.1 - - [11/Dec/2025 17:45:27] "POST /api/test/access HTTP/1.1" 500 -

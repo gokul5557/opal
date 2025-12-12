@@ -1,0 +1,23 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8182
+ * Running on http://10.69.127.29:8182
+Press CTRL+C to quit
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp08uiuzau.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:22:27] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpfcbxqzk8.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:22:36] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Running Password OPA: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpau5iryeg.json', '{ "reasons": data.policies.security.password.deny, "trace": data.policies.common.inheritance.explain_config("password") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:22:50] "POST /api/test/password HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp2164tjpa.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:23:08] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp72051pn0.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:23:12] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp8l7ppq1q.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:23:16] "POST /api/test/access HTTP/1.1" 200 -

@@ -116,13 +116,25 @@ def save_policy(org_id):
                 "password_require_special_char": "password_require_special_char" in request.form,
                 "password_reject_common": "password_reject_common" in request.form
             }
+        elif p_type == "access":
+            raw_prefixes = request.form.get("prefixes", "")
+            prefixes = [p.strip() for p in raw_prefixes.split(",") if p.strip()]
+            
+            permissions = []
+            if "perm_read" in request.form: permissions.append("read")
+            if "perm_write" in request.form: permissions.append("write")
+            
+            policy = {
+                "prefixes": prefixes,
+                "permissions": permissions
+            }
         elif p_type == "mfa":
             policy = {
                 "mfa_required": request.form.get("mfa_required") == "true"
             }
         elif p_type == "ip_whitelist":
             policy = {
-                "allowed_cidrs": [x.strip() for x in request.form.get("allowed_cidrs", "").split(",") if x.strip()]
+                "allow_cidrs": [x.strip() for x in request.form.get("allow_cidrs", "").split(",") if x.strip()]
             }
         elif p_type == "session":
             policy = {
@@ -187,6 +199,8 @@ def save_assignment(org_id):
             target_obj = org["departments"][target_name]
         elif target_type == "group" and target_name in org["groups"]:
             target_obj = org["groups"][target_name]
+        elif target_type == "organization":
+            target_obj = org
             
         if target_obj:
             if "assigned_policies" not in target_obj:
@@ -242,10 +256,13 @@ def test_password():
         
         cmd = [
             "opa", "eval",
-            "-d", ".",
+            "-d", "policies",
+            "-d", "data.json",
             "-i", temp_input_path,
             query
         ]
+        
+        print(f"DEBUG: Running Password OPA: {cmd} in {base_dir}", flush=True)
         
         result = subprocess.run(
             cmd, 
@@ -291,6 +308,104 @@ def test_password():
         
     finally:
         if os.path.exists(temp_input_path):
+            os.remove(temp_input_path)
+
+@app.route("/api/test/access", methods=["POST"])
+def test_access():
+    user = request.form.get("user")
+    path = request.form.get("path")
+    method = request.form.get("method")
+    ip = request.form.get("ip", "127.0.0.1") # Default to localhost
+    
+    # Legacy: Strict requirement for user
+    if not user or not path or not method:
+        return {"error": "Missing user, path, or method"}, 400
+        
+    # Construct input for OPA
+    headers = {
+        "x-real-ip": ip or "127.0.0.1"
+    }
+
+    print(f"DEBUG: OPA Headers: {headers}")
+    
+    opa_input = {
+        "user": user, 
+        "ip": ip,
+        "request": {
+            "path": path,
+            "method": method,
+            "headers": headers
+        }
+    }
+    # Create temp file
+    fd, temp_input_path = tempfile.mkstemp(suffix=".json")
+    try:
+        with os.fdopen(fd, 'w') as f:
+            json.dump(opa_input, f)
+            
+        # OPA Eval
+        print(f"DEBUG: Starting OPA Eval for {user}")
+        
+        # Query for allow decision, reasons, and explanation
+        # Pass the extracted user_email to the trace function to ensure it works for JWT flows too
+        query = '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'
+        
+        # Determine base dir correctly
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        # Use specific paths to avoid scanning irrelevant files or large logs
+        cmd = [
+            "opa", "eval",
+            "-d", "policies",
+            "-d", "data.json",
+            "-i", temp_input_path,
+            query
+        ]
+        
+        print(f"DEBUG: Running command: {cmd} in {base_dir}")
+        
+        result = subprocess.run(
+            cmd, 
+            cwd=base_dir, 
+            capture_output=True, 
+            text=True,
+            timeout=5 # Fail fast to avoid hanging
+        )
+        
+        if result.returncode != 0:
+            print(f"DEBUG: OPA Failed: {result.stderr}")
+            return {"error": f"OPA Error: {result.stderr}"}, 500
+            
+        # print(f"DEBUG: OPA Output: {result.stdout[:100]}...")
+        opa_json = json.loads(result.stdout)
+        
+        allowed = False
+        reasons = []
+        trace = {}
+        
+        if "result" in opa_json and opa_json["result"]:
+             expressions = opa_json["result"][0].get("expressions", [])
+             if expressions:
+                 val = expressions[0].get("value", {})
+                 allowed = val.get("allow", False)
+                 reasons_map = val.get("reasons", {})
+                 if isinstance(reasons_map, list):
+                     reasons = reasons_map
+                 else:
+                     reasons = list(reasons_map.keys())
+                 trace = val.get("trace", {})
+                 
+        return {
+            "allowed": allowed,
+            "reasons": reasons,
+            "trace": trace
+        }
+        
+    except Exception as e:
+        print(f"DEBUG: Exception: {e}")
+        return {"error": str(e)}, 500
+    finally:
+         if os.path.exists(temp_input_path):
             os.remove(temp_input_path)
 
 # --- Phase 9: User & Group Management ---
@@ -349,7 +464,8 @@ def update_user():
     email = request.form.get("email")
     dept_id = request.form.get("dept_id")
     group_list = request.form.getlist("groups")
-    org_id = request.form.get("org_id") # Needed for redirect
+    role_list = request.form.getlist("roles") # Added this
+    org_id = request.form.get("org_id") 
     
     if not email:
         return "Email required", 400
@@ -358,10 +474,89 @@ def update_user():
     if email in data["users"]:
         data["users"][email]["dept_id"] = dept_id
         data["users"][email]["groups"] = group_list
+        data["users"][email]["roles"] = role_list # Save this
         save_data(data)
     
     return redirect(url_for("org_details", org_id=org_id))
 
-if __name__ == "__main__":
-    app.run(debug=True, port=8182) # Configured port for dev
+@app.route("/org/<org_id>/roles/save", methods=["POST"])
+def save_role(org_id):
+    role_name = request.form.get("role_name")
+    inherited_roles = request.form.getlist("inherited_roles") # List of role names
+    
+    # Granular Permissions: Passed as JSON string from frontend or dynamic form fields?
+    # Dynamic form fields are easier to debug: path_0, read_0, write_0...
+    # Let's assume frontend sends a JSON string `permissions_data` for simplicity.
+    perms_json = request.form.get("permissions_data") # [{"path": "/api/x", "read": true, "write": false}]
+    
+    if not role_name:
+        return "Role Name Required", 400
+        
+    data = load_data()
+    org = data["organizations"].get(org_id)
+    if not org:
+        return "Org not found", 404
+        
+    # 1. Ensure Roles container exists
+    if "roles" not in org:
+        org["roles"] = {}
+        
+    # 2. Create/Update Role Entity
+    # Auto-generate policy ID if new
+    policy_id = f"access_role_{role_name.lower().replace(' ', '_')}"
+    
+    if role_name not in org["roles"]:
+        org["roles"][role_name] = {}
+        
+    org["roles"][role_name]["assigned_policies"] = {"access": policy_id}
+    org["roles"][role_name]["inherited_roles"] = inherited_roles
+    
+    # 3. Create/Update Access Policy Definition
+    if "access" not in org["defined_policies"]:
+        org["defined_policies"]["access"] = {}
+        
+    # Parse permissions
+    api_permissions = {}
+    if perms_json:
+        try:
+            raw_perms = json.loads(perms_json)
+            # Format: [{"path": "/foo", "actions": ["read", "write"]}]
+            for item in raw_perms:
+                path = item.get("path")
+                actions = item.get("actions", [])
+                if path and actions:
+                    api_permissions[path] = actions
+        except json.JSONDecodeError:
+            return "Invalid Permissions JSON", 400
+            
+    # Save Policy Config
+    policy_config = {
+        "api_permissions": api_permissions,
+        # Backward compat fields derived
+        "prefixes": list(api_permissions.keys()),
+        "permissions": ["read", "write"] 
+    }
+    
+    org["defined_policies"]["access"][policy_id] = policy_config
+    
+    save_data(data)
+    return redirect(url_for("org_details", org_id=org_id))
 
+@app.route("/org/<org_id>/roles/delete", methods=["POST"])
+def delete_role(org_id):
+    role_name = request.form.get("role_name")
+    data = load_data()
+    org = data["organizations"].get(org_id)
+    
+    if role_name and role_name in org.get("roles", {}):
+        # Optional: delete associated policy?
+        # policy_id = org["roles"][role_name]["assigned_policies"].get("access")
+        # if policy_id: del org["defined_policies"]["access"][policy_id]
+        
+        del org["roles"][role_name]
+        save_data(data)
+        
+    return redirect(url_for("org_details", org_id=org_id))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8182, debug=False) # Configured port for dev

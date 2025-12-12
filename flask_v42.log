@@ -1,0 +1,15 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8182
+ * Running on http://10.69.127.29:8182
+Press CTRL+C to quit
+127.0.0.1 - - [11/Dec/2025 18:21:32] "GET /org/Org_1?page_users=2&page_groups=1 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:21:32] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp7f526_2u.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:21:38] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpvw7bfn5f.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:21:41] "POST /api/test/access HTTP/1.1" 200 -

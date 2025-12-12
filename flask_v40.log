@@ -1,0 +1,31 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8182
+ * Running on http://10.69.127.29:8182
+Press CTRL+C to quit
+127.0.0.1 - - [11/Dec/2025 18:09:58] "GET /org/Org_1?page_users=2&page_groups=1 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:09:58] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdquie9cs.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:10:56] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for alice@sagasoft.io
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpmrwu_wil.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:13:04] "POST /api/test/access HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:13:26] "GET /org/Org_1?page_users=2&page_groups=1 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:13:26] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp5rhn1_k2.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:13:31] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmp_4v_236b.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:17:04] "POST /api/test/access HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:18:57] "GET /org/Org_1?page_users=2&page_groups=1 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Dec/2025 18:18:58] "GET /static/style.css HTTP/1.1" 304 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpcqr_s36g.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:19:10] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Starting OPA Eval for user_94348@org_1.com
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpdira2ulh.json', '{ "allow": data.policies.apisix.policy.allow, "trace": data.policies.common.inheritance.explain_config_merged("access") }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 18:19:17] "POST /api/test/access HTTP/1.1" 200 -

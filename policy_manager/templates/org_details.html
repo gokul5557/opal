@@ -31,6 +31,10 @@
                         <a class="nav-link active" id="pwd-tab" data-bs-toggle="tab" href="#pwd" role="tab">Password</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="access-tab" data-bs-toggle="tab" href="#access" role="tab">Access
+                            (APISIX)</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="mfa-tab" data-bs-toggle="tab" href="#mfa" role="tab">MFA</a>
                     </li>
                     <li class="nav-item">
@@ -43,8 +47,8 @@
             </div>
             <div class="card-body">
                 <div class="tab-content" id="policyTabsContent">
-                    {% for ptype, tabby in [('password', 'pwd'), ('mfa', 'mfa'), ('ip_whitelist', 'ip'), ('session',
-                    'sess')] %}
+                    {% for ptype, tabby in [('password', 'pwd'), ('access', 'access'), ('mfa', 'mfa'), ('ip_whitelist',
+                    'ip'), ('session', 'sess')] %}
                     <div class="tab-pane fade {{ 'show active' if ptype == 'password' else '' }}" id="{{ tabby }}"
                         role="tabpanel">
                         <table class="table table-sm table-striped">
@@ -74,6 +78,10 @@
                                 {% endif %}
                             </tbody>
                         </table>
+                        <div class="mt-2">
+                            <a href="/org/{{ org_id }}/policies/new?type={{ ptype }}" class="btn btn-sm btn-success">+
+                                New {{ ptype|capitalize }} Policy</a>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
@@ -82,6 +90,7 @@
     </div>
 
     <!-- Organization Structure (Departments) -->
+
     <div class="col-md-6 mb-4">
         <div class="card">
             <div class="card-header bg-warning">Departments</div>
@@ -157,6 +166,64 @@
         </div>
     </div>
 
+    <!-- Roles Management -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <span>Roles</span>
+                <button class="btn btn-sm btn-light" onclick="openRoleModal()">
+                    <i class="bi bi-plus-lg"></i> New Role
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Inherits From</th>
+                                <th>Policy ID</th>
+                                <th>Permissions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rname, rconf in org.roles.items() %}
+                            <tr>
+                                <td><span class="badge bg-info text-dark">{{ rname }}</span></td>
+                                <td>
+                                    {% for ir in rconf.get('inherited_roles', []) %}
+                                    <span class="badge bg-secondary">{{ ir }}</span>
+                                    {% else %}
+                                    <span class="text-muted small">-</span>
+                                    {% endfor %}
+                                </td>
+                                <td><small class="text-muted">{{ rconf.assigned_policies.access }}</small></td>
+                                <td>
+                                    {% set pol = org.defined_policies.access.get(rconf.assigned_policies.access, {}) %}
+                                    <small class="text-muted">{{ pol.get('api_permissions', {}) | length }} APIs</small>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick='editRole("{{ rname }}", {{ rconf.get("inherited_roles", [])|tojson }}, {{ pol.get("api_permissions", {})|tojson }})'>
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <form action="{{ url_for('delete_role', org_id=org_id) }}" method="POST"
+                                        class="d-inline" onsubmit="return confirm('Delete Role?');">
+                                        <input type="hidden" name="role_name" value="{{ rname }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"><i
+                                                class="bi bi-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Users List -->
     <div class="col-md-12 mb-4">
         <div class="card">
@@ -191,6 +258,11 @@
                                 {% endfor %}
                             </td>
                             <td>
+                                {% for role in udata.get('roles', []) %}
+                                <span class="badge bg-info text-dark">{{ role }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>
                                 {% if udata.get('policy_overrides') %}
                                 {{ udata.get('policy_overrides') }}
                                 {% else %}
@@ -200,7 +272,7 @@
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-outline-dark"
-                                        onclick='editUser({{ uid|tojson }}, {{ udata.get("dept_id")|tojson }}, {{ udata.get("groups")|tojson }})'
+                                        onclick='editUser({{ uid|tojson }}, {{ udata.get("dept_id")|tojson }}, {{ udata.get("groups")|tojson }}, {{ udata.get("roles")|tojson }})'
                                         data-bs-toggle="modal" data-bs-target="#userModal">
                                         <i class="bi bi-pencil"></i>
                                     </button>
@@ -294,13 +366,30 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Groups</label>
-                        <div style="max-height: 150px; overflow-y: auto;" class="border p-2 rounded">
-                            {% for g in org.groups.keys() %}
+                        <div class="border p-2" style="max-height: 150px; overflow-y: auto;">
+                            {% for gname in org.groups.keys() %}
                             <div class="form-check">
                                 <input class="form-check-input group-check" type="checkbox" name="groups"
-                                    value="{{ g }}" id="g_{{ g }}">
-                                <label class="form-check-label" for="g_{{ g }}">
-                                    {{ g }}
+                                    value="{{ gname }}" id="edit_group_{{ loop.index }}_{{ gname }}">
+                                <label class="form-check-label" for="edit_group_{{ loop.index }}_{{ gname }}">
+                                    {{ gname }}
+                                    <small class="text-muted">({{ org.groups[gname].get('dept_id', '-')}})</small>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Roles Selection -->
+                    <div class="mb-3">
+                        <label class="form-label">Roles</label>
+                        <div class="border p-2" style="max-height: 150px; overflow-y: auto;">
+                            {% for rname in org.get('roles', {}).keys() %}
+                            <div class="form-check">
+                                <input class="form-check-input role-check" type="checkbox" name="roles"
+                                    value="{{ rname }}" id="edit_role_{{ loop.index }}_{{ rname }}">
+                                <label class="form-check-label" for="edit_role_{{ loop.index }}_{{ rname }}">
+                                    {{ rname }}
                                 </label>
                             </div>
                             {% endfor %}
@@ -326,9 +415,10 @@
 
         // Clear checkboxes
         document.querySelectorAll('.group-check').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.role-check').forEach(cb => cb.checked = false);
     }
 
-    function editUser(email, deptId, groups) {
+    function editUser(email, deptId, groups, roles) {
         document.getElementById('userModalTitle').textContent = "Edit User: " + email;
         document.getElementById('userForm').action = "/api/users/update";
 
@@ -338,9 +428,14 @@
 
         document.getElementById('userDeptInput').value = deptId || "";
 
-        // Set checkboxes
+        // Set checkboxes (Groups)
         document.querySelectorAll('.group-check').forEach(cb => {
             cb.checked = (groups && groups.includes(cb.value));
+        });
+
+        // Set checkboxes (Roles)
+        document.querySelectorAll('.role-check').forEach(cb => {
+            cb.checked = (roles && roles.includes(cb.value));
         });
     }
 </script>
@@ -350,16 +445,58 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Test Password Policy</h5>
+                <h5 class="modal-title">Test Policy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <p>Testing for user: <strong id="modalUserEmail"></strong></p>
-                <div class="mb-3">
-                    <label class="form-label">Password to Test</label>
-                    <input type="password" class="form-control" id="testPasswordInput">
+
+                <ul class="nav nav-tabs mb-3" id="testPolicyTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="test-pwd-tab" data-bs-toggle="tab"
+                            data-bs-target="#test-pwd" type="button">Password</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="test-access-tab" data-bs-toggle="tab" data-bs-target="#test-access"
+                            type="button">Access (APISIX)</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Password Test Tab -->
+                    <div class="tab-pane fade show active" id="test-pwd">
+                        <div class="mb-3">
+                            <label class="form-label">Password to Test</label>
+                            <input type="password" class="form-control" id="testPasswordInput">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="runPwdTestBtn">Test Password</button>
+                    </div>
+
+                    <!-- Access Test Tab -->
+                    <div class="tab-pane fade" id="test-access">
+                        <div class="mb-3">
+                            <label class="form-label">URI Path</label>
+                            <input type="text" class="form-control" id="testPathInput" placeholder="/mail">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Method</label>
+                            <select class="form-select" id="testMethodInput">
+                                <option value="GET">GET (Read)</option>
+                                <option value="POST">POST (Write)</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">IP Address (Optional)</label>
+                            <input type="text" class="form-control" id="testIpInput" placeholder="127.0.0.1">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="runAccessTestBtn">Test Access</button>
+                    </div>
                 </div>
-                <div id="testResult" class="d-none">
+
+                <!-- Results Area -->
+                <div id="testResult" class="d-none mt-3">
                     <div class="alert" id="testResultAlert"></div>
                     <ul id="testResultReasons" class="mb-0 text-danger fw-bold"></ul>
 
@@ -391,21 +528,175 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="runTestBtn">Run Test</button>
             </div>
         </div>
     </div>
 </div>
+<!-- Role Management Modal -->
+<div class="modal fade" id="roleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form action="{{ url_for('save_role', org_id=org_id) }}" method="POST" id="roleForm"
+            onsubmit="return saveRoleForm()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roleModalTitle">Manage Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="roleNameInput" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" id="roleNameInput" name="role_name" required>
+                        <div class="form-text">Unique name for this role (e.g., "Billing Viewer").</div>
+                    </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Inherited Roles</label>
+                        <select class="form-select" id="inheritedRolesInput" name="inherited_roles" multiple size="5">
+                            {% for rname in org.roles.keys() %}
+                            <option value="{{ rname }}">{{ rname }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">Hold Ctrl/Cmd to select multiple roles to inherit permissions from.</div>
+                    </div>
+
+                    <hr>
+                    <label class="form-label">Does this role have specific API Permissions?</label>
+                    <table class="table table-sm table-bordered" id="permsTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%">URI Path (Prefix)</th>
+                                <th style="width: 20%">Read</th>
+                                <th style="width: 20%">Write</th>
+                                <th style="width: 10%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows added by JS -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <button type="button" class="btn btn-sm btn-outline-success"
+                                        onclick="addPermissionRow()">
+                                        + Add URI Permission
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <input type="hidden" name="permissions_data" id="permissionsData">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Role</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var roleModal;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        roleModal = new bootstrap.Modal(document.getElementById('roleModal'));
+    });
+
+    function openRoleModal() {
+        document.getElementById('roleModalTitle').innerText = "New Role";
+        document.getElementById('roleNameInput').value = "";
+        document.getElementById('roleNameInput').readOnly = false;
+
+        // Clear inheritance
+        var select = document.getElementById('inheritedRolesInput');
+        for (var i = 0; i < select.options.length; i++) {
+            select.options[i].selected = false;
+        }
+
+        // Clear table
+        document.querySelector('#permsTable tbody').innerHTML = '';
+
+        roleModal.show();
+    }
+
+    function editRole(name, inherited, api_perms) {
+        document.getElementById('roleModalTitle').innerText = "Edit Role: " + name;
+        document.getElementById('roleNameInput').value = name;
+        document.getElementById('roleNameInput').readOnly = true;
+
+        // Set inheritance
+        var select = document.getElementById('inheritedRolesInput');
+        for (var i = 0; i < select.options.length; i++) {
+            if (inherited.includes(select.options[i].value)) {
+                select.options[i].selected = true;
+            } else {
+                select.options[i].selected = false;
+            }
+        }
+
+        // Set Table
+        var tbody = document.querySelector('#permsTable tbody');
+        tbody.innerHTML = '';
+
+        // api_perms is { "/uri": ["read", "write"] }
+        for (var path in api_perms) {
+            var perms = api_perms[path];
+            addPermissionRow(path, perms.includes('read'), perms.includes('write'));
+        }
+
+        roleModal.show();
+    }
+
+    function addPermissionRow(path = "", read = true, write = false) {
+        var tbody = document.querySelector('#permsTable tbody');
+        var tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td><input type="text" class="form-control form-control-sm path-input" value="${path}" placeholder="/api/..."></td>
+            <td class="text-center"><input type="checkbox" class="form-check-input read-check" ${read ? 'checked' : ''}></td>
+            <td class="text-center"><input type="checkbox" class="form-check-input write-check" ${write ? 'checked' : ''}></td>
+            <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">X</button></td>
+        `;
+        tbody.appendChild(tr);
+    }
+
+    function saveRoleForm() {
+        var rows = document.querySelectorAll('#permsTable tbody tr');
+        var data = [];
+
+        rows.forEach(function (tr) {
+            var path = tr.querySelector('.path-input').value;
+            if (path) {
+                var actions = [];
+                if (tr.querySelector('.read-check').checked) actions.push('read');
+                if (tr.querySelector('.write-check').checked) actions.push('write');
+
+                data.push({ path: path, actions: actions });
+            }
+        });
+
+        document.getElementById('permissionsData').value = JSON.stringify(data);
+        return true;
+    }
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var testModal = document.getElementById('testPolicyModal');
         var modalUserEmail = document.getElementById('modalUserEmail');
+
+        var runPwdTestBtn = document.getElementById('runPwdTestBtn');
         var testPasswordInput = document.getElementById('testPasswordInput');
-        var runTestBtn = document.getElementById('runTestBtn');
+
+        var runAccessTestBtn = document.getElementById('runAccessTestBtn');
+        var testPathInput = document.getElementById('testPathInput');
+        var testMethodInput = document.getElementById('testMethodInput');
+        var testIpInput = document.getElementById('testIpInput');
+
         var testResult = document.getElementById('testResult');
         var testResultAlert = document.getElementById('testResultAlert');
         var testResultReasons = document.getElementById('testResultReasons');
+        var traceList = document.getElementById('traceList');
+        var effectiveConfig = document.getElementById('effectiveConfig');
 
         var currentUser = '';
 
@@ -413,20 +704,45 @@
             var button = event.relatedTarget;
             currentUser = button.getAttribute('data-user');
             modalUserEmail.textContent = currentUser;
+
+            // Reset fields
             testPasswordInput.value = '';
+            testPathInput.value = '';
             testResult.classList.add('d-none');
         });
 
-        runTestBtn.addEventListener('click', function () {
+        // Run Password Test
+        runPwdTestBtn.addEventListener('click', function () {
             var password = testPasswordInput.value;
             if (!password) return;
 
-            // Simple AJAX form post
             var formData = new FormData();
             formData.append('user', currentUser);
             formData.append('password', password);
 
-            fetch('/api/test/password', {
+            runTest('/api/test/password', formData, "Password");
+        });
+
+        // Run Access Test
+        runAccessTestBtn.addEventListener('click', function () {
+            var path = testPathInput.value;
+            var method = testMethodInput.value;
+            var ip = testIpInput.value;
+            if (!path) return;
+
+            var formData = new FormData();
+            formData.append('user', currentUser);
+            formData.append('path', path);
+            formData.append('method', method);
+            if (ip) formData.append('ip', ip);
+
+            runTest('/api/test/access', formData, "Access");
+        });
+
+        function runTest(url, formData, type) {
+            testResult.classList.add('d-none');
+
+            fetch(url, {
                 method: 'POST',
                 body: formData
             })
@@ -434,20 +750,18 @@
                 .then(data => {
                     testResult.classList.remove('d-none');
                     testResultReasons.innerHTML = '';
-                    var traceList = document.getElementById('traceList');
-                    var effectiveConfig = document.getElementById('effectiveConfig');
                     traceList.innerHTML = '';
                     effectiveConfig.textContent = '';
 
                     if (data.allowed) {
                         testResultAlert.className = 'alert alert-success';
-                        testResultAlert.textContent = 'ALLOWED: Password meets all policy requirements.';
+                        testResultAlert.textContent = 'ALLOWED';
                     } else {
                         testResultAlert.className = 'alert alert-danger';
-                        testResultAlert.textContent = 'DENIED: Policy violations found:';
+                        testResultAlert.textContent = 'DENIED';
 
                         if (data.reasons && data.reasons.length > 0) {
-                            data.reasons.forEach(function (r) {
+                            data.reasons.forEach(r => {
                                 var li = document.createElement('li');
                                 li.textContent = r;
                                 testResultReasons.appendChild(li);
@@ -457,18 +771,13 @@
 
                     // Render Trace
                     if (data.trace) {
-                        // Org
                         addTraceItem(traceList, "Organization", data.trace.org_policy.id, data.trace.org_policy.config);
-                        // Dept
                         addTraceItem(traceList, "Department", data.trace.dept_policy.id, data.trace.dept_policy.config);
-                        // Groups
                         if (data.trace.group_policies) {
-                            data.trace.group_policies.forEach(function (gp) {
+                            data.trace.group_policies.forEach(gp => {
                                 addTraceItem(traceList, "Group: " + gp.group, gp.policy_id, gp.config);
                             });
                         }
-
-                        // Effective
                         effectiveConfig.textContent = JSON.stringify(data.trace.effective, null, 2);
                     }
                 })
@@ -477,14 +786,15 @@
                     testResultAlert.className = 'alert alert-warning';
                     testResultAlert.textContent = 'Error: ' + error;
                 });
-        });
+        }
 
         function addTraceItem(list, label, id, config) {
             var li = document.createElement('li');
             li.className = "list-group-item";
             var idHtml = id ? `<span class="badge bg-secondary ms-2">${id}</span>` : `<span class="badge bg-light text-dark border ms-2">None</span>`;
 
-            var configStr = (Object.keys(config).length > 0) ? JSON.stringify(config) : "No overrides";
+            // For Access policies (sets/lists), pretty print is helpful
+            var configStr = (Object.keys(config).length > 0) ? JSON.stringify(config) : "No config";
 
             li.innerHTML = `<div><strong>${label}</strong>${idHtml}</div><div class="text-muted small">${configStr}</div>`;
             list.appendChild(li);

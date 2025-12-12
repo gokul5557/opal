@@ -1,0 +1,17 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8182
+ * Running on http://10.69.127.29:8182
+Press CTRL+C to quit
+DEBUG: Form Data: ImmutableMultiDict([('x_userinfo', 'eyJlbWFpbCI6ImFsaWNlQHNhZ2Fzb2Z0LmlvIn0='), ('path', '/mail'), ('method', 'GET')])
+DEBUG: OPA Headers: {'x-real-ip': '127.0.0.1', 'x-userinfo': 'eyJlbWFpbCI6ImFsaWNlQHNhZ2Fzb2Z0LmlvIn0='}
+DEBUG: Starting OPA Eval for None
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpg57oinn2.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 19:35:47] "POST /api/test/access HTTP/1.1" 200 -
+DEBUG: Form Data: ImmutableMultiDict([('x_userinfo', 'eyJlbWFpbCI6ImFsaWNlQHNhZ2Fzb2Z0LmlvIn0='), ('path', '/mail'), ('method', 'GET')])
+DEBUG: OPA Headers: {'x-real-ip': '127.0.0.1', 'x-userinfo': 'eyJlbWFpbCI6ImFsaWNlQHNhZ2Fzb2Z0LmlvIn0='}
+DEBUG: Starting OPA Eval for None
+DEBUG: Running command: ['opa', 'eval', '-d', 'policies', '-d', 'data.json', '-i', '/tmp/tmpx9pkxyg4.json', '{ "allow": data.policies.apisix.policy.allow, "reasons": data.policies.apisix.policy.deny, "trace": data.policies.common.inheritance.explain_config_merged_with_user("access", data.policies.apisix.policy.user_email) }'] in /home/gokul/oidc+apisix/python/opal_testing/policy_poc
+127.0.0.1 - - [11/Dec/2025 19:38:31] "POST /api/test/access HTTP/1.1" 200 -

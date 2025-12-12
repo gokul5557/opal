@@ -59,6 +59,11 @@
             "allowed_cidrs": [
               "0.0.0.0/0"
             ]
+          },
+          "Org_1_IP_White": {
+            "allow_cidrs": [
+              "10.0.0.0/8"
+            ]
           }
         },
         "access": {
@@ -70,18 +75,288 @@
           },
           "Org_1_Access_User": {
             "allowed_prefixes": [
-              "/app",
-              "/home"
+              "/mail",
+              "/drive",
+              "/api/resource/Organization",
+              "/api"
+            ]
+          },
+          "access_plan_basic": {
+            "prefixes": [
+              "/drive",
+              "/mail"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_plan_pro": {
+            "prefixes": [
+              "/drive",
+              "/mail",
+              "/calendar"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_plan_premium": {
+            "prefixes": [
+              "/meet",
+              "/drive",
+              "/mail",
+              "/calendar",
+              "/rooms"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_plan_enterprise": {
+            "prefixes": [
+              "/meet",
+              "/drive",
+              "/mail",
+              "/chat",
+              "/calendar",
+              "/rooms"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_workspace_admin": {
+            "prefixes": [
+              "/"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_billing_admin": {
+            "prefixes": [
+              "/api/method/saga_billings.invoice.invoice_list.view",
+              "/api/resource/Wallet%20History",
+              "/api/method/saga_billings.billings.before_payment.list_items",
+              "/api/resource/Subscription Plan",
+              "/api/method/saga_billings.billings.current_plan.plan",
+              "/api/method/saga_billings.billings.order_id.get",
+              "/api/method/saga_billings.billings.change_plan.move",
+              "/api/method/saga_billings.invoice.invoice_list.get_list",
+              "/api/method/saga_billings.billings.transaction_history.get",
+              "/api/resource/Wallet"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_org_admin": {
+            "prefixes": [
+              "/api/method/saga_directory.dns.cloudflar.add_record",
+              "/api/method/saga_workspace.mail_setup.txt_record_verify.verify_dns",
+              "/api/resource/Domains",
+              "/api/method/saga_directory.deletion.org_admin.delete",
+              "/api/method/saga_directory.deletion.organization.delete",
+              "/api/method/saga_workspace.mail_setup.domain_validate.validate",
+              "/api/method/saga_workspace.mail_setup.dns_record.dns_datas",
+              "/api/method/saga_workspace.mail_setup.domain_provision.add_domain",
+              "/api/resource/Organization"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_user_admin": {
+            "prefixes": [
+              "/api/method/saga_directory.account.update_info.profile",
+              "/api/method/saga_directory.login.stage.find",
+              "/api/method/saga_directory.account.user_info.profile",
+              "/api/method/saga_directory.account.change_email.mailid",
+              "/api/method/saga_directory.account.change_password.password",
+              "/api/method/saga_directory.signup.signup_update.phone_number",
+              "/api/method/saga_directory.account.update_otp_type.otp_type",
+              "/api/method/saga_directory.login.forgot_password.otp_send",
+              "/api/method/saga_directory.account.change_phone_number.phone",
+              "/api/method/saga_directory.signup.register.company_details",
+              "/api/method/saga_directory.login.stage.update",
+              "/api/method/saga_directory.signup.signup_update.otp_type",
+              "/api/method/saga_directory.signup.initial.step",
+              "/api/method/saga_directory.login.auth.user_login",
+              "/api/method/saga_directory.login.forgot_password.password"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_email_admin": {
+            "prefixes": [
+              "/mail"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_drive_admin": {
+            "prefixes": [
+              "/drive"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_calendar_admin": {
+            "prefixes": [
+              "/calendar"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_meet_admin": {
+            "prefixes": [
+              "/meet",
+              "/rooms"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_employee": {
+            "prefixes": [],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_guest": {
+            "prefixes": [],
+            "permissions": [
+              "read"
+            ]
+          },
+          "access_role_super_admin": {
+            "prefixes": [
+              "/api/method/frappe.client.get_list",
+              "/api/method/saga_msp.deletion.msp_admin.delete",
+              "/api/method/saga_msp.deletion.msp_org.delete",
+              "/api/method/frappe.auth.get_logged_user"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_department_admin": {
+            "prefixes": [
+              "/api/resource/Designation",
+              "/api/resource/Department"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_group_admin": {
+            "prefixes": [
+              "/api/method/remove_group_member",
+              "/api/resource/Group*"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_employee_apps": {
+            "prefixes": [
+              "/mail/mail.api.account.get_user_info",
+              "/mail/mail.api.mail.create_mail",
+              "/mail/mail.api.outbound.send",
+              "/mail/mail.api.mail.get_mime_message",
+              "/mail/upload_file",
+              "/mail/mail.api.mail.fetch_attachment",
+              "/mail/mail.api.mail.search_mails",
+              "/mail/mail.api.mail.set_flagged",
+              "/mail/mail.api.mail.get_mailboxes",
+              "/mail/mail.api.mail.get_mail_thread",
+              "/mail/mail.api.mail.get_mails_from_mailbox",
+              "/drive/*",
+              "/mail/mail.api.outbound.send_raw",
+              "/mail/mail.api.auth.validate",
+              "/calendar/*",
+              "/mail/mail.api.mail.update_draft_mail",
+              "/mail/mail.api.mail.set_mails_mailbox",
+              "/mail/mail.api.mail.delete_threads",
+              "/mail/mail.api.mail.set_seen",
+              "/mail/mail.api.mail.get_mailbox_thread_count"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          },
+          "access_role_general_api": {
+            "prefixes": [
+              "/api/resource/Work%20Location*",
+              "/api/method/saga_directory.employee.self_account.create",
+              "/api/resource/Org%20Admin",
+              "/api/method/saga_directory.verification.phone_otp_validate.check",
+              "/api/method/saga_directory.employee.account.create",
+              "/api/method/saga_directory.verification.app_otp_validate.validate",
+              "/api/resource/Item*",
+              "/api/method/saga_directory.verification.mail_otp_validate.check",
+              "/api/method/saga_directory.verification.mail_otp_resend.resend",
+              "/auth/login",
+              "/api/method/saga_auth.auth_gateway.session_auth.session",
+              "/api/method/saga_directory.verification.phone_otp_send.phone_otp_send",
+              "/api/*",
+              "/rooms/*",
+              "/api/method/saga_auth.auth_gateway.password_set.set",
+              "/api/method/saga_directory.verification.totp_service.generate",
+              "/api/method/upload_file",
+              "/api/method/saga_directory.db.validators.clientadmin",
+              "/api/method/saga_directory.verification.mail_otp_send.otp_send",
+              "/api/method/saga_directory.deletion.account_cleanup.delete",
+              "/api/method/logout",
+              "/api/method/saga_directory.verification.phone_otp_send.resend",
+              "/api/method/saga_directory.deletion.employee.delete",
+              "/callback",
+              "/api/method/saga_directory.verification.find_otp_type.type",
+              "/api/method/saga_auth.user_activity.recent_activity.datas",
+              "/api/method/saga_auth.auth_gateway.user_account.create",
+              "/api/method/login",
+              "/api/status",
+              "/*",
+              "/api/method/saga_workspace.mail_setup.txt_record.record",
+              "/api/method/saga_directory.deletion.org_signup.delete",
+              "/api/method/saga_workspace.mail_setup.txt_record.generate",
+              "/logout",
+              "/api/method/saga_directory.verification.phone_otp_send.send",
+              "/api/health",
+              "/api/method/saga_auth.deletion.user_account.delete",
+              "/api/resource/Employee*"
+            ],
+            "permissions": [
+              "read",
+              "write"
             ]
           }
         }
       },
       "assigned_policies": {
-        "password": "Org_1_Pwd_Med",
-        "mfa": "Org_1_MFA_Optional",
-        "session": "Org_1_Sess_Std",
-        "ip_whitelist": "Org_1_IP_Any",
-        "access": "Org_1_Access_User"
+        "access": "Org_1_Access_User",
+        "ip_whitelist": "Org_1_IP_White"
       },
       "departments": {
         "HR": {
@@ -195,6 +470,167 @@
         "devops": {
           "dept_id": "Engineering",
           "assigned_policies": {}
+        },
+        "Plan_Basic": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_plan_basic"
+          }
+        },
+        "Plan_Pro": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_plan_pro"
+          }
+        },
+        "Plan_Premium": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_plan_premium"
+          }
+        },
+        "Plan_Enterprise": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_plan_enterprise"
+          }
+        },
+        "Role_WorkspaceAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_workspace_admin"
+          }
+        },
+        "Role_BillingAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_billing_admin"
+          }
+        },
+        "Role_OrgAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_org_admin"
+          }
+        },
+        "Role_UserAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_user_admin"
+          }
+        },
+        "Role_EmailAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_email_admin"
+          }
+        },
+        "Role_DriveAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_drive_admin"
+          }
+        },
+        "Role_CalendarAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_calendar_admin"
+          }
+        },
+        "Role_MeetAdmin": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_meet_admin"
+          }
+        },
+        "Role_Employee": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_employee"
+          }
+        },
+        "Role_Guest": {
+          "dept_id": "Engineering",
+          "assigned_policies": {
+            "access": "access_role_guest"
+          }
+        }
+      },
+      "roles": {
+        "workspace_admin": {
+          "assigned_policies": {
+            "access": "access_role_workspace_admin"
+          }
+        },
+        "billing_admin": {
+          "assigned_policies": {
+            "access": "access_role_billing_admin"
+          }
+        },
+        "org_admin": {
+          "assigned_policies": {
+            "access": "access_role_org_admin"
+          }
+        },
+        "user_admin": {
+          "assigned_policies": {
+            "access": "access_role_user_admin"
+          }
+        },
+        "email_admin": {
+          "assigned_policies": {
+            "access": "access_role_email_admin"
+          }
+        },
+        "drive_admin": {
+          "assigned_policies": {
+            "access": "access_role_drive_admin"
+          }
+        },
+        "calendar_admin": {
+          "assigned_policies": {
+            "access": "access_role_calendar_admin"
+          }
+        },
+        "meet_admin": {
+          "assigned_policies": {
+            "access": "access_role_meet_admin"
+          }
+        },
+        "employee": {
+          "assigned_policies": {
+            "access": "access_role_employee"
+          }
+        },
+        "guest": {
+          "assigned_policies": {
+            "access": "access_role_guest"
+          }
+        },
+        "super_admin": {
+          "assigned_policies": {
+            "access": "access_role_super_admin"
+          }
+        },
+        "department_admin": {
+          "assigned_policies": {
+            "access": "access_role_department_admin"
+          }
+        },
+        "group_admin": {
+          "assigned_policies": {
+            "access": "access_role_group_admin"
+          }
+        },
+        "employee_apps": {
+          "assigned_policies": {
+            "access": "access_role_employee_apps"
+          }
+        },
+        "general_api": {
+          "assigned_policies": {
+            "access": "access_role_general_api"
+          }
         }
       }
     },
@@ -1022,535 +1458,731 @@
     }
   },
   "users": {
+    "alice@sagasoft.io": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Org_1_Group_01"
+      ],
+      "roles": [
+        "access_role_workspace_admin"
+      ]
+    },
     "user_64587@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
-      "groups": [],
-      "policy_overrides": {}
+      "groups": [
+        "Org_1_Group_11"
+      ],
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_14713@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_1"
+        "Org_1_Group_11"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_29670@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_1",
-        "Org_1_Group_8",
         "Org_1_Group_15"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_86181@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_1",
-        "Org_1_Group_12"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_21206@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_2",
-        "Org_1_Group_3"
+        "Org_1_Group_4"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_42000@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_2",
-        "Org_1_Group_6"
+        "Org_1_Group_5"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_32414@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_2",
-        "Org_1_Group_10"
+        "Org_1_Group_5"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_43378@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_3"
+        "Org_1_Group_17"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_17264@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_3"
+        "Org_1_Group_5"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "group_admin"
+      ]
     },
     "user_94348@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_3",
-        "Org_1_Group_4"
+        "Org_1_Group_9"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_80430@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_3",
-        "Org_1_Group_16"
+        "Org_1_Group_19"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "department_admin"
+      ]
     },
     "user_71646@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_4"
+        "Org_1_Group_11"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_89016@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_4"
+        "Org_1_Group_9"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_31546@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_4"
+        "Org_1_Group_13"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_84052@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_5",
-        "Org_1_Group_9"
+        "Org_1_Group_14"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_65854@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_5",
-        "Org_1_Group_8",
-        "Org_1_Group_10",
-        "Org_1_Group_12"
+        "Org_1_Group_20"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_14621@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_5"
+        "Org_1_Group_15"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_57889@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_5",
-        "Org_1_Group_8",
-        "Org_1_Group_19"
+        "Org_1_Group_5"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_20231@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_5"
+        "Org_1_Group_12"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_7265@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_6",
-        "Org_1_Group_12",
-        "Org_1_Group_20"
+        "Org_1_Group_12"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_42822@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_6"
+        "Org_1_Group_10"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_21258@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_6"
+        "Org_1_Group_14"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_43419@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_7",
-        "Org_1_Group_13"
+        "Org_1_Group_2"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_58942@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_7"
+        "Org_1_Group_3"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_70070@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_7"
+        "Org_1_Group_15"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_24538@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_8",
-        "Org_1_Group_16"
+        "Org_1_Group_1"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_38164@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_8"
+        "Org_1_Group_10"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_8987@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_9"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "workspace_admin"
+      ]
     },
     "user_77420@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_9"
+        "Org_1_Group_19"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_65069@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_10"
+        "Org_1_Group_17"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_94281@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_10"
+        "Org_1_Group_17"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_45670@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_11"
+        "Org_1_Group_20"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_99302@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_11"
+        "Org_1_Group_3"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "department_admin"
+      ]
     },
     "user_3973@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_11"
+        "Org_1_Group_17"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_38588@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_11"
+        "Org_1_Group_13"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_38021@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_12"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "org_admin"
+      ]
     },
     "user_31464@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_12"
+        "Org_1_Group_2"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_36352@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_13"
+        "Org_1_Group_5"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_72865@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_13",
-        "Org_1_Group_17"
+        "Org_1_Group_9"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "email_admin"
+      ]
     },
     "user_89685@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_13"
+        "Org_1_Group_8"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_8173@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_13",
-        "Org_1_Group_14"
+        "Org_1_Group_8"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_97980@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_14"
+        "Org_1_Group_15"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_74775@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_14"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_56659@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_14"
+        "Org_1_Group_1"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_14398@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_15"
+        "Org_1_Group_12"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "super_admin"
+      ]
     },
     "user_24397@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_15"
+        "Org_1_Group_1"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_18359@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_15"
+        "Org_1_Group_12"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_58867@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_15"
+        "Org_1_Group_7"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_19213@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_16"
+        "Org_1_Group_8"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "meet_admin"
+      ]
     },
     "user_13008@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_16"
+        "Org_1_Group_7"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_54252@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_16"
+        "Org_1_Group_1"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_48618@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_17"
+        "Org_1_Group_10"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_69223@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "HR",
       "groups": [
-        "Org_1_Group_17"
+        "Org_1_Group_14"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_52866@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_18"
+        "Org_1_Group_2"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_90705@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_18"
+        "Org_1_Group_1"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "meet_admin"
+      ]
     },
     "user_27370@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Finance",
       "groups": [
-        "Org_1_Group_18"
+        "Org_1_Group_3"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_93399@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_19"
+        "Org_1_Group_2"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "meet_admin"
+      ]
     },
     "user_95712@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_19"
+        "Org_1_Group_7"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_87360@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_19"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_71670@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_19"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "meet_admin"
+      ]
     },
     "user_65054@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_20"
+        "Org_1_Group_19"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_29473@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_20"
+        "Org_1_Group_6"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_90495@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_20"
+        "Org_1_Group_12"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
     },
     "user_98725@org_1.com": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "Org_1_Group_20"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "general_api"
+      ]
     },
     "user_59185@org_2.com": {
       "org_id": "Org_2",
@@ -3403,9 +4035,46 @@
       "org_id": "Org_1",
       "dept_id": "Engineering",
       "groups": [
-        "devops"
+        "Org_1_Group_16"
       ],
-      "policy_overrides": {}
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
+    },
+    "gokul@sagaid.com": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Org_1_Group_14"
+      ],
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
+    },
+    "billing@sagasoft.xyz": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Org_1_Group_4"
+      ],
+      "policy_overrides": {},
+      "roles": [
+        "employee"
+      ]
+    },
+    "guest@sagasoft.xyz": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Org_1_Group_16"
+      ],
+      "policy_overrides": {},
+      "roles": [
+        "employee",
+        "drive_admin"
+      ]
     }
   },
   "common_passwords": [
