@@ -27,7 +27,7 @@ allow_user(user_email) if {
 allow_user(user_email) if {
     config := inheritance.get_effective_ip_whitelist_merged_with_user("ip_whitelist", user_email)
     some cidr in config.allow_cidrs
-    net.cidr_contains(cidr, input.ip)
+    net.cidr_contains(cidr, input.var.remote_addr)
 }
 
 # Legacy rule for backward compat (if called directly without arg)
@@ -56,13 +56,13 @@ get_deny_reasons(user_email) = reasons if {
         config := inheritance.get_effective_ip_whitelist_merged_with_user("ip_whitelist", user_email)
         count(config.allow_cidrs) > 0
         not ip_in_whitelist_config(config)
-        r := sprintf("IP %v is not whitelisted", [input.ip])
+        r := sprintf("IP %v is not whitelisted", [input.var.remote_addr])
     }
 }
 
 ip_in_whitelist_config(config) if {
     some cidr in config.allow_cidrs
-    net.cidr_contains(cidr, input.ip)
+    net.cidr_contains(cidr, input.var.remote_addr)
 }
 
 ip_in_whitelist if {

@@ -26,7 +26,20 @@ def run_test(name, endpoint, payload, expected_status, expected_content_check=No
         content_match = True
         
         if expected_content_check:
-            content_match = expected_content_check(response.json())
+            response_json = response.json()
+            content_match = expected_content_check(response_json)
+            
+            # Specific check for "Access_Invalid_IP" test
+            if name == "Access_Invalid_IP":
+                # Reasons should contain "IP X is not whitelisted"
+                if not response_json.get("reasons"):
+                    print(f"  {RED}FAIL{RESET}: Expected reasons list to be populated for IP failure.")
+                    content_match = False
+                elif "IP 192.168.1.1 is not whitelisted" not in response_json["reasons"][0]:
+                    print(f"  {RED}FAIL{RESET}: Expected 'IP 192.168.1.1 is not whitelisted', Got: {response_json['reasons']}")
+                    content_match = False
+                else:
+                    print(f"   {GREEN}Reason Check PASS{RESET}") # This line was problematic in the original snippet, adjusted for context
             
         if status_match and content_match:
             print(f"  {GREEN}PASS{RESET}")

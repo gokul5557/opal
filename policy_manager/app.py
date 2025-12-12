@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+import base64
 from data_access import get_organizations, get_org, save_data, load_data
 
 app = Flask(__name__)
@@ -326,15 +327,25 @@ def test_access():
         "x-real-ip": ip or "127.0.0.1"
     }
 
-    print(f"DEBUG: OPA Headers: {headers}")
+    # Simulate APISIX Production Input
+    # 1. Generate X-Userinfo (Base64 Encoded JSON)
+    user_info = {
+        "email": user,
+        "groups": ["simulated_group"] # Minimal required fields
+    }
+    user_info_json = json.dumps(user_info)
+    user_info_b64 = base64.b64encode(user_info_json.encode('utf-8')).decode('utf-8')
     
     opa_input = {
-        "user": user, 
-        "ip": ip,
+        "var": {
+            "remote_addr": ip
+        },
         "request": {
             "path": path,
             "method": method,
-            "headers": headers
+            "headers": {
+                "X-Userinfo": user_info_b64
+            }
         }
     }
     # Create temp file

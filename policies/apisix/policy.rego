@@ -14,8 +14,13 @@ default allow = false
 params := input.request
 path := params.path
 method := params.method
-# Legacy: User is passed explicitly in input
-user_email := input.user
+# Production: Extract User from X-Userinfo header
+user_email := email if {
+    v := input.request.headers["X-Userinfo"]
+    dec := base64.decode(v)
+    obj := json.unmarshal(dec)
+    email := obj.email
+}
 
 allow if {
     is_public_path
@@ -34,11 +39,11 @@ allow if {
     # User must be authenticated
     user_email != null
     
-    # Check IP Whitelist (uses input.user implicitly via legacy wrapper)
-    ip_whitelist.allow
+    # Check IP Whitelist (Explicitly pass decoded user_email)
+    ip_whitelist.allow_user(user_email)
     
-    # Get Effective Access Configuration (Merged) (uses input.user implicitly)
-    config := inheritance.get_effective_config_merged("access")
+    # Get Effective Access Configuration (Merged) (Explicitly pass user_email)
+    config := inheritance.get_effective_config_merged_with_user("access", user_email)
     
     # Check Permissions (Read/Write)
     has_permission(config.permissions, method)
@@ -67,17 +72,18 @@ has_prefix_access(prefixes, p) if {
 # 3. Denial Reasons (for debugging/testing)
 # -----------------------------------------------------------------------------
 deny[reason] if {
-    # Check IP Whitelist Denials
-    ip_whitelist.deny[reason]
+    # Check IP Whitelist Denials (Explicit user)
+    reasons := ip_whitelist.get_deny_reasons(user_email)
+    reason := reasons[_]
 }
 
 deny[reason] if {
     # Check Access Denials
     user_email != null
     # Only check if IP passed
-    ip_whitelist.allow
+    ip_whitelist.allow_user(user_email)
     
-    config := inheritance.get_effective_config_merged("access")
+    config := inheritance.get_effective_config_merged_with_user("access", user_email)
     
     # Check 1: Permission
     not has_permission(config.permissions, method)
@@ -87,9 +93,9 @@ deny[reason] if {
 deny[reason] if {
     # Check Access Denials
     user_email != null
-    ip_whitelist.allow
+    ip_whitelist.allow_user(user_email)
     
-    config := inheritance.get_effective_config_merged("access")
+    config := inheritance.get_effective_config_merged_with_user("access", user_email)
     
     # Check 2: Prefix
     not has_prefix_access(config.prefixes, path)

@@ -29,6 +29,12 @@
             "password_require_number": true,
             "password_require_special_char": true,
             "password_reject_common": true
+          },
+          "test_friday": {
+            "password_min_length": 5,
+            "password_require_number": true,
+            "password_require_special_char": true,
+            "password_reject_common": true
           }
         },
         "mfa": {
@@ -351,6 +357,21 @@
               "read",
               "write"
             ]
+          },
+          "access_role_gokul": {
+            "api_permissions": {
+              "/api/resource/Domains": [
+                "read",
+                "write"
+              ]
+            },
+            "prefixes": [
+              "/api/resource/Domains"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
           }
         }
       },
@@ -372,7 +393,7 @@
         },
         "Sales": {
           "assigned_policies": {
-            "password": "Org_1_Pwd_Low"
+            "password": "test_friday"
           }
         },
         "Engineering": {
@@ -631,6 +652,14 @@
           "assigned_policies": {
             "access": "access_role_general_api"
           }
+        },
+        "gokul": {
+          "assigned_policies": {
+            "access": "access_role_gokul"
+          },
+          "inherited_roles": [
+            "billing_admin"
+          ]
         }
       }
     },
@@ -1461,11 +1490,11 @@
     "alice@sagasoft.io": {
       "org_id": "Org_1",
       "dept_id": "Engineering",
-      "groups": [
-        "Org_1_Group_01"
-      ],
+      "groups": [],
       "roles": [
-        "access_role_workspace_admin"
+        "user_admin",
+        "employee",
+        "gokul"
       ]
     },
     "user_64587@org_1.com": {
@@ -1549,7 +1578,9 @@
       "org_id": "Org_1",
       "dept_id": "Sales",
       "groups": [
-        "Org_1_Group_17"
+        "Org_1_Group_1",
+        "Org_1_Group_2",
+        "Org_1_Group_4"
       ],
       "policy_overrides": {},
       "roles": [
