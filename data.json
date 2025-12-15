@@ -398,10 +398,15 @@
         },
         "mfa": {
           "admins": {
-            "mfa_required": true
+            "required": true,
+            "methods": [
+              "totp",
+              "email_otp"
+            ]
           },
           "interns": {
-            "mfa_required": false
+            "required": false,
+            "methods": []
           }
         },
         "ip_whitelist": {
@@ -414,12 +419,14 @@
         }
       },
       "assigned_policies": {
-        "password": "Global_Default_Password_Policy"
+        "password": "Global_Default_Password_Policy",
+        "mfa": "admins"
       },
       "departments": {
         "HR": {
           "assigned_policies": {
-            "password": "medium_interns"
+            "password": "medium_interns",
+            "ip_whitelist": "billing_team"
           }
         },
         "Sales": {

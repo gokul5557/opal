@@ -305,6 +305,7 @@ explain_config_merged_with_user(policy_type, user_email) := trace if {
     }
 }
 
+
 # -----------------------------------------------------------------------------
 # IP Whitelist Merge Logic (Union of CIDRs)
 # -----------------------------------------------------------------------------
@@ -337,7 +338,7 @@ get_effective_ip_whitelist_merged_with_user(policy_type, user_email) := merged_c
         gp := object.get(defined_policies_type, grp_policy_id, {})
     ]
 
-    # Roles (Resolved Recursively)
+    # Roles
     direct_roles := object.get(user, "roles", [])
     all_role_names := resolve_all_roles(object.get(org, "roles", {}), direct_roles)
     
@@ -364,5 +365,74 @@ get_effective_ip_whitelist_merged_with_user(policy_type, user_email) := merged_c
     
     merged_config := {
         "allow_cidrs": all_cidrs
+    }
+}
+
+# -----------------------------------------------------------------------------
+# MFA Merge Logic (Union of Methods, OR of Required)
+# -----------------------------------------------------------------------------
+get_effective_mfa_config(policy_type) := get_effective_mfa_config_with_user(policy_type, input.user)
+
+get_effective_mfa_config_with_user(policy_type, user_email) := merged_config if {
+    # user_email arg
+    user := object.get(users, user_email, {})
+    org := object.get(organizations, object.get(user, "org_id", ""), {})
+    
+    # 1. Defined Policies Lookup
+    defined_policies_type := object.get(object.get(org, "defined_policies", {}), policy_type, {})
+    
+    # 2. Collect all raw policy configs
+    # Org
+    org_policy_id := object.get(object.get(org, "assigned_policies", {}), policy_type, "")
+    org_policy := object.get(defined_policies_type, org_policy_id, {})
+
+    # Dept
+    dept := object.get(object.get(org, "departments", {}), object.get(user, "dept_id", ""), {})
+    dept_policy_id := object.get(object.get(dept, "assigned_policies", {}), policy_type, "")
+    dept_policy := object.get(defined_policies_type, dept_policy_id, {})
+    
+    # Groups
+    user_groups := object.get(user, "groups", [])
+    group_policies := [gp |
+        some group_name in user_groups
+        group := object.get(object.get(org, "groups", {}), group_name, {})
+        grp_policy_id := object.get(object.get(group, "assigned_policies", {}), policy_type, "")
+        gp := object.get(defined_policies_type, grp_policy_id, {})
+    ]
+
+    # Roles
+    direct_roles := object.get(user, "roles", [])
+    all_role_names := resolve_all_roles(object.get(org, "roles", {}), direct_roles)
+    
+    role_policies := [rp |
+        some role_name in all_role_names
+        role := object.get(object.get(org, "roles", {}), role_name, {})
+        rp_id := object.get(object.get(role, "assigned_policies", {}), policy_type, "")
+        rp := object.get(defined_policies_type, rp_id, {})
+    ]
+
+    # User Override
+    user_override := object.get(object.get(user, "policy_overrides", {}), policy_type, {})
+    
+    # 3. Merge Strategy
+    input_configs := array.concat([org_policy, dept_policy, user_override], group_policies)
+    all_configs := array.concat(input_configs, role_policies)
+    
+    # Union of Methods
+    all_methods := {m |
+        some cfg in all_configs
+        some m in object.get(cfg, "methods", [])
+    }
+    
+    # OR of Required
+    is_required := count({x | 
+        some cfg in all_configs
+        x := object.get(cfg, "required", false)
+        x == true
+    }) > 0
+    
+    merged_config := {
+        "required": is_required,
+        "methods": all_methods
     }
 }
