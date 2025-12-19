@@ -2,19 +2,22 @@
   "global_roles": {
     "msp_admin": {
       "assigned_policies": {
-        "access": "access_role_msp_admin"
+        "access": "access_role_msp_admin",
+        "mfa": "admins"
       },
       "inherited_roles": []
     },
     "org_admin": {
       "assigned_policies": {
-        "access": "access_role_org_admin"
+        "access": "access_role_org_admin",
+        "mfa": "admins"
       },
       "inherited_roles": []
     },
     "admin": {
       "assigned_policies": {
-        "access": "access_role_admin"
+        "access": "access_role_admin",
+        "mfa": "admins"
       },
       "inherited_roles": []
     },

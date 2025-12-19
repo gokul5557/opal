@@ -52,8 +52,16 @@ def generate_dataset():
         global_policies["mfa"] = {
             "admins": {"mfa_required": True},
             "default": {"mfa_required": False},
-            "all_users": {"mfa_required": True} # Strict fallback
+            "all_users": {"mfa_required": True}
         }
+
+    # Assign MFA to Admin Roles (In-Memory update of loaded/empty roles)
+    admin_roles = ["msp_admin", "org_admin", "admin", "security_admin"]
+    for r in admin_roles:
+        if r not in global_roles: continue
+        if "assigned_policies" not in global_roles[r]:
+            global_roles[r]["assigned_policies"] = {}
+        global_roles[r]["assigned_policies"]["mfa"] = "admins"
 
     # Re-create output dir but preserve global if needed? 
     # Actually, safest is to write to a temp dict, clear dir, then write back.
@@ -63,6 +71,7 @@ def generate_dataset():
     os.makedirs(f"{OUTPUT_DIR}/organizations")
 
     # Save Global Data (Real Data)
+    # Save as policy_data/global/data.json
     save_json(GLOBAL_DATA_FILE, {
         "global_roles": global_roles,
         "global_policies": global_policies
@@ -96,7 +105,7 @@ def generate_dataset():
         org_assigned_policies = {
              "password": "default",
              "access": "Global_Access_User", # Placeholder if using roles primarily
-             "mfa": "admins"
+             "mfa": "default" # Default False, let Roles override
         }
 
         if i == 1:

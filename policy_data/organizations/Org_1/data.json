@@ -11,7 +11,7 @@
       "assigned_policies": {
         "password": "strict",
         "access": "Global_Access_User",
-        "mfa": "admins"
+        "mfa": "default"
       },
       "departments": {
         "Engineering": {
@@ -70,7 +70,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "email_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -81,7 +81,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "resource_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -92,7 +92,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "admin"
+        "resource_admin"
       ],
       "policy_overrides": {}
     },
@@ -103,7 +103,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "domain_admin"
+        "directory_admin"
       ],
       "policy_overrides": {}
     },
@@ -114,7 +114,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "admin"
+        "read_only"
       ],
       "policy_overrides": {}
     },
@@ -125,7 +125,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "directory_admin"
+        "billing_admin"
       ],
       "policy_overrides": {}
     },
@@ -136,7 +136,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "employee"
+        "email_admin"
       ],
       "policy_overrides": {}
     },
@@ -147,7 +147,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "domain_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     },
@@ -158,7 +158,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "resource_admin"
+        "email_admin"
       ],
       "policy_overrides": {}
     }
