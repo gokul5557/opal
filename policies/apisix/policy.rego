@@ -16,7 +16,9 @@ path := params.path
 method := params.method
 # Production: Extract User from X-Userinfo header
 user_email := email if {
-    v := input.request.headers["X-Userinfo"]
+    headers := input.request.headers
+    v := object.get(headers, "X-Userinfo", object.get(headers, "x-userinfo", ""))
+    v != ""
     dec := base64.decode(v)
     obj := json.unmarshal(dec)
     email := obj.email
