@@ -416,6 +416,22 @@
               "10.1.0.1/8"
             ]
           }
+        },
+        "access": {
+          "access_role_test": {
+            "api_permissions": {
+              "/api/test": [
+                "read"
+              ]
+            },
+            "prefixes": [
+              "/api/test"
+            ],
+            "permissions": [
+              "read",
+              "write"
+            ]
+          }
         }
       },
       "assigned_policies": {
@@ -457,7 +473,14 @@
           "assigned_policies": {}
         }
       },
-      "roles": {}
+      "roles": {
+        "test": {
+          "assigned_policies": {
+            "access": "access_role_test"
+          },
+          "inherited_roles": []
+        }
+      }
     }
   },
   "users": {

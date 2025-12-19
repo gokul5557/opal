@@ -21,16 +21,24 @@ def test_mfa(email, expected_required, expected_methods=None):
         }
     }
     
+    print("\n[REQUEST]")
+    print(json.dumps(payload, indent=2))
+    
     try:
         response = requests.post(OPA_URL, json=payload)
         response.raise_for_status()
-        result = response.json().get("result", {})
+        full_response = response.json()
+        
+        print("\n[RESPONSE]")
+        print(json.dumps(full_response, indent=2))
+        
+        result = full_response.get("result", {})
         config = result.get("config", {})
         
         required = config.get("required")
         methods = config.get("methods", [])
         
-        print(f"  Result: Required={required}, Methods={methods}")
+        print(f"\n[SUMMARY] Required={required}, Methods={methods}")
         
         if required != expected_required:
             print(f"  [FAIL] Expected Required={expected_required}, Got {required}")

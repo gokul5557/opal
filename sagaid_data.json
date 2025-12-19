@@ -1,0 +1,311 @@
+{
+  "global_roles": {
+    "msp_admin": {
+      "assigned_policies": {
+        "access": "access_role_msp_admin"
+      },
+      "inherited_roles": []
+    },
+    "org_admin": {
+      "assigned_policies": {
+        "access": "access_role_org_admin"
+      },
+      "inherited_roles": []
+    },
+    "admin": {
+      "assigned_policies": {
+        "access": "access_role_admin"
+      },
+      "inherited_roles": []
+    },
+    "support_admin": {
+      "assigned_policies": {
+        "access": "access_role_support_admin"
+      },
+      "inherited_roles": []
+    },
+    "directory_admin": {
+      "assigned_policies": {
+        "access": "access_role_directory_admin"
+      },
+      "inherited_roles": []
+    },
+    "migration_admin": {
+      "assigned_policies": {
+        "access": "access_role_migration_admin"
+      },
+      "inherited_roles": []
+    },
+    "domain_admin": {
+      "assigned_policies": {
+        "access": "access_role_domain_admin"
+      },
+      "inherited_roles": []
+    },
+    "email_admin": {
+      "assigned_policies": {
+        "access": "access_role_email_admin"
+      },
+      "inherited_roles": []
+    },
+    "billing_admin": {
+      "assigned_policies": {
+        "access": "access_role_billing_admin"
+      },
+      "inherited_roles": []
+    },
+    "resource_admin": {
+      "assigned_policies": {
+        "access": "access_role_resource_admin"
+      },
+      "inherited_roles": []
+    },
+    "read_only": {
+      "assigned_policies": {
+        "access": "access_role_read_only"
+      },
+      "inherited_roles": []
+    },
+    "employee": {
+      "assigned_policies": {
+        "access": "access_role_employee"
+      },
+      "inherited_roles": []
+    }
+  },
+  "global_policies": {
+    "access": {
+      "access_role_msp_admin": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/organization",
+          "/api/msp_multi_organization_and_admin_management",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/sso_application",
+          "/api/user_sync_to_directory",
+          "/api/saas_management",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_org_admin": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/billing",
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/sso_application",
+          "/api/user_sync_to_directory",
+          "/api/saas_management",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_admin": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/sso_application",
+          "/api/user_sync_to_directory",
+          "/api/saas_management",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_support_admin": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/sso_application",
+          "/api/saas_management",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_directory_admin": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/user_sync_to_directory",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_migration_admin": {
+        "prefixes": [
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/domains",
+          "/api/user_sync_to_directory",
+          "/api/in_product_support_tickets",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_domain_admin": {
+        "prefixes": [
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/domains",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_email_admin": {
+        "prefixes": [
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/domains",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/email_migration",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_billing_admin": {
+        "prefixes": [
+          "/api/billing",
+          "/api/organization",
+          "/api/in_product_support_tickets",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_resource_admin": {
+        "prefixes": [
+          "/api/organization",
+          "/api/resource_management",
+          "/api/in_product_support_tickets",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_read_only": {
+        "prefixes": [
+          "/api/org_administrators",
+          "/api/organization",
+          "/api/users",
+          "/api/groups_and_department",
+          "/api/security_policy",
+          "/api/resource_management",
+          "/api/domains",
+          "/api/sso_application",
+          "/api/saas_management",
+          "/api/in_product_support_tickets",
+          "/api/email_management",
+          "/api/email_policy",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      },
+      "access_role_employee": {
+        "prefixes": [
+          "/api/in_product_support_tickets",
+          "/api/my_account",
+          "/api/email_client"
+        ],
+        "permissions": [
+          "read",
+          "write"
+        ]
+      }
+    }
+  }
+}
