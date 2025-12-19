@@ -1,15 +1,23 @@
 {
   "organizations": {
     "Org_1": {
-      "defined_policies": {},
+      "defined_policies": {
+        "password": {
+          "strict": {
+            "password_min_length": 20
+          }
+        }
+      },
       "assigned_policies": {
-        "password": "default",
+        "password": "strict",
         "access": "Global_Access_User",
-        "mfa": "admins"
+        "mfa": "default"
       },
       "departments": {
         "Engineering": {
-          "assigned_policies": {}
+          "assigned_policies": {
+            "mfa": "admins"
+          }
         },
         "Sales": {
           "assigned_policies": {}
@@ -73,7 +81,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "read_only"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -84,7 +92,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "directory_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -95,7 +103,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "billing_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     },
@@ -106,7 +114,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "migration_admin"
+        "admin"
       ],
       "policy_overrides": {}
     },
@@ -117,7 +125,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "admin"
+        "domain_admin"
       ],
       "policy_overrides": {}
     },
@@ -128,7 +136,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "domain_admin"
+        "msp_admin"
       ],
       "policy_overrides": {}
     },
@@ -150,7 +158,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "resource_admin"
+        "billing_admin"
       ],
       "policy_overrides": {}
     }

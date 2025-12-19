@@ -27,36 +27,43 @@ def save_json(path, data):
 
 def generate_dataset():
     # 1. Setup Directory
-    if os.path.exists(OUTPUT_DIR):
-        shutil.rmtree(OUTPUT_DIR)
-    os.makedirs(OUTPUT_DIR)
+    # Ensure we don't delete global data if we need it
+    GLOBAL_DATA_FILE = f"{OUTPUT_DIR}/global/data.json"
+    global_roles = {}
+    global_policies = {}
     
-    # 2. Load Global Roles (SagaID)
-    if os.path.exists(SAGAID_DATA_PATH):
+    if os.path.exists(GLOBAL_DATA_FILE):
+        print(f"Loading existing Real Data from {GLOBAL_DATA_FILE}")
+        existing_global = load_json(GLOBAL_DATA_FILE)
+        global_roles = existing_global.get("global_roles", {})
+        global_policies = existing_global.get("global_policies", {})
+    elif os.path.exists(SAGAID_DATA_PATH):
+        # Fallback to sagaid_data
         saga_data = load_json(SAGAID_DATA_PATH)
         global_roles = saga_data.get("global_roles", {})
         global_policies = saga_data.get("global_policies", {})
-    else:
-        print("Warning: SagaID data not found, using empty defaults.")
-        global_roles = {}
-        global_policies = {}
 
-    # Write Global Data
-    # Add a global definition for password/mfa defaults as well if missing
+    # Ensure defaults exist
     if "password" not in global_policies:
          global_policies["password"] = {
              "default": {"password_min_length": 10}
          }
-    # ADDED: MFA Definitions
     if "mfa" not in global_policies:
         global_policies["mfa"] = {
             "admins": {"mfa_required": True},
             "default": {"mfa_required": False},
-            "all_users": {"mfa_required": True}
+            "all_users": {"mfa_required": True} # Strict fallback
         }
-    
-    # Save as policy_data/global/data.json
-    save_json(f"{OUTPUT_DIR}/global/data.json", {
+
+    # Re-create output dir but preserve global if needed? 
+    # Actually, safest is to write to a temp dict, clear dir, then write back.
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(f"{OUTPUT_DIR}/global")
+    os.makedirs(f"{OUTPUT_DIR}/organizations")
+
+    # Save Global Data (Real Data)
+    save_json(GLOBAL_DATA_FILE, {
         "global_roles": global_roles,
         "global_policies": global_policies
     })
@@ -70,29 +77,45 @@ def generate_dataset():
         # Departments
         departments = {}
         for d_name in DEPT_NAMES:
-            departments[d_name] = {"assigned_policies": {}}
+            departments[d_name] = {
+                "assigned_policies": {} 
+            }
             
         # Groups
         groups = {}
         for g_idx in range(GROUPS_PER_ORG):
             g_name = GROUP_NAMES[g_idx]
-            # Round robin dept assignment
             dept = DEPT_NAMES[g_idx % len(DEPT_NAMES)]
             groups[g_name] = {
                 "dept_id": dept,
                 "assigned_policies": {}
             }
+        
+        # VARIATION: Org_1 defines custom policy
+        org_defined_policies = {}
+        org_assigned_policies = {
+             "password": "default",
+             "access": "Global_Access_User", # Placeholder if using roles primarily
+             "mfa": "default"
+        }
+
+        if i == 1:
+            # Org 1: Strict Password
+            org_defined_policies["password"] = {
+                "strict": {"password_min_length": 20}
+            }
+            org_assigned_policies["password"] = "strict" # Override Global Default
             
+            # Org 1: Engineering Dept gets stricter MFA?
+            departments["Engineering"]["assigned_policies"]["mfa"] = "admins" # effectively force true? 
+            # (Note: policy logic unions requirements. If global=default(false) and dept=admins(true), union might depend on policy code)
+
         # Org Structure
         org_data = {
             "organizations": {
                 org_id: {
-                    "defined_policies": {}, # Could replicate local policies if needed
-                    "assigned_policies": {
-                        "password": "default", # Referencing generic default
-                        "access": "Global_Access_User",
-                        "mfa": "admins"
-                    },
+                    "defined_policies": org_defined_policies, 
+                    "assigned_policies": org_assigned_policies,
                     "departments": departments,
                     "groups": groups,
                     "roles": {} 
@@ -104,14 +127,9 @@ def generate_dataset():
         # 4. Generate Users
         for u_idx in range(1, USERS_PER_ORG + 1):
             user_id = f"user_{u_idx}@{org_id.lower()}.com"
-            
-            # Random Attributes
-            # Pick a group
             grp = GROUP_NAMES[u_idx % len(GROUP_NAMES)]
             dept = groups[grp]["dept_id"]
             
-            # Pick a role (e.g. billing_admin vs employee)
-            # Make sure at least one user is admin
             if u_idx == 1:
                 assigned_roles = ["msp_admin"] if "msp_admin" in role_keys else ["admin"]
             else:
@@ -125,7 +143,6 @@ def generate_dataset():
                 "policy_overrides": {}
             }
             
-        # Save as policy_data/organizations/{org_id}/data.json
         save_json(f"{OUTPUT_DIR}/organizations/{org_id}/data.json", org_data)
 
 if __name__ == "__main__":

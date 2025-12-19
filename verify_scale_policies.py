@@ -78,6 +78,12 @@ def check_policy(num_orgs=10, users_per_org=10):
             mfa_config = resp_mfa.json().get("result", {})
             mfa_required = mfa_config.get("mfa_required", False)
             
+            # Check Password Policy
+            # Check effective password policy for user
+            resp_pwd = requests.post(f"{OPA_URL}/policies/security/password/config", json=input_data)
+            pwd_config = resp_pwd.json().get("result", {})
+            min_len = pwd_config.get("password_min_length", 0)
+            
             # Role Check (Implicit in Access)
             
             # Verification Logic
@@ -88,15 +94,25 @@ def check_policy(num_orgs=10, users_per_org=10):
                 print(f"[FAIL] {user_id} denied access to {path}")
                 user_passed = False
                 
-            # MFA: Admins should require MFA (based on Global Policy / Org Assignment)
-            # Org_1...10 all use "password": "default" and "mfa": "admins" (from generator)
-            # So u==1 (admin) => MFA True. u!=1 => MFA False.
+            # MFA Checks
             if is_admin and not mfa_required:
                 print(f"[FAIL] {user_id} (Admin) MFA NOT required")
                 user_passed = False
             if not is_admin and mfa_required:
                 print(f"[FAIL] {user_id} (User) MFA unexpectedly required")
                 user_passed = False
+            
+            # Hierarchy Override Check (Org 1 vs Others)
+            if i == 1:
+                # Org 1 has strict password override (20)
+                if min_len != 20:
+                    print(f"[FAIL] {user_id} (Org 1) expected pwd len 20, got {min_len}")
+                    user_passed = False
+            else:
+                # Others inherit global default (10)
+                if min_len != 10:
+                    print(f"[FAIL] {user_id} (Org {i}) expected pwd len 10, got {min_len}")
+                    user_passed = False
                 
             if user_passed:
                 passed += 1
