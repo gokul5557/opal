@@ -1,0 +1,156 @@
+{
+  "organizations": {
+    "Org_1": {
+      "defined_policies": {},
+      "assigned_policies": {
+        "password": "default"
+      },
+      "departments": {
+        "Engineering": {
+          "assigned_policies": {}
+        },
+        "Sales": {
+          "assigned_policies": {}
+        },
+        "HR": {
+          "assigned_policies": {}
+        }
+      },
+      "groups": {
+        "Team_Alpha": {
+          "dept_id": "Engineering",
+          "assigned_policies": {}
+        },
+        "Team_Beta": {
+          "dept_id": "Sales",
+          "assigned_policies": {}
+        },
+        "Team_Gamma": {
+          "dept_id": "HR",
+          "assigned_policies": {}
+        },
+        "Team_Delta": {
+          "dept_id": "Engineering",
+          "assigned_policies": {}
+        },
+        "Team_Epsilon": {
+          "dept_id": "Sales",
+          "assigned_policies": {}
+        }
+      },
+      "roles": {}
+    }
+  },
+  "users": {
+    "user_1@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Beta"
+      ],
+      "roles": [
+        "msp_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_2@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "HR",
+      "groups": [
+        "Team_Gamma"
+      ],
+      "roles": [
+        "support_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_3@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Team_Delta"
+      ],
+      "roles": [
+        "migration_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_4@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Epsilon"
+      ],
+      "roles": [
+        "directory_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_5@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Team_Alpha"
+      ],
+      "roles": [
+        "directory_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_6@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Beta"
+      ],
+      "roles": [
+        "migration_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_7@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "HR",
+      "groups": [
+        "Team_Gamma"
+      ],
+      "roles": [
+        "msp_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_8@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Team_Delta"
+      ],
+      "roles": [
+        "domain_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_9@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Epsilon"
+      ],
+      "roles": [
+        "directory_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_10@org_1.com": {
+      "org_id": "Org_1",
+      "dept_id": "Engineering",
+      "groups": [
+        "Team_Alpha"
+      ],
+      "roles": [
+        "email_admin"
+      ],
+      "policy_overrides": {}
+    }
+  }
+}
