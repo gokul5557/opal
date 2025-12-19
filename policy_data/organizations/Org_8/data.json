@@ -3,7 +3,9 @@
     "Org_8": {
       "defined_policies": {},
       "assigned_policies": {
-        "password": "default"
+        "password": "default",
+        "access": "Global_Access_User",
+        "mfa": "admins"
       },
       "departments": {
         "Engineering": {
@@ -60,7 +62,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "msp_admin"
+        "migration_admin"
       ],
       "policy_overrides": {}
     },
@@ -71,7 +73,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "resource_admin"
+        "domain_admin"
       ],
       "policy_overrides": {}
     },
@@ -82,7 +84,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "directory_admin"
+        "resource_admin"
       ],
       "policy_overrides": {}
     },
@@ -93,7 +95,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "directory_admin"
+        "support_admin"
       ],
       "policy_overrides": {}
     },
@@ -104,7 +106,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "org_admin"
+        "billing_admin"
       ],
       "policy_overrides": {}
     },
@@ -115,7 +117,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "read_only"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -137,7 +139,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "admin"
+        "read_only"
       ],
       "policy_overrides": {}
     },
@@ -148,7 +150,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "email_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     }

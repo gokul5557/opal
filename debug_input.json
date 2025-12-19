@@ -1,9 +1,9 @@
 {
-    "user": "gokul@sagasoft.io",
-    "var": {
-        "remote_addr": "127.0.0.1"
-    },
-    "headers": {
-        "X-Userinfo": "eyJlbWFpbCI6ICJnb2t1bEBzYWdhc29mdC5pbyJ9"
+    "request": {
+        "headers": {
+            "X-Userinfo": "eyJlbWFpbCI6ICJ1c2VyXzFAb3JnXzEuY29tIiwgIm9yZ19pZCI6ICJPcmdfMSIsICJyb2xlcyI6IFsibXNwX2FkbWluIl19"
+        },
+        "path": "/admin",
+        "method": "GET"
     }
 }

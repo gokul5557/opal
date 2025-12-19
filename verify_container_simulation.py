@@ -11,16 +11,27 @@ def verify_simulation():
     print(f"Connecting to OPA at {OPA_URL}...")
     
     try:
-        # Check Users Count
-        # We query 'users' key. path: /v1/data/users
-        response = requests.get(f"{OPA_URL}/users")
+        # Query virtual 'users' from inheritance policy
+        response = requests.post(f"{OPA_URL}", json={
+            "input": {}, 
+            "query": "data.policies.common.inheritance.users"
+        })
         
         if response.status_code != 200:
             print(f"[FAIL] Connection Error: {response.status_code} {response.text}")
             return
             
         result = response.json()
-        users_map = result.get("result", {})
+        # OPA query result structure: {"result": [{"expressions": [{"value": {...}}]}]}
+        # Direct data query vs query param?
+        # If accessing /v1/data/policies/common/inheritance/users, it returns object key-value
+        
+        response_direct = requests.get(f"{OPA_URL}/policies/common/inheritance/users")
+        if response_direct.status_code == 200:
+             users_map = response_direct.json().get("result", {})
+        else: 
+             print("[FAIL] Could not fetch virtual users.")
+             users_map = {}
         
         user_count = len(users_map)
         print(f"Users Found: {user_count}")

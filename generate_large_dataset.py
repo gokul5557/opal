@@ -7,7 +7,7 @@ import random
 SAGAID_DATA_PATH = "sagaid_data.json"
 OUTPUT_DIR = "policy_data"
 
-ORGS_COUNT = 3
+ORGS_COUNT = 10
 DEPTS_PER_ORG = 3
 GROUPS_PER_ORG = 5
 USERS_PER_ORG = 10
@@ -82,7 +82,9 @@ def generate_dataset():
                 org_id: {
                     "defined_policies": {}, # Could replicate local policies if needed
                     "assigned_policies": {
-                        "password": "default" # Referencing generic default
+                        "password": "default", # Referencing generic default
+                        "access": "Global_Access_User",
+                        "mfa": "admins"
                     },
                     "departments": departments,
                     "groups": groups,
