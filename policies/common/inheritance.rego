@@ -4,10 +4,25 @@ import future.keywords.if
 import future.keywords.in
 
 # Break recursion by importing specific data paths instead of using 'data' root
-import data.global_policies
-import data.global_roles
-import data.users
-import data.organizations
+# Break recursion by importing specific data paths instead of using 'data' root
+# import data.global_policies
+# import data.global_roles
+# import data.users
+# import data.organizations
+
+# Virtualize Data from Split Sources (policy_data/...)
+users[userid] := u {
+    some file_obj in data.policy_data.organizations
+    some userid, u in file_obj.users
+}
+
+organizations[org_id] := o {
+    some file_obj in data.policy_data.organizations
+    some org_id, o in file_obj.organizations
+}
+
+global_roles := data.policy_data.global.global_roles
+global_policies := data.policy_data.global.global_policies
 
 # -----------------------------------------------------------------------------
 # Data Lookups & Merging Logic
