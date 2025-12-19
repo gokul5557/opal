@@ -18,10 +18,8 @@ allow if {
 # For now, let's just expose the CONFIG so the app knows what to ask for.
 
 # Expose the effective configuration
+# Expose the effective configuration
 config := inheritance.get_effective_config("mfa")
-config := c if {
-    c := inheritance.get_effective_mfa_config("mfa")
-}
 
 # Helper to check if a specific method is allowed for this user
 is_method_allowed(method) if {
