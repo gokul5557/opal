@@ -47,8 +47,9 @@ def generate_dataset():
          global_policies["password"] = {
              "default": {"password_min_length": 10}
          }
-         
-    save_json(f"{OUTPUT_DIR}/global.json", {
+    
+    # Save as policy_data/global/data.json
+    save_json(f"{OUTPUT_DIR}/global/data.json", {
         "global_roles": global_roles,
         "global_policies": global_policies
     })
@@ -115,7 +116,8 @@ def generate_dataset():
                 "policy_overrides": {}
             }
             
-        save_json(f"{OUTPUT_DIR}/organizations/{org_id}.json", org_data)
+        # Save as policy_data/organizations/{org_id}/data.json
+        save_json(f"{OUTPUT_DIR}/organizations/{org_id}/data.json", org_data)
 
 if __name__ == "__main__":
     generate_dataset()
