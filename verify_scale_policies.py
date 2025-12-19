@@ -52,8 +52,10 @@ def check_policy(num_orgs=10, users_per_org=10):
                         "headers": {
                             "X-Userinfo": user_info_b64
                         },
-                        "path": path
-                    }
+                        "path": path,
+                        "method": "GET"
+                    },
+                    "user": user_id # Required for inheritance.rego
                 }
             }
             

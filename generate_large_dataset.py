@@ -96,7 +96,7 @@ def generate_dataset():
         org_assigned_policies = {
              "password": "default",
              "access": "Global_Access_User", # Placeholder if using roles primarily
-             "mfa": "default"
+             "mfa": "admins"
         }
 
         if i == 1:
