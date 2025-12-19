@@ -62,7 +62,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "directory_admin"
+        "email_admin"
       ],
       "policy_overrides": {}
     },
@@ -73,7 +73,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "domain_admin"
+        "email_admin"
       ],
       "policy_overrides": {}
     },
@@ -84,7 +84,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "org_admin"
+        "domain_admin"
       ],
       "policy_overrides": {}
     },
@@ -106,7 +106,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "migration_admin"
+        "support_admin"
       ],
       "policy_overrides": {}
     },
@@ -117,7 +117,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "domain_admin"
+        "read_only"
       ],
       "policy_overrides": {}
     },
@@ -128,7 +128,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "directory_admin"
+        "resource_admin"
       ],
       "policy_overrides": {}
     },
@@ -139,7 +139,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "read_only"
+        "directory_admin"
       ],
       "policy_overrides": {}
     },
@@ -150,7 +150,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "employee"
+        "email_admin"
       ],
       "policy_overrides": {}
     }

@@ -311,6 +311,17 @@
       "default": {
         "password_min_length": 10
       }
+    },
+    "mfa": {
+      "admins": {
+        "mfa_required": true
+      },
+      "default": {
+        "mfa_required": false
+      },
+      "all_users": {
+        "mfa_required": true
+      }
     }
   }
 }

@@ -50,9 +50,9 @@ def generate_dataset():
     # ADDED: MFA Definitions
     if "mfa" not in global_policies:
         global_policies["mfa"] = {
-            "admins": {"mfa_required": true},
-            "default": {"mfa_required": false},
-            "all_users": {"mfa_required": true}
+            "admins": {"mfa_required": True},
+            "default": {"mfa_required": False},
+            "all_users": {"mfa_required": True}
         }
     
     # Save as policy_data/global/data.json
