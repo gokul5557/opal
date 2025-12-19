@@ -31,9 +31,11 @@ def check_policy(num_orgs=10, users_per_org=10):
             is_admin = (u == 1)
             
             # 1. Test APISIX Access
-            # Admins (msp_admin / admin) should access /admin or similar
-            # Non-admins should access /mail
-            path = "/admin" if is_admin else "/mail"
+            # Admins (msp_admin / admin) should access /api/organization
+            # Non-admins should access /api/my_account
+            # Note: msp_admin has access to /api/organization via access_role_msp_admin
+            # employee has access to /api/my_account via access_role_employee
+            path = "/api/organization" if is_admin else "/api/my_account"
             
             # Construct Input
             user_info_json = json.dumps({
@@ -60,12 +62,14 @@ def check_policy(num_orgs=10, users_per_org=10):
             resp_apisix = requests.post(f"{OPA_URL}/policies/apisix/policy/allow", json=input_data)
             allow = resp_apisix.json().get("result", False)
             
-            # DEBUG: Probe extraction
+            # DEBUG: Probe Explain Config
             if i == 1 and u == 1:
-                debug_email_resp = requests.post(f"{OPA_URL}/policies/apisix/policy/user_email", json=input_data)
-                with open("debug_extraction.log", "w") as f:
-                    f.write(f"X-Userinfo B64: {user_info_b64}\n")
-                    f.write(f"Extracted Email: {debug_email_resp.text}\n")
+                debug_query = {
+                    "query": 'data.policies.common.inheritance.explain_config("access")',
+                    "input": { "user": user_id } 
+                }
+                debug_resp = requests.post(f"http://localhost:8181/v1/data", json=debug_query)
+                print(f"[DEBUG] Explanation for {user_id}: {json.dumps(debug_resp.json(), indent=2)}")
                 break # EXIT DEBUG
             
             # Check MFA
