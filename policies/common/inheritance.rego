@@ -60,12 +60,26 @@ get_effective_config(policy_type) := merged_config if {
         gp := object.get(defined_policies_type, grp_policy_id, {})
     ]
 
-    # 5. User Overrides (Direct values still, or referenced? Generator says unused for now)
+    # 5. Role Policies
+    user_roles := object.get(user, "roles", [])
+    role_policies := [rp |
+        some role_name in user_roles
+        # Check Org Roles first, then Global Roles
+        org_role := object.get(object.get(org, "roles", {}), role_name, {})
+        global_role := object.get(global_roles, role_name, {})
+        role_def := object.union(global_role, org_role)
+        
+        role_policy_id := object.get(object.get(role_def, "assigned_policies", {}), policy_type, "")
+        rp := object.get(defined_policies_type, role_policy_id, {})
+    ]
+
+    # 6. User Overrides
     # Let's support inline overrides for ultimate flexibility
     user_policy := object.get(object.get(user, "policy_overrides", {}), policy_type, {})
     
     layers := array.concat([org_policy, dept_policy], group_policies)
-    final_layers := array.concat(layers, [user_policy])
+    layers_with_roles := array.concat(layers, role_policies)
+    final_layers := array.concat(layers_with_roles, [user_policy])
     
     merged_config := object.union_n(final_layers)
 }
