@@ -9,6 +9,9 @@ contains_string(str, substr) if {
     contains(lower(str), lower(substr))
 }
 
+# Expose Configuration for Verification/Introspection
+config := inheritance.get_effective_config("password")
+
 # 1. Length Check
 deny[reason] if {
     config := inheritance.get_effective_config("password")
