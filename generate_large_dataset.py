@@ -142,7 +142,7 @@ def generate_dataset():
             if u_idx == 1:
                 assigned_roles = ["msp_admin"] if "msp_admin" in role_keys else ["admin"]
             else:
-                assigned_roles = [random.choice(role_keys)]
+                assigned_roles = ["employee"]
                 
             org_data["users"][user_id] = {
                 "org_id": org_id,

@@ -92,7 +92,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "resource_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -103,7 +103,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "directory_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -114,7 +114,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "read_only"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -125,7 +125,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "billing_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -136,7 +136,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "email_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -147,7 +147,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "org_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -158,7 +158,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "email_admin"
+        "employee"
       ],
       "policy_overrides": {}
     }
