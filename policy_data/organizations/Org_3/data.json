@@ -60,7 +60,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "billing_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     },
@@ -71,7 +71,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "admin"
+        "billing_admin"
       ],
       "policy_overrides": {}
     },
@@ -82,7 +82,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "msp_admin"
+        "domain_admin"
       ],
       "policy_overrides": {}
     },
@@ -93,7 +93,7 @@
         "Team_Alpha"
       ],
       "roles": [
-        "msp_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
@@ -104,7 +104,7 @@
         "Team_Beta"
       ],
       "roles": [
-        "directory_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     },
@@ -115,7 +115,7 @@
         "Team_Gamma"
       ],
       "roles": [
-        "billing_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     },
@@ -126,7 +126,7 @@
         "Team_Delta"
       ],
       "roles": [
-        "migration_admin"
+        "read_only"
       ],
       "policy_overrides": {}
     },
@@ -137,7 +137,7 @@
         "Team_Epsilon"
       ],
       "roles": [
-        "email_admin"
+        "admin"
       ],
       "policy_overrides": {}
     },

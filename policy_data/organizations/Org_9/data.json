@@ -1,6 +1,6 @@
 {
   "organizations": {
-    "Org_2": {
+    "Org_9": {
       "defined_policies": {},
       "assigned_policies": {
         "password": "default"
@@ -42,8 +42,8 @@
     }
   },
   "users": {
-    "user_1@org_2.com": {
-      "org_id": "Org_2",
+    "user_1@org_9.com": {
+      "org_id": "Org_9",
       "dept_id": "Sales",
       "groups": [
         "Team_Beta"
@@ -53,74 +53,74 @@
       ],
       "policy_overrides": {}
     },
-    "user_2@org_2.com": {
-      "org_id": "Org_2",
+    "user_2@org_9.com": {
+      "org_id": "Org_9",
       "dept_id": "HR",
       "groups": [
         "Team_Gamma"
-      ],
-      "roles": [
-        "msp_admin"
-      ],
-      "policy_overrides": {}
-    },
-    "user_3@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Team_Delta"
-      ],
-      "roles": [
-        "domain_admin"
-      ],
-      "policy_overrides": {}
-    },
-    "user_4@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Team_Epsilon"
-      ],
-      "roles": [
-        "msp_admin"
-      ],
-      "policy_overrides": {}
-    },
-    "user_5@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Engineering",
-      "groups": [
-        "Team_Alpha"
-      ],
-      "roles": [
-        "employee"
-      ],
-      "policy_overrides": {}
-    },
-    "user_6@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "Sales",
-      "groups": [
-        "Team_Beta"
       ],
       "roles": [
         "directory_admin"
       ],
       "policy_overrides": {}
     },
-    "user_7@org_2.com": {
-      "org_id": "Org_2",
-      "dept_id": "HR",
+    "user_3@org_9.com": {
+      "org_id": "Org_9",
+      "dept_id": "Engineering",
       "groups": [
-        "Team_Gamma"
+        "Team_Delta"
+      ],
+      "roles": [
+        "email_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_4@org_9.com": {
+      "org_id": "Org_9",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Epsilon"
+      ],
+      "roles": [
+        "resource_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_5@org_9.com": {
+      "org_id": "Org_9",
+      "dept_id": "Engineering",
+      "groups": [
+        "Team_Alpha"
+      ],
+      "roles": [
+        "admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_6@org_9.com": {
+      "org_id": "Org_9",
+      "dept_id": "Sales",
+      "groups": [
+        "Team_Beta"
       ],
       "roles": [
         "domain_admin"
       ],
       "policy_overrides": {}
     },
-    "user_8@org_2.com": {
-      "org_id": "Org_2",
+    "user_7@org_9.com": {
+      "org_id": "Org_9",
+      "dept_id": "HR",
+      "groups": [
+        "Team_Gamma"
+      ],
+      "roles": [
+        "directory_admin"
+      ],
+      "policy_overrides": {}
+    },
+    "user_8@org_9.com": {
+      "org_id": "Org_9",
       "dept_id": "Engineering",
       "groups": [
         "Team_Delta"
@@ -130,25 +130,25 @@
       ],
       "policy_overrides": {}
     },
-    "user_9@org_2.com": {
-      "org_id": "Org_2",
+    "user_9@org_9.com": {
+      "org_id": "Org_9",
       "dept_id": "Sales",
       "groups": [
         "Team_Epsilon"
       ],
       "roles": [
-        "directory_admin"
+        "employee"
       ],
       "policy_overrides": {}
     },
-    "user_10@org_2.com": {
-      "org_id": "Org_2",
+    "user_10@org_9.com": {
+      "org_id": "Org_9",
       "dept_id": "Engineering",
       "groups": [
         "Team_Alpha"
       ],
       "roles": [
-        "directory_admin"
+        "org_admin"
       ],
       "policy_overrides": {}
     }
