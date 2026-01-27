@@ -11,14 +11,14 @@ allow_with_user(user_id) if {
     org_id := get_org_id(user_id)
 
     # 2. Get User & Org Data
-    user := data.organizations[org_id].users[user_id]
+    user := data.policy_data.organizations[org_id].users[user_id]
     
     # 3. Status Check
     user.status == "active"
     
     # 4. Role & Policy Resolution
     some role_name in user.roles
-    role := data.organizations[org_id].roles[role_name]
+    role := data.policy_data.organizations[org_id].roles[role_name]
     policy_name := role.assigned_policies.access
     
     # 5. Permission Lookup (Org > Global)
@@ -36,16 +36,16 @@ allow_with_user(user_id) if {
 
 # Resolve Org ID for a user
 get_org_id(user_id) := org_id if {
-    some id, org in data.organizations
+    some id, org in data.policy_data.organizations
     org.users[user_id]
     org_id := id
 }
 
 # Get Access Policy Definition (Org > Global)
 get_policy_def(org_id, policy_name) := def if {
-    def := data.organizations[org_id].defined_policies.access[policy_name]
+    def := data.policy_data.organizations[org_id].defined_policies.access[policy_name]
 } else := def if {
-    def := data.global.global_policies.access[policy_name]
+    def := data.policy_data.global.global_policies.access[policy_name]
 }
 
 # Verify Path & Method

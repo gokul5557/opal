@@ -1,0 +1,11 @@
+{
+    "input": {
+        "request": {
+            "method": "POST",
+            "path": "/api/v1/users/new",
+            "headers": {
+                "X-Userinfo": "eyJlbWFpbCI6ICJhZG1pbkBjb21wYW55YWJjLmNvbSJ9"
+            }
+        }
+    }
+}

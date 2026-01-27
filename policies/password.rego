@@ -20,15 +20,15 @@ validate(user_id, password) if {
 
 get_password_policy(org_id) := policy if {
     # 1. Org Assigned Policy
-    name := data.organizations[org_id].assigned_policies.password
-    policy := data.organizations[org_id].defined_policies.password[name]
+    name := data.policy_data.organizations[org_id].assigned_policies.password
+    policy := data.policy_data.organizations[org_id].defined_policies.password[name]
 } else := policy if {
     # 2. Global Default
-    policy := data.global.global_policies.password["default"]
+    policy := data.policy_data.global.global_policies.password["default"]
 }
 
 get_org_id(user_id) := org_id if {
-    some id, org in data.organizations
+    some id, org in data.policy_data.organizations
     org.users[user_id]
     org_id := id
 }

@@ -28,19 +28,19 @@ allow_with_user(user_id) if {
 get_mfa_policy(org_id, user_id) := policy if {
     # 1. Check User Overrides? (Future)
     # 2. Check Org Level Default
-    policy := data.organizations[org_id].assigned_policies.mfa
+    policy := data.policy_data.organizations[org_id].assigned_policies.mfa
 } else := policy if {
     # 3. Check Global Admin MFA if user is admin
-    user := data.organizations[org_id].users[user_id]
+    user := data.policy_data.organizations[org_id].users[user_id]
     "admin" in user.roles
-    policy := data.global.global_policies.mfa.admins_only
+    policy := data.policy_data.global.global_policies.mfa.admins_only
 } else := policy if {
     # 4. Global Default
-    policy := data.global.global_policies.mfa["default"]
+    policy := data.policy_data.global.global_policies.mfa["default"]
 }
 
 get_org_id(user_id) := org_id if {
-    some id, org in data.organizations
+    some id, org in data.policy_data.organizations
     org.users[user_id]
     org_id := id
 }
