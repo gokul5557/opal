@@ -15,6 +15,8 @@ allow_with_user(user_id) if {
 } else if {
     # If MFA is required, check if user has verified MFA in session/input
     # (Assuming APISIX/OIDC provides this in a header or context)
+    org_id := get_org_id(user_id)
+    policy_def := get_mfa_policy(org_id, user_id)
     policy_def.mfa_required
     input.request.headers["X-Mfa-Verified"] == "true"
 }
