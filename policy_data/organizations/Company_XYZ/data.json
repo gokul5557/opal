@@ -33,7 +33,7 @@
         "access": {
             "admin_access": {
                 "api_permissions": {
-                    "*": [
+                    "/**": [
                         "create",
                         "read",
                         "update",
