@@ -1,116 +1,116 @@
 {
-    "plan": "pro_plan",
-    "total_storage": "2TB",
-    "storage_used": "11.5GB",
-    "domains": {
-        "companyabc.com": {
-            "status": "verified",
-            "storage_allocated": "1.5TB"
-        },
-        "companyabc.net": {
-            "status": "verified",
-            "storage_allocated": "500GB"
-        }
+  "plan": "pro_plan",
+  "total_storage": "2TB",
+  "storage_used": "11.5GB",
+  "domains": {
+    "companyabc.com": {
+      "status": "verified",
+      "storage_allocated": "1.5TB"
     },
-    "roles": {
-        "admin": {
-            "assigned_policies": {
-                "access": "global_admin_access",
-                "password": "strict"
-            },
-            "inherited_roles": []
-        },
-        "user": {
-            "assigned_policies": {
-                "access": "global_user_access",
-                "password": "simple"
-            },
-            "inherited_roles": []
-        }
-    },
-    "users": {
-        "admin@companyabc.com": {
-            "org_id": "Company_ABC",
-            "name": "System Administrator",
-            "roles": [
-                "admin"
-            ],
-            "status": "active",
-            "storage_quota": "50GB",
-            "storage_used": "5GB",
-            "aliases": [
-                "root@companyabc.com"
-            ]
-        },
-        "alice@companyabc.com": {
-            "org_id": "Company_ABC",
-            "name": "Alice Smith",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "10GB",
-            "storage_used": "2GB",
-            "aliases": []
-        },
-        "bob@companyabc.com": {
-            "org_id": "Company_ABC",
-            "name": "Bob Jones",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "10GB",
-            "storage_used": "1.5GB",
-            "aliases": []
-        },
-        "charlie@companyabc.net": {
-            "org_id": "Company_ABC",
-            "name": "Charlie Brown",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "10GB",
-            "storage_used": "501MB",
-            "aliases": []
-        },
-        "dave@companyabc.net": {
-            "org_id": "Company_ABC",
-            "name": "Dave Wilson",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "10GB",
-            "storage_used": "100MB",
-            "aliases": []
-        }
-    },
-    "defined_policies": {
-        "password": {
-            "strict": {
-                "password_min_length": 16,
-                "password_require_special_char": true
-            },
-            "simple": {
-                "password_min_length": 8,
-                "password_require_special_char": false
-            }
-        }
-    },
-    "assigned_policies": {
-        "password": "simple",
-        "access": "global_admin_access"
-    },
-    "email_settings": {
-        "default_folders": [
-            "Inbox",
-            "Sent",
-            "Drafts",
-            "Trash",
-            "Junk"
-        ],
-        "max_attachment_size": "25MB"
+    "companyabc.net": {
+      "status": "verified",
+      "storage_allocated": "500GB"
     }
+  },
+  "roles": {
+    "admin": {
+      "assigned_policies": {
+        "access": "global_admin_access",
+        "password": "strict"
+      },
+      "inherited_roles": []
+    },
+    "user": {
+      "assigned_policies": {
+        "access": "global_user_access",
+        "password": "simple"
+      },
+      "inherited_roles": []
+    }
+  },
+  "defined_policies": {
+    "password": {
+      "strict": {
+        "password_min_length": 16,
+        "password_require_special_char": true
+      },
+      "simple": {
+        "password_min_length": 8,
+        "password_require_special_char": false
+      }
+    }
+  },
+  "assigned_policies": {
+    "password": "simple",
+    "access": "global_admin_access"
+  },
+  "email_settings": {
+    "default_folders": [
+      "Inbox",
+      "Sent",
+      "Drafts",
+      "Trash",
+      "Junk"
+    ],
+    "max_attachment_size": "25MB"
+  },
+  "users": {
+    "admin@companyabc.com": {
+      "org_id": "Company_ABC",
+      "name": "System Administrator",
+      "storage_quota": "50GB",
+      "storage_used": "5GB",
+      "aliases": [
+        "root@companyabc.com"
+      ],
+      "roles": [
+        "admin"
+      ],
+      "status": "active"
+    },
+    "alice@companyabc.com": {
+      "org_id": "Company_ABC",
+      "name": "Alice Smith",
+      "storage_quota": "10GB",
+      "storage_used": "2GB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    },
+    "bob@companyabc.com": {
+      "org_id": "Company_ABC",
+      "name": "Bob Jones",
+      "storage_quota": "10GB",
+      "storage_used": "1.5GB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    },
+    "charlie@companyabc.net": {
+      "org_id": "Company_ABC",
+      "name": "Charlie Brown",
+      "storage_quota": "10GB",
+      "storage_used": "501MB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    },
+    "dave@companyabc.net": {
+      "org_id": "Company_ABC",
+      "name": "Dave Wilson",
+      "storage_quota": "10GB",
+      "storage_used": "100MB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    }
+  }
 }

@@ -1,336 +1,286 @@
 {
-    "global_plans": {
-        "starter": {
-            "storage_per_user": "5GB",
-            "max_users": 10,
-            "max_domains": 2,
-            "max_aliases_per_user": 5,
-            "support": "email",
-            "features": {
-                "smtp": true,
-                "imap": true,
-                "pop3": true,
-                "webmail": true,
-                "calendar": true
-            }
-        },
-        "pro": {
-            "storage_per_user": "25GB",
-            "max_users": 50,
-            "max_domains": 10,
-            "max_aliases_per_user": 20,
-            "support": "priority",
-            "features": {
-                "smtp": true,
-                "imap": true,
-                "pop3": true,
-                "webmail": true,
-                "calendar": true,
-                "contacts": true,
-                "audit_logs": true
-            }
-        },
-        "enterprise": {
-            "storage_per_user": "50GB",
-            "max_users": 1000,
-            "max_domains": 100,
-            "max_aliases_per_user": 100,
-            "support": "dedicated",
-            "features": {
-                "smtp": true,
-                "imap": true,
-                "pop3": true,
-                "webmail": true,
-                "calendar": true,
-                "contacts": true,
-                "audit_logs": true,
-                "sso": true,
-                "custom_branding": true
-            }
+  "global_policies": {
+    "access": {
+      "global_admin_access": {
+        "api_permissions": {
+          "/api/v1/domains/*": [
+            "create",
+            "read",
+            "update",
+            "delete"
+          ],
+          "/api/v1/users/*": [
+            "create",
+            "read",
+            "update",
+            "delete"
+          ],
+          "/api/v1/aliases/*": [
+            "create",
+            "read",
+            "update",
+            "delete"
+          ],
+          "/api/v1/groups/*": [
+            "create",
+            "read",
+            "update",
+            "delete"
+          ],
+          "/api/v1/mailing_lists/*": [
+            "create",
+            "read",
+            "update",
+            "delete"
+          ],
+          "/mail/mail.api.outbound.send": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.create_mail": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.outbound.send_raw": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.update_draft_mail": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mailboxes": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mails_from_mailbox": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mail_thread": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mime_message": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_seen": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_flagged": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_mails_mailbox": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.search_mails": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/upload_file": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.fetch_attachment": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.auth.validate": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.account.get_user_info": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.delete_threads": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mailbox_thread_count": [
+            "write",
+            "read",
+            "delete"
+          ]
         }
+      },
+      "global_user_access": {
+        "api_permissions": {
+          "/mail/mail.api.outbound.send": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.create_mail": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.outbound.send_raw": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.update_draft_mail": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mailboxes": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mails_from_mailbox": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mail_thread": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mime_message": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_seen": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_flagged": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.set_mails_mailbox": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.search_mails": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/upload_file": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.fetch_attachment": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.auth.validate": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.account.get_user_info": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.delete_threads": [
+            "write",
+            "read",
+            "delete"
+          ],
+          "/mail/mail.api.mail.get_mailbox_thread_count": [
+            "write",
+            "read",
+            "delete"
+          ]
+        }
+      }
     },
-    "global_roles": {
-        "admin": {
-            "assigned_policies": {
-                "access": "global_admin_access",
-                "password": "strict",
-                "mfa": "admins_only"
-            }
-        },
-        "user": {
-            "assigned_policies": {
-                "access": "global_user_access",
-                "password": "default",
-                "mfa": "default"
-            }
-        }
+    "password": {
+      "default": {
+        "password_min_length": 10,
+        "password_require_number": true,
+        "password_require_special_char": false,
+        "password_require_uppercase": false
+      },
+      "strict": {
+        "password_min_length": 14,
+        "password_require_number": true,
+        "password_require_special_char": true,
+        "password_require_uppercase": true,
+        "password_require_lowercase": true
+      },
+      "weak": {
+        "password_min_length": 8,
+        "password_require_number": false,
+        "password_require_special_char": false
+      }
     },
-    "global_policies": {
-        "access": {
-            "global_admin_access": {
-                "api_permissions": {
-                    "/api/v1/domains/*": [
-                        "create",
-                        "read",
-                        "update",
-                        "delete"
-                    ],
-                    "/api/v1/users/*": [
-                        "create",
-                        "read",
-                        "update",
-                        "delete"
-                    ],
-                    "/api/v1/aliases/*": [
-                        "create",
-                        "read",
-                        "update",
-                        "delete"
-                    ],
-                    "/api/v1/groups/*": [
-                        "create",
-                        "read",
-                        "update",
-                        "delete"
-                    ],
-                    "/api/v1/mailing_lists/*": [
-                        "create",
-                        "read",
-                        "update",
-                        "delete"
-                    ],
-                    "/mail/mail.api.outbound.send": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.create_mail": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.outbound.send_raw": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.update_draft_mail": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mailboxes": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mails_from_mailbox": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mail_thread": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mime_message": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_seen": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_flagged": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_mails_mailbox": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.search_mails": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/upload_file": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.fetch_attachment": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.auth.validate": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.account.get_user_info": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.delete_threads": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mailbox_thread_count": [
-                        "write",
-                        "read",
-                        "delete"
-                    ]
-                }
-            },
-            "global_user_access": {
-                "api_permissions": {
-                    "/mail/mail.api.outbound.send": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.create_mail": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.outbound.send_raw": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.update_draft_mail": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mailboxes": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mails_from_mailbox": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mail_thread": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mime_message": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_seen": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_flagged": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.set_mails_mailbox": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.search_mails": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/upload_file": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.fetch_attachment": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.auth.validate": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.account.get_user_info": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.delete_threads": [
-                        "write",
-                        "read",
-                        "delete"
-                    ],
-                    "/mail/mail.api.mail.get_mailbox_thread_count": [
-                        "write",
-                        "read",
-                        "delete"
-                    ]
-                }
-            }
-        },
-        "password": {
-            "default": {
-                "password_min_length": 10,
-                "password_require_number": true,
-                "password_require_special_char": false,
-                "password_require_uppercase": false
-            },
-            "strict": {
-                "password_min_length": 14,
-                "password_require_number": true,
-                "password_require_special_char": true,
-                "password_require_uppercase": true,
-                "password_require_lowercase": true
-            },
-            "weak": {
-                "password_min_length": 8,
-                "password_require_number": false,
-                "password_require_special_char": false
-            }
-        },
-        "mfa": {
-            "default": {
-                "mfa_required": false,
-                "mfa_methods": [
-                    "totp",
-                    "email"
-                ]
-            },
-            "strict": {
-                "mfa_required": true,
-                "mfa_methods": [
-                    "totp",
-                    "hardware_key"
-                ]
-            },
-            "admins_only": {
-                "mfa_required": true,
-                "mfa_methods": [
-                    "totp"
-                ],
-                "apply_to_roles": [
-                    "admin",
-                    "super_admin"
-                ]
-            }
-        }
+    "mfa": {
+      "default": {
+        "mfa_required": false,
+        "mfa_methods": [
+          "totp",
+          "email"
+        ]
+      },
+      "strict": {
+        "mfa_required": true,
+        "mfa_methods": [
+          "totp",
+          "hardware_key"
+        ]
+      },
+      "admins_only": {
+        "mfa_required": true,
+        "mfa_methods": [
+          "totp"
+        ],
+        "apply_to_roles": [
+          "admin",
+          "super_admin"
+        ]
+      }
     }
+  },
+  "global_roles": {
+    "admin": {
+      "assigned_policies": {
+        "access": "global_admin_access",
+        "password": "strict",
+        "mfa": "admins_only"
+      }
+    },
+    "user": {
+      "assigned_policies": {
+        "access": "global_user_access",
+        "password": "default",
+        "mfa": "default"
+      }
+    }
+  }
 }

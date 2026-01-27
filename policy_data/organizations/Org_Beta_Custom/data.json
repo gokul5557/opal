@@ -1,127 +1,127 @@
 {
-    "plan": "enterprise",
-    "total_storage": "5TB",
-    "storage_used": "100GB",
-    "domains": {
-        "beta-custom.com": {
-            "status": "verified",
-            "storage_allocated": "5TB"
-        }
-    },
-    "roles": {
-        "admin": {
-            "assigned_policies": {
-                "access": "global_admin_access",
-                "password": "ultra_strict",
-                "mfa": "hardware_only"
-            },
-            "inherited_roles": []
-        },
-        "user": {
-            "assigned_policies": {
-                "access": "global_user_access",
-                "password": "strict_user"
-            },
-            "inherited_roles": []
-        }
-    },
-    "users": {
-        "admin@beta-custom.com": {
-            "org_id": "Org_Beta_Custom",
-            "name": "Beta Admin",
-            "roles": [
-                "admin"
-            ],
-            "status": "active",
-            "storage_quota": "100GB",
-            "storage_used": "5GB",
-            "aliases": []
-        },
-        "user1@beta-custom.com": {
-            "org_id": "Org_Beta_Custom",
-            "name": "Beta User 1",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "20GB",
-            "storage_used": "1GB",
-            "aliases": []
-        },
-        "user2@beta-custom.com": {
-            "org_id": "Org_Beta_Custom",
-            "name": "Beta User 2",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "20GB",
-            "storage_used": "500MB",
-            "aliases": []
-        },
-        "user3@beta-custom.com": {
-            "org_id": "Org_Beta_Custom",
-            "name": "Beta User 3",
-            "roles": [
-                "user"
-            ],
-            "status": "active",
-            "storage_quota": "20GB",
-            "storage_used": "200MB",
-            "aliases": []
-        }
-    },
-    "groups": {
-        "engineering": {
-            "name": "Engineering",
-            "members": [
-                "user1@beta-custom.com"
-            ]
-        },
-        "finance": {
-            "name": "Finance",
-            "members": [
-                "user2@beta-custom.com",
-                "user3@beta-custom.com"
-            ]
-        }
-    },
-    "defined_policies": {
-        "password": {
-            "ultra_strict": {
-                "password_min_length": 20,
-                "password_require_special_char": true,
-                "password_require_number": true,
-                "password_require_uppercase": true,
-                "password_require_lowercase": true
-            },
-            "strict_user": {
-                "password_min_length": 12,
-                "password_require_number": true
-            }
-        },
-        "mfa": {
-            "hardware_only": {
-                "mfa_required": true,
-                "mfa_methods": [
-                    "hardware_key"
-                ],
-                "apply_to_roles": [
-                    "admin"
-                ]
-            }
-        }
-    },
-    "assigned_policies": {
-        "access": "global_admin_access",
-        "password": "strict_user"
-    },
-    "email_settings": {
-        "default_folders": [
-            "Inbox",
-            "Sent",
-            "Archive"
-        ],
-        "max_attachment_size": "50MB"
+  "plan": "enterprise",
+  "total_storage": "5TB",
+  "storage_used": "100GB",
+  "domains": {
+    "beta-custom.com": {
+      "status": "verified",
+      "storage_allocated": "5TB"
     }
+  },
+  "roles": {
+    "admin": {
+      "assigned_policies": {
+        "access": "global_admin_access",
+        "password": "ultra_strict",
+        "mfa": "hardware_only"
+      },
+      "inherited_roles": []
+    },
+    "user": {
+      "assigned_policies": {
+        "access": "global_user_access",
+        "password": "strict_user"
+      },
+      "inherited_roles": []
+    }
+  },
+  "groups": {
+    "engineering": {
+      "name": "Engineering",
+      "members": [
+        "user1@beta-custom.com"
+      ]
+    },
+    "finance": {
+      "name": "Finance",
+      "members": [
+        "user2@beta-custom.com",
+        "user3@beta-custom.com"
+      ]
+    }
+  },
+  "defined_policies": {
+    "password": {
+      "ultra_strict": {
+        "password_min_length": 20,
+        "password_require_special_char": true,
+        "password_require_number": true,
+        "password_require_uppercase": true,
+        "password_require_lowercase": true
+      },
+      "strict_user": {
+        "password_min_length": 12,
+        "password_require_number": true
+      }
+    },
+    "mfa": {
+      "hardware_only": {
+        "mfa_required": true,
+        "mfa_methods": [
+          "hardware_key"
+        ],
+        "apply_to_roles": [
+          "admin"
+        ]
+      }
+    }
+  },
+  "assigned_policies": {
+    "access": "global_admin_access",
+    "password": "strict_user"
+  },
+  "email_settings": {
+    "default_folders": [
+      "Inbox",
+      "Sent",
+      "Archive"
+    ],
+    "max_attachment_size": "50MB"
+  },
+  "users": {
+    "admin@beta-custom.com": {
+      "org_id": "Org_Beta_Custom",
+      "name": "Beta Admin",
+      "storage_quota": "100GB",
+      "storage_used": "5GB",
+      "aliases": [],
+      "roles": [
+        "admin"
+      ],
+      "status": "active"
+    },
+    "user1@beta-custom.com": {
+      "org_id": "Org_Beta_Custom",
+      "name": "Beta User 1",
+      "storage_quota": "20GB",
+      "storage_used": "1GB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    },
+    "user2@beta-custom.com": {
+      "org_id": "Org_Beta_Custom",
+      "name": "Beta User 2",
+      "storage_quota": "20GB",
+      "storage_used": "500MB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    },
+    "user3@beta-custom.com": {
+      "org_id": "Org_Beta_Custom",
+      "name": "Beta User 3",
+      "storage_quota": "20GB",
+      "storage_used": "200MB",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
+    }
+  }
 }
