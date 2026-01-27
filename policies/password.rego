@@ -5,7 +5,12 @@ import future.keywords.in
 
 default allow := false
 
-# Main Entry: Validate password against hierarchical policy
+# Main Entry: Validate password via input (for API testing)
+allow if {
+    validate(input.user_id, input.password)
+}
+
+# Function: Validate password against hierarchical policy
 validate(user_id, password) if {
     org_id := get_org_id(user_id)
     policy := get_password_policy(org_id)
