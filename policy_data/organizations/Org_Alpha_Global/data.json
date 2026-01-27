@@ -12,14 +12,12 @@
         "admin": {
             "assigned_policies": {
                 "access": "global_admin_access"
-                // No password/mfa assignment -> Inherit global default
             },
             "inherited_roles": []
         },
         "user": {
             "assigned_policies": {
                 "access": "global_user_access"
-                // No password/mfa assignment -> Inherit global default
             },
             "inherited_roles": []
         }
@@ -82,7 +80,6 @@
     "defined_policies": {},
     "assigned_policies": {
         "access": "global_admin_access"
-        // No password/mfa assignment -> Inherit global default
     },
     "email_settings": {
         "default_folders": [

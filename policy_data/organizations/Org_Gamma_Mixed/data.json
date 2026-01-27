@@ -19,7 +19,6 @@
         "user": {
             "assigned_policies": {
                 "access": "global_user_access"
-                // Inherits global password/mfa
             },
             "inherited_roles": []
         }
