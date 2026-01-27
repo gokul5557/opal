@@ -72,7 +72,7 @@
             ],
             "status": "active",
             "storage_quota": "10GB",
-            "storage_used": "500MB",
+            "storage_used": "501MB",
             "aliases": []
         },
         "dave@companyabc.net": {
