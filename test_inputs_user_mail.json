@@ -1,0 +1,1 @@
+{"input": {"request": {"method": "POST", "path": "/mail/mail.api.outbound.send", "headers": {"X-Userinfo": "eyJlbWFpbCI6ICJhbGljZUBjb21wYW55YWJjLmNvbSJ9"}}}}

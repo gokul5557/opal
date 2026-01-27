@@ -26,7 +26,7 @@ requirements := types if {
     org_id := get_org_id(input.user_id)
     policy := get_mfa_policy(org_id, input.user_id)
     policy.mfa_required
-    types := policy.mfa_types
+    types := policy.mfa_methods
 } else := null
 
 # -----------------------------------------------------------------------------

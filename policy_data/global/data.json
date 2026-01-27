@@ -323,6 +323,9 @@
             },
             "admins_only": {
                 "mfa_required": true,
+                "mfa_methods": [
+                    "totp"
+                ],
                 "apply_to_roles": [
                     "admin",
                     "super_admin"
