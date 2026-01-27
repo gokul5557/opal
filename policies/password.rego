@@ -5,23 +5,62 @@ import future.keywords.in
 
 default allow := false
 
-# Main Entry: Validate password via input (for API testing)
+# Main Entry: Allow if no deny reasons exist
 allow if {
-    validate(input.user_id, input.password)
+    count(deny) == 0
 }
 
-# Function: Validate password against hierarchical policy
-validate(user_id, password) if {
-    org_id := get_org_id(user_id)
-    policy := get_password_policy(org_id, user_id)
-    
-    count(password) >= policy.password_min_length
-    check_rules(policy, password)
+# 1. Length Check
+deny[reason] if {
+    policy := get_policy_context
+    min_len := object.get(policy, "password_min_length", 8)
+    count(input.password) < min_len
+    reason := sprintf("Password must be at least %d characters long", [min_len])
+}
+
+# 2. Number Check
+deny[reason] if {
+    policy := get_policy_context
+    object.get(policy, "password_require_number", false) == true
+    not re_match("[0-9]", input.password)
+    reason := "Password must contain at least one number"
+}
+
+# 3. Special Character Check
+deny[reason] if {
+    policy := get_policy_context
+    object.get(policy, "password_require_special_char", false) == true
+    not re_match("[^A-Za-z0-9]", input.password)
+    reason := "Password must contain at least one special character"
+}
+
+# 4. Uppercase Check
+deny[reason] if {
+    policy := get_policy_context
+    object.get(policy, "password_require_uppercase", false) == true
+    not re_match("[A-Z]", input.password)
+    reason := "Password must contain at least one uppercase letter"
+}
+
+# 5. Lowercase Check
+deny[reason] if {
+    policy := get_policy_context
+    object.get(policy, "password_require_lowercase", false) == true
+    not re_match("[a-z]", input.password)
+    reason := "Password must contain at least one lowercase letter"
 }
 
 # -----------------------------------------------------------------------------
 # Helpers
 # -----------------------------------------------------------------------------
+
+# Helper to fetch policy once per evaluation (context sensitive)
+get_policy_context := policy if {
+    # Ensure input has necessary fields
+    input.user_id
+    org_id := get_org_id(input.user_id)
+    policy := get_password_policy(org_id, input.user_id)
+}
 
 get_password_policy(org_id, user_id) := policy if {
     # 1. Check User's Role-based Policy
@@ -44,13 +83,3 @@ get_org_id(user_id) := org_id if {
     org.users[user_id]
     org_id := id
 }
-
-check_rules(policy, pwd) if {
-    # Optional logic for numbers/special chars
-    not policy.password_require_number
-} else if {
-    policy.password_require_number
-    re_match(`[0-9]`, pwd)
-}
-
-# (Add more rule checks as needed)
