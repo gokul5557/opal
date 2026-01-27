@@ -83,8 +83,8 @@ def main():
              "pwd": "123", "exp": False
         },
         {
-            "user": "admin@gamma-mixed.io", "desc": "Gamma Admin: Loose Valid (7)",
-             "pwd": "pass", "exp": True # Wait, Min 6. "pass" is 4. "passwd" is 6.
+            "user": "admin@gamma-mixed.io", "desc": "Gamma Admin: Loose Valid (6)",
+             "pwd": "passwd", "exp": True 
         },
         {
             "user": "user1@gamma-mixed.io", "desc": "Gamma User: Short (<10 Global)",
