@@ -13,7 +13,7 @@ allow if {
 # Function: Validate password against hierarchical policy
 validate(user_id, password) if {
     org_id := get_org_id(user_id)
-    policy := get_password_policy(org_id)
+    policy := get_password_policy(org_id, user_id)
     
     count(password) >= policy.password_min_length
     check_rules(policy, password)
@@ -23,12 +23,19 @@ validate(user_id, password) if {
 # Helpers
 # -----------------------------------------------------------------------------
 
-get_password_policy(org_id) := policy if {
-    # 1. Org Assigned Policy
+get_password_policy(org_id, user_id) := policy if {
+    # 1. Check User's Role-based Policy
+    user := data.policy_data.organizations[org_id].users[user_id]
+    some role_name in user.roles
+    role := data.policy_data.organizations[org_id].roles[role_name]
+    name := role.assigned_policies.password
+    policy := data.policy_data.organizations[org_id].defined_policies.password[name]
+} else := policy if {
+    # 2. Org Assigned Policy (Fallback)
     name := data.policy_data.organizations[org_id].assigned_policies.password
     policy := data.policy_data.organizations[org_id].defined_policies.password[name]
 } else := policy if {
-    # 2. Global Default
+    # 3. Global Default
     policy := data.policy_data.global.global_policies.password["default"]
 }
 
