@@ -9,25 +9,20 @@ default allow := false
 allow_with_user(user_id) if {
     # 1. Resolve Org ID
     org_id := get_org_id(user_id)
-    trace(sprintf("Resolved Org ID: %v", [org_id]))
 
     # 2. Get User & Org Data
     user := data.policy_data.organizations[org_id].users[user_id]
-    trace(sprintf("Found User: %v", [user_id]))
     
     # 3. Status Check
     user.status == "active"
     
     # 4. Role & Policy Resolution
     some role_name in user.roles
-    trace(sprintf("Checking Role: %v", [role_name]))
     role := data.policy_data.organizations[org_id].roles[role_name]
     policy_name := role.assigned_policies.access
-    trace(sprintf("Resolved Policy Name: %v", [policy_name]))
     
     # 5. Permission Lookup (Org > Global)
     policy_def := get_policy_def(org_id, policy_name)
-    trace(sprintf("Resolved Policy Def: %v", [policy_def]))
     
     # 6. Action Verification
     path := input.request.path
@@ -56,12 +51,9 @@ get_policy_def(org_id, policy_name) := def if {
 # Verify Path & Method
 check_permissions(perms, path, method) if {
     some pattern, allowed_actions in perms
-    trace(sprintf("Checking pattern: %v against path: %v", [pattern, path]))
     glob.match(pattern, ["/"], path)
-    trace(sprintf("Glob matched for pattern: %v", [pattern]))
     some action in allowed_actions
     action_matches_method(action, method)
-    trace(sprintf("Method matched: %v for action: %v", [method, action]))
 }
 
 # HTTP Method Mapping
@@ -70,77 +62,3 @@ action_matches_method("write", m)  if m in ["POST", "PUT", "PATCH", "DELETE"]
 action_matches_method("create", m) if m == "POST"
 action_matches_method("update", m) if m in ["PUT", "PATCH"]
 action_matches_method("delete", m) if m == "DELETE"
-
-# Debug Rule to trace execution path
-debug_trace[msg] if {
-    # Extract User
-    user_id := get_user_id_from_input
-    msg := sprintf("User ID: %v", [user_id])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    msg := sprintf("Resolved Org: %v", [org_id])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    user := data.policy_data.organizations[org_id].users[user_id]
-    msg := sprintf("Found User Data for: %v", [user_id])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    user := data.policy_data.organizations[org_id].users[user_id]
-    some role_name in user.roles
-    msg := sprintf("User has Role: %v", [role_name])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    user := data.policy_data.organizations[org_id].users[user_id]
-    some role_name in user.roles
-    role := data.policy_data.organizations[org_id].roles[role_name]
-    msg := sprintf("Role %v definition found", [role_name])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    user := data.policy_data.organizations[org_id].users[user_id]
-    some role_name in user.roles
-    role := data.policy_data.organizations[org_id].roles[role_name]
-    policy_name := role.assigned_policies.access
-    
-    # Get Policy Def
-    policy_def := get_policy_def(org_id, policy_name)
-    msg := sprintf("Resolved Policy Def Keys: %v", [object.keys(policy_def)])
-}
-
-debug_trace[msg] if {
-    user_id := get_user_id_from_input
-    org_id := get_org_id(user_id)
-    user := data.policy_data.organizations[org_id].users[user_id]
-    some role_name in user.roles
-    role := data.policy_data.organizations[org_id].roles[role_name]
-    policy_name := role.assigned_policies.access
-    policy_def := get_policy_def(org_id, policy_name)
-    
-    # Trace perms
-    perms := policy_def.api_permissions
-    msg := sprintf("API Perms Keys: %v", [object.keys(perms)])
-}
-
-# Helper to get user ID safely for debug
-get_user_id_from_input := email if {
-    headers := input.request.headers
-    v := object.get(headers, "X-Userinfo", object.get(headers, "x-userinfo", ""))
-    v != ""
-    dec := base64.decode(v)
-    obj := json.unmarshal(dec)
-    email := obj.email
-}
