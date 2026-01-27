@@ -9,20 +9,25 @@ default allow := false
 allow_with_user(user_id) if {
     # 1. Resolve Org ID
     org_id := get_org_id(user_id)
+    trace(sprintf("Resolved Org ID: %v", [org_id]))
 
     # 2. Get User & Org Data
     user := data.policy_data.organizations[org_id].users[user_id]
+    trace(sprintf("Found User: %v", [user_id]))
     
     # 3. Status Check
     user.status == "active"
     
     # 4. Role & Policy Resolution
     some role_name in user.roles
+    trace(sprintf("Checking Role: %v", [role_name]))
     role := data.policy_data.organizations[org_id].roles[role_name]
     policy_name := role.assigned_policies.access
+    trace(sprintf("Resolved Policy Name: %v", [policy_name]))
     
     # 5. Permission Lookup (Org > Global)
     policy_def := get_policy_def(org_id, policy_name)
+    trace(sprintf("Resolved Policy Def: %v", [policy_def]))
     
     # 6. Action Verification
     path := input.request.path
