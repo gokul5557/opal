@@ -108,6 +108,33 @@ debug_trace[msg] if {
     msg := sprintf("Role %v definition found", [role_name])
 }
 
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    user := data.policy_data.organizations[org_id].users[user_id]
+    some role_name in user.roles
+    role := data.policy_data.organizations[org_id].roles[role_name]
+    policy_name := role.assigned_policies.access
+    
+    # Get Policy Def
+    policy_def := get_policy_def(org_id, policy_name)
+    msg := sprintf("Resolved Policy Def Keys: %v", [object.keys(policy_def)])
+}
+
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    user := data.policy_data.organizations[org_id].users[user_id]
+    some role_name in user.roles
+    role := data.policy_data.organizations[org_id].roles[role_name]
+    policy_name := role.assigned_policies.access
+    policy_def := get_policy_def(org_id, policy_name)
+    
+    # Trace perms
+    perms := policy_def.api_permissions
+    msg := sprintf("API Perms Keys: %v", [object.keys(perms)])
+}
+
 # Helper to get user ID safely for debug
 get_user_id_from_input := email if {
     headers := input.request.headers
