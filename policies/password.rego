@@ -7,7 +7,14 @@ default allow := false
 
 # Main Entry: Allow if no deny reasons exist
 allow if {
+    # Ensure checking logic actually ran
+    get_policy_context
     count(deny) == 0
+}
+
+# Fail Safe: Deny if policy context cannot be resolved
+deny["System Error: Unable to resolve password policy for user"] if {
+    not get_policy_context
 }
 
 # 1. Length Check
