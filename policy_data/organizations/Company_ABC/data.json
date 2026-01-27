@@ -1,7 +1,7 @@
 {
     "plan": "pro_plan",
     "total_storage": "2TB",
-    "storage_used": "10.5GB",
+    "storage_used": "11.5GB",
     "domains": {
         "companyabc.com": {
             "status": "verified",
