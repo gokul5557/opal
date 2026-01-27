@@ -1,0 +1,100 @@
+{
+    "plan": "pro",
+    "total_storage": "1TB",
+    "storage_used": "20GB",
+    "domains": {
+        "gamma-mixed.io": {
+            "status": "verified",
+            "storage_allocated": "1TB"
+        }
+    },
+    "roles": {
+        "admin": {
+            "assigned_policies": {
+                "access": "global_admin_access",
+                "password": "local_loose"
+            },
+            "inherited_roles": []
+        },
+        "user": {
+            "assigned_policies": {
+                "access": "global_user_access"
+                // Inherits global password/mfa
+            },
+            "inherited_roles": []
+        }
+    },
+    "users": {
+        "admin@gamma-mixed.io": {
+            "org_id": "Org_Gamma_Mixed",
+            "name": "Gamma Admin",
+            "roles": [
+                "admin"
+            ],
+            "status": "active",
+            "storage_quota": "50GB",
+            "storage_used": "5GB",
+            "aliases": []
+        },
+        "user1@gamma-mixed.io": {
+            "org_id": "Org_Gamma_Mixed",
+            "name": "Gamma User 1",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "10GB",
+            "storage_used": "1GB",
+            "aliases": []
+        },
+        "user2@gamma-mixed.io": {
+            "org_id": "Org_Gamma_Mixed",
+            "name": "Gamma User 2",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "10GB",
+            "storage_used": "500MB",
+            "aliases": []
+        },
+        "user3@gamma-mixed.io": {
+            "org_id": "Org_Gamma_Mixed",
+            "name": "Gamma User 3",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "10GB",
+            "storage_used": "100MB",
+            "aliases": []
+        }
+    },
+    "groups": {
+        "support": {
+            "name": "Support",
+            "members": [
+                "user1@gamma-mixed.io",
+                "user2@gamma-mixed.io",
+                "user3@gamma-mixed.io"
+            ]
+        }
+    },
+    "defined_policies": {
+        "password": {
+            "local_loose": {
+                "password_min_length": 6
+            }
+        }
+    },
+    "assigned_policies": {
+        "access": "global_admin_access"
+    },
+    "email_settings": {
+        "default_folders": [
+            "Inbox",
+            "Sent"
+        ],
+        "max_attachment_size": "25MB"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "plan": "starter",
+    "total_storage": "500GB",
+    "storage_used": "5GB",
+    "domains": {
+        "alpha-global.com": {
+            "status": "verified",
+            "storage_allocated": "500GB"
+        }
+    },
+    "roles": {
+        "admin": {
+            "assigned_policies": {
+                "access": "global_admin_access"
+                // No password/mfa assignment -> Inherit global default
+            },
+            "inherited_roles": []
+        },
+        "user": {
+            "assigned_policies": {
+                "access": "global_user_access"
+                // No password/mfa assignment -> Inherit global default
+            },
+            "inherited_roles": []
+        }
+    },
+    "users": {
+        "admin@alpha-global.com": {
+            "org_id": "Org_Alpha_Global",
+            "name": "Alpha Admin",
+            "roles": [
+                "admin"
+            ],
+            "status": "active",
+            "storage_quota": "50GB",
+            "storage_used": "1GB",
+            "aliases": []
+        },
+        "user1@alpha-global.com": {
+            "org_id": "Org_Alpha_Global",
+            "name": "Alpha User 1",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "5GB",
+            "storage_used": "500MB",
+            "aliases": []
+        },
+        "user2@alpha-global.com": {
+            "org_id": "Org_Alpha_Global",
+            "name": "Alpha User 2",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "5GB",
+            "storage_used": "100MB",
+            "aliases": []
+        },
+        "user3@alpha-global.com": {
+            "org_id": "Org_Alpha_Global",
+            "name": "Alpha User 3",
+            "roles": [
+                "user"
+            ],
+            "status": "active",
+            "storage_quota": "5GB",
+            "storage_used": "100MB",
+            "aliases": []
+        }
+    },
+    "groups": {
+        "sales": {
+            "name": "Sales Team",
+            "members": [
+                "user1@alpha-global.com",
+                "user2@alpha-global.com"
+            ]
+        }
+    },
+    "defined_policies": {},
+    "assigned_policies": {
+        "access": "global_admin_access"
+        // No password/mfa assignment -> Inherit global default
+    },
+    "email_settings": {
+        "default_folders": [
+            "Inbox",
+            "Sent"
+        ],
+        "max_attachment_size": "25MB"
+    }
+}
