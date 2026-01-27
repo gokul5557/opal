@@ -51,9 +51,12 @@ get_policy_def(org_id, policy_name) := def if {
 # Verify Path & Method
 check_permissions(perms, path, method) if {
     some pattern, allowed_actions in perms
+    trace(sprintf("Checking pattern: %v against path: %v", [pattern, path]))
     glob.match(pattern, ["/"], path)
+    trace(sprintf("Glob matched for pattern: %v", [pattern]))
     some action in allowed_actions
     action_matches_method(action, method)
+    trace(sprintf("Method matched: %v for action: %v", [method, action]))
 }
 
 # HTTP Method Mapping
