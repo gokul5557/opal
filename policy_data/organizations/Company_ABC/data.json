@@ -111,6 +111,14 @@
         "user"
       ],
       "status": "active"
+    },
+    "gokul@companyabc.net": {
+      "name": "GOKUL V",
+      "aliases": [],
+      "roles": [
+        "user"
+      ],
+      "status": "active"
     }
   }
 }
