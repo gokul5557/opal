@@ -70,3 +70,50 @@ action_matches_method("write", m)  if m in ["POST", "PUT", "PATCH", "DELETE"]
 action_matches_method("create", m) if m == "POST"
 action_matches_method("update", m) if m in ["PUT", "PATCH"]
 action_matches_method("delete", m) if m == "DELETE"
+
+# Debug Rule to trace execution path
+debug_trace[msg] if {
+    # Extract User
+    user_id := get_user_id_from_input
+    msg := sprintf("User ID: %v", [user_id])
+}
+
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    msg := sprintf("Resolved Org: %v", [org_id])
+}
+
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    user := data.policy_data.organizations[org_id].users[user_id]
+    msg := sprintf("Found User Data for: %v", [user_id])
+}
+
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    user := data.policy_data.organizations[org_id].users[user_id]
+    some role_name in user.roles
+    msg := sprintf("User has Role: %v", [role_name])
+}
+
+debug_trace[msg] if {
+    user_id := get_user_id_from_input
+    org_id := get_org_id(user_id)
+    user := data.policy_data.organizations[org_id].users[user_id]
+    some role_name in user.roles
+    role := data.policy_data.organizations[org_id].roles[role_name]
+    msg := sprintf("Role %v definition found", [role_name])
+}
+
+# Helper to get user ID safely for debug
+get_user_id_from_input := email if {
+    headers := input.request.headers
+    v := object.get(headers, "X-Userinfo", object.get(headers, "x-userinfo", ""))
+    v != ""
+    dec := base64.decode(v)
+    obj := json.unmarshal(dec)
+    email := obj.email
+}
