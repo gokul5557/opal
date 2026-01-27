@@ -1,0 +1,36 @@
+{
+    "admin_access_allowed": {
+        "request": {
+            "method": "POST",
+            "path": "/api/v1/users/new",
+            "headers": {
+                "X-Userinfo": "eyJlbWFpbCI6ICJhZG1pbkBjb21wYW55YWJjLmNvbSJ9"
+            }
+        }
+    },
+    "user_mail_allowed": {
+        "request": {
+            "method": "POST",
+            "path": "/mail/mail.api.outbound.send",
+            "headers": {
+                "X-Userinfo": "eyJlbWFpbCI6ICJhbGljZUBjb21wYW55YWJjLmNvbSJ9"
+            }
+        }
+    },
+    "public_path_allowed": {
+        "request": {
+            "method": "GET",
+            "path": "/health",
+            "headers": {}
+        }
+    },
+    "user_admin_denied": {
+        "request": {
+            "method": "POST",
+            "path": "/api/v1/users/new",
+            "headers": {
+                "X-Userinfo": "eyJlbWFpbCI6ICJhbGljZUBjb21wYW55YWJjLmNvbSJ9"
+            }
+        }
+    }
+}

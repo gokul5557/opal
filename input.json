@@ -1,0 +1,10 @@
+{
+    "request": {
+        "method": "POST",
+        "path": "/mail/mail.api.mail.create_mail",
+        "headers": {
+            "X-Userinfo": "eyJlbWFpbCI6ICJhbGljZUBjb21wYW55YWJjLmNvbSIsICJzdWIiOiAiMTIzNDUifQ==",
+            "Content-Type": "application/json"
+        }
+    }
+}
