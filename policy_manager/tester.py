@@ -7,7 +7,7 @@ import glob
 from typing import Dict, List, Any
 
 # Configuration
-OPA_URL = "http://localhost:8182/v1/data/mail_service/apisix/allow"
+OPA_URL = "http://localhost:8181/v1/data/mail_service/apisix/allow"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 GLOBAL_DATA_PATH = os.path.join(BASE_DIR, "../policy_data/global/data.json")
 ORGS_DIR = os.path.join(BASE_DIR, "../policy_data/organizations")
