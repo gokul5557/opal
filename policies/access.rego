@@ -46,6 +46,8 @@ get_policy_def(org_id, policy_name) := def if {
     def := data.policy_data.organizations[org_id].defined_policies.access[policy_name]
 } else := def if {
     def := data.policy_data.global.global_policies.access[policy_name]
+} else := def if {
+    def := data.policy_data.common.global_policies.access[policy_name]
 }
 
 # Verify Path & Method
