@@ -1,0 +1,11 @@
+{
+    "input": {
+        "request": {
+            "method": "GET",
+            "path": "/api/v1/aliases/test_resource_123",
+            "headers": {
+                "X-Userinfo": "eyJlbWFpbCI6ImFsaWNlQGNvbXBhbnlhYmMuY29tIn0="
+            }
+        }
+    }
+}
