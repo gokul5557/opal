@@ -1,5 +1,5 @@
 {
-  "plan": "enterprise",
+  "plan": "free_tier",
   "total_storage": "5TB",
   "storage_used": "100GB",
   "domains": {

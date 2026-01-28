@@ -7,9 +7,9 @@ import glob
 from typing import Dict, List, Any
 
 # Configuration
-OPA_URL = "http://localhost:8181/v1/data/mail_service/apisix/allow"
-GLOBAL_DATA_PATH = "mail_service/policy_data/global/data.json"
-ORGS_DIR = "mail_service/policy_data/organizations"
+OPA_URL = "http://localhost:8182/v1/data/mail_service/apisix/allow"
+GLOBAL_DATA_PATH = "policy_data/global/data.json"
+ORGS_DIR = "policy_data/organizations"
 
 # ANSI Colors
 class Colors:

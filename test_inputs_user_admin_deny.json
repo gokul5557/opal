@@ -1,1 +1,0 @@
-{"input": {"request": {"method": "POST", "path": "/api/v1/users/new", "headers": {"X-Userinfo": "eyJlbWFpbCI6ICJhbGljZUBjb21wYW55YWJjLmNvbSJ9"}}}}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <div>
+        <a href="{{ url_for('org_details', org_id=org_id) }}" class="text-dim"
+            style="text-decoration: none; font-size: 0.875rem;">&larr; Back to {{ org_id }}</a>
+        <h1 style="margin-top: 0.5rem;">Policy Audit: {{ org_id }}</h1>
+    </div>
+    <div style="text-align: right;">
+        <span class="badge {{ 'badge-active' if passed == total else 'badge-inactive' }}"
+            style="font-size: 1rem; padding: 0.75rem 1.5rem;">
+            {{ passed }} / {{ total }} Passed ({{ (passed/total*100)|round(1) if total > 0 else 0 }}%)
+        </span>
+    </div>
+</div>
+
+<div class="card">
+    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border);">
+        <h3 style="font-size: 1.125rem;">Audit Trail</h3>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Userinfo</th>
+                <th>Request</th>
+                <th>Expected</th>
+                <th>Actual</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+            <tr style="{{ 'opacity: 0.7;' if r.passed }}">
+                <td><span style="font-size: 0.875rem;">{{ r.user }}</span></td>
+                <td>
+                    <span style="font-weight: 600; font-size: 0.75rem; color: var(--accent);">{{ r.method }}</span>
+                    <span style="font-family: monospace; font-size: 0.8125rem;">{{ r.path }}</span>
+                </td>
+                <td><span class="badge" style="background: rgba(255,255,255,0.05);">{{ r.expected }}</span></td>
+                <td>
+                    <span class="badge"
+                        style="background: {{ 'rgba(16, 185, 129, 0.1)' if r.actual == 'ALLOW' else 'rgba(239, 68, 68, 0.1)' }}; color: {{ 'var(--success)' if r.actual == 'ALLOW' else 'var(--danger)' }};">
+                        {{ r.actual }}
+                    </span>
+                </td>
+                <td>
+                    {% if r.passed %}
+                    <span style="color: var(--success); font-weight: 700;">&check; PASS</span>
+                    {% else %}
+                    <span style="color: var(--danger); font-weight: 700;">&cross; FAIL</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

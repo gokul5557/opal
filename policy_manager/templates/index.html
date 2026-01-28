@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <h1>Organizations</h1>
+    <div class="text-dim">Total: {{ orgs|length }}</div>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>Org ID</th>
+                <th>Users</th>
+                <th>Status</th>
+                <th style="text-align: right;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for org in orgs %}
+            <tr>
+                <td style="font-weight: 600;">{{ org.org_id }}</td>
+                <td>{{ org.user_count }}</td>
+                <td><span class="badge badge-active">Active</span></td>
+                <td style="text-align: right;">
+                    <a href="{{ url_for('org_details', org_id=org.org_id) }}" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

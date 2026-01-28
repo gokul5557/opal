@@ -267,6 +267,13 @@
       }
     }
   },
+  "plans": {
+    "free_tier": {
+      "assigned_policies": {
+        "access": "global_user_access"
+      }
+    }
+  },
   "global_roles": {
     "admin": {
       "assigned_policies": {

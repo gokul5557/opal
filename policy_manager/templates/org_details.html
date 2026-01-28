@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+        <a href="{{ url_for('index') }}" class="text-dim" style="text-decoration: none; font-size: 0.875rem;">&larr;
+            Back to Orgs</a>
+        <h1 style="margin-top: 0.5rem;">{{ org.org_id }}</h1>
+    </div>
+    <a href="{{ url_for('test_org_policy', org_id=org.org_id) }}" class="btn"
+        style="background: rgba(56, 189, 248, 0.1); color: var(--accent); border: 1px solid var(--accent); padding: 0.6rem 1.2rem; font-weight: 600; text-decoration: none; border-radius: 0.5rem;">
+        &target; Run Security Audit
+    </a>
+</div>
+
+<!-- Settings Grid -->
+<div class="card" style="padding: 1.5rem;">
+    <h3 style="margin-bottom: 1.5rem;">Organization Settings</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div
+            style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+            <div
+                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">
+                Subscription Plan</div>
+            <div style="font-size: 1.125rem; font-weight: 600; color: var(--accent);">{{ org.config.plan | replace('_',
+                ' ') | title }}</div>
+        </div>
+
+        <div
+            style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+            <div
+                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">
+                Storage Usage</div>
+            <div style="font-size: 1.125rem; font-weight: 600;">{{ org.config.storage_used }} / {{
+                org.config.total_storage }}</div>
+            <div
+                style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 0.75rem; overflow: hidden;">
+                <div style="height: 100%; background: var(--accent); width: 45%;"></div>
+            </div>
+        </div>
+
+        {% if org.config.email_settings %}
+        <div
+            style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+            <div
+                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">
+                Email Settings</div>
+            <div style="font-size: 0.875rem;">
+                Max Attachment: <strong>{{ org.config.email_settings.max_attachment_size }}</strong><br>
+                Default Folders: <strong>{{ org.config.email_settings.default_folders | join(', ') }}</strong>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if org.config.domains %}
+        <div
+            style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+            <div
+                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem;">
+                Domains</div>
+            <div style="font-size: 0.875rem;">
+                {% for domain, dconfig in org.config.domains.items() %}
+                <span title="Status: {{ dconfig.status }}">{{ domain }}</span>{{ ", " if not loop.last }}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Org Policies Section -->
+    <div style="margin-top: 1.5rem; display: flex; gap: 2rem;">
+        {% if org.config.assigned_policies %}
+        <div>
+            <h4 style="margin-bottom: 0.75rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">
+                Org-Level Default Policies</h4>
+            <div style="display: flex; gap: 0.5rem;">
+                {% for cat, p_id in org.config.assigned_policies.items() %}
+                <span class="badge"
+                    style="background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2);">
+                    {{ cat | title }}: {{ p_id }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if org.config.defined_policies %}
+        <div>
+            <h4 style="margin-bottom: 0.75rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">
+                Custom Definitions</h4>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                {% for cat, policies in org.config.defined_policies.items() %}
+                {% for name in policies.keys() %}
+                <span class="badge"
+                    style="background: rgba(56, 189, 248, 0.1); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.2);">
+                    {{ cat | title }}: {{ name }}
+                </span>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+    <!-- Groups Table -->
+    {% if org.config.groups %}
+    <div class="card">
+        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 1rem;">Groups</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Group Name</th>
+                    <th>Members</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for g_id, g_details in org.config.groups.items() %}
+                <tr>
+                    <td style="font-weight: 500;">{{ g_id }}</td>
+                    <td><span class="badge" style="background: rgba(255,255,255,0.05);">{{ g_details.members | length }}
+                            users</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Roles Table -->
+    {% if org.config.roles %}
+    <div class="card">
+        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 1rem;">Role Definitions</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Policies</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r_id, r_details in org.config.roles.items() %}
+                <tr>
+                    <td style="font-weight: 500;">{{ r_id }}</td>
+                    <td style="font-size: 0.8125rem; color: var(--text-dim);">
+                        {% for cat, p_id in r_details.assigned_policies.items() %}
+                        {{ cat }}: {{ p_id }}{{ ", " if not loop.last }}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Users Table -->
+<div class="card">
+    <div
+        style="padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.125rem;">User Directory</h3>
+        <button onclick="document.getElementById('add-user-form').style.display = 'block'; this.style.display='none'"
+            class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">+ Add User</button>
+    </div>
+
+    <!-- Quick Add User Form (Hidden by default) -->
+    <div id="add-user-form"
+        style="display: none; padding: 1.5rem; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border);">
+        <form action="{{ url_for('add_user', org_id=org.org_id) }}" method="POST"
+            style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end;">
+            <div>
+                <label style="display: block; font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem;">Email
+                    Address</label>
+                <input type="email" name="email" required placeholder="user@example.com"
+                    style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: white; padding: 0.6rem; border-radius: 0.4rem;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem;">Full
+                    Name</label>
+                <input type="text" name="name" placeholder="John Doe"
+                    style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: white; padding: 0.6rem; border-radius: 0.4rem;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem;">Roles
+                    (comma-separated)</label>
+                <input type="text" name="roles" placeholder="user"
+                    style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); color: white; padding: 0.6rem; border-radius: 0.4rem;">
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button type="submit" class="btn btn-success" style="padding: 0.6rem 1rem;">Create</button>
+                <button type="reset"
+                    onclick="document.getElementById('add-user-form').style.display = 'none'; document.querySelector('.btn-primary').style.display='block'"
+                    class="btn"
+                    style="background: rgba(255,255,255,0.1); color: white; padding: 0.6rem 1rem;">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>User Details</th>
+                <th>Roles</th>
+                <th>Status</th>
+                <th style="text-align: right;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>
+                    <div style="font-weight: 600;">{{ user.meta.name if user.meta.name else user.email.split('@')[0] }}
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-dim);">{{ user.email }}</div>
+                    {% if user.meta.aliases %}
+                    <div style="font-size: 0.7rem; color: var(--accent);">Aliases: {{ user.meta.aliases | join(', ') }}
+                    </div>
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{{ url_for('edit_user', user_id=user.id) }}" method="POST" id="form-{{ user.id }}"
+                        style="display: flex; gap: 10px;">
+                        <input type="text" name="roles" value="{{ user.roles }}"
+                            style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.875rem; flex: 1;">
+                        <select name="status"
+                            style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.875rem;">
+                            <option value="active" {{ 'selected' if user.status=='active' }}>Active</option>
+                            <option value="inactive" {{ 'selected' if user.status=='inactive' }}>Inactive</option>
+                        </select>
+                </td>
+                <td>
+                    <span class="badge {{ 'badge-active' if user.status == 'active' else 'badge-inactive' }}">
+                        {{ user.status.capitalize() }}
+                    </span>
+                </td>
+                <td style="text-align: right;">
+                    <button type="submit" class="btn btn-primary"
+                        style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Save</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
